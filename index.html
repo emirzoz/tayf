@@ -129,6 +129,7 @@
     .animate-logo-pop { animation: logo-pop .5s ease-out .05s both; }
     .animate-title-slide { animation: title-slide .5s ease-out .12s both; }
     @media (prefers-reduced-motion: reduce) { .animate-logo-pop,.animate-title-slide { animation: none !important; } }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
   </style>
 </head>
 <body class="bg-prussian_blue text-timberwolf">
@@ -201,6 +202,41 @@
       </div>
     </div>
   </section>
+<!-- Outcome Metrics -->
+<section id="metrics" class="bg-prussian_blue border-t border-[#6E92B6]/30">
+  <div class="container mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+    <div class="space-y-1">
+      <div class="text-4xl md:text-5xl font-heading text-[#6E92B6] tabular-nums">
+        <span class="countup" data-target="12" data-suffix="+">0</span>
+      </div>
+      <p class="opacity-80">Uçuş/Yer testi</p>
+    </div>
+    <div class="space-y-1">
+      <div class="text-4xl md:text-5xl font-heading text-[#6E92B6] tabular-nums">
+        <span class="countup" data-target="180000" data-format="compact" data-suffix="+">0</span>
+      </div>
+      <p class="opacity-80">Yıllık erişim</p>
+    </div>
+    <div class="space-y-1">
+      <div class="text-4xl md:text-5xl font-heading text-[#6E92B6] tabular-nums">
+        <span class="countup" data-target="25">0</span>
+      </div>
+      <p class="opacity-80">Aktif üye</p>
+    </div>
+    <div class="space-y-1">
+      <div class="text-4xl md:text-5xl font-heading text-[#6E92B6] tabular-nums">
+        <span class="countup" data-target="5">0</span>
+      </div>
+      <p class="opacity-80">Sanayi ortağı</p>
+    </div>
+    <div class="space-y-1 col-span-2 md:col-span-1">
+      <div class="text-4xl md:text-5xl font-heading text-[#6E92B6] tabular-nums">
+        <span class="countup" data-target="6000" data-suffix="+">0</span>
+      </div>
+      <p class="opacity-80">Lab saati / dönem</p>
+    </div>
+  </div>
+</section>
 
   <!-- Project Section -->
   <section id="project" class="py-20 bg-prussian_blue">
@@ -442,6 +478,57 @@
     window.addEventListener('hashchange', updateAriaCurrent);
     document.addEventListener('DOMContentLoaded', updateAriaCurrent);
   </script>
+<script>
+  // Count-up animation with IntersectionObserver
+  (function() {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = document.querySelectorAll('.countup');
+    if (!els.length) return;
+
+    const formatCompact = n => {
+      // simple compact formatter (e.g., 1.8M)
+      const f = new Intl.NumberFormat('tr-TR', { notation: 'compact', maximumFractionDigits: 1 });
+      return f.format(n);
+    };
+
+    const animate = (el) => {
+      const target = parseFloat(el.dataset.target || '0');
+      const suffix = el.dataset.suffix || '';
+      const compact = el.dataset.format === 'compact';
+      const duration = 1200; // ms
+      const start = performance.now();
+      const startVal = 0;
+
+      if (prefersReduced) {
+        el.textContent = (compact ? formatCompact(target) : Math.round(target)).toString() + suffix;
+        return;
+      }
+
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        // easeOutCubic
+        const eased = 1 - Math.pow(1 - t, 3);
+        const value = startVal + (target - startVal) * eased;
+        el.textContent = (compact ? formatCompact(value) : Math.round(value)).toString() + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+
+    // Trigger once when visible
+    const seen = new WeakSet();
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !seen.has(entry.target)) {
+          seen.add(entry.target);
+          animate(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    els.forEach(el => obs.observe(el));
+  })();
+</script>
 
 </body>
 </html>
