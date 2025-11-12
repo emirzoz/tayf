@@ -154,7 +154,21 @@
           </div>
         </div>
 
-        <!-- mobile hamburger -->
+<!-- mobile language switcher -->
+<div class="md:hidden flex items-center gap-2">
+  <button id="lang-tr-mobile"
+          onclick="setLanguage('tr')"
+          class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">
+    TR
+  </button>
+  <span class="text-yinmn_blue">|</span>
+  <button id="lang-en-mobile"
+          onclick="setLanguage('en')"
+          class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">
+    EN
+  </button>
+</div>
+
 
   <!-- Hero Section -->
   <section id="hero" class="min-h-screen flex items-center justify-center text-timberwolf pt-24"
@@ -358,37 +372,43 @@
     };
 
     function setLanguage(lang) {
-      // Update all text elements
-      const elements = document.querySelectorAll('[data-key]');
-      elements.forEach(el => {
-        const key = el.getAttribute('data-key');
-        if (langData[lang] && langData[lang][key]) {
-          el.innerText = langData[lang][key];
-        }
-      });
-
-      // Update button styles
-      const btnTR = document.getElementById('lang-tr');
-      const btnEN = document.getElementById('lang-en');
-      const activeClass = 'text-blue_gray';
-      const inactiveClass = 'text-timberwolf opacity-70 hover:text-blue_gray';
-      if (btnTR && btnEN) {
-        if (lang === 'tr') {
-          btnTR.className = 'font-semibold px-2 py-1 rounded-md ' + activeClass;
-          btnEN.className = 'font-semibold px-2 py-1 rounded-md ' + inactiveClass;
-          btnTR.innerText = 'TR';
-          btnEN.innerText = 'EN';
-        } else {
-          btnEN.className = 'font-semibold px-2 py-1 rounded-md ' + activeClass;
-          btnTR.className = 'font-semibold px-2 py-1 rounded-md ' + inactiveClass;
-          btnTR.innerText = 'TR';
-          btnEN.innerText = 'EN';
-        }
+    // 1) Update text content
+    const elements = document.querySelectorAll('[data-key]');
+    elements.forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (langData[lang] && langData[lang][key]) {
+        el.innerText = langData[lang][key];
       }
+    });
+
+    // 2) Style desktop + mobile language buttons consistently
+    const btnTR  = document.getElementById('lang-tr');
+    const btnEN  = document.getElementById('lang-en');
+    const btnTRm = document.getElementById('lang-tr-mobile');
+    const btnENm = document.getElementById('lang-en-mobile');
+
+    const active   = 'text-blue_gray';
+    const inactive = 'text-timberwolf opacity-70 hover:text-blue_gray';
+
+    function applyState(activeBtn, inactiveBtn) {
+      if (!activeBtn || !inactiveBtn) return;
+      activeBtn.className   = 'font-semibold px-2 py-1 rounded-md ' + active;
+      inactiveBtn.className = 'font-semibold px-2 py-1 rounded-md ' + inactive;
+      activeBtn.innerText = activeBtn.id.includes('tr') ? 'TR' : 'EN';
+      inactiveBtn.innerText = inactiveBtn.id.includes('tr') ? 'TR' : 'EN';
     }
 
-    // Default language
-    document.addEventListener('DOMContentLoaded', () => { setLanguage('tr'); });
+    if (lang === 'tr') {
+      applyState(btnTR, btnEN);
+      applyState(btnTRm, btnENm);
+    } else {
+      applyState(btnEN, btnTR);
+      applyState(btnENm, btnTRm);
+    }
+  }
+
+  // Default language on load
+  document.addEventListener('DOMContentLoaded', () => setLanguage('tr'));
   // Active nav link highlighting + aria-current
     function updateAriaCurrent() {
       const links = document.querySelectorAll('nav a[href^="#"]');
