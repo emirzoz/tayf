@@ -80,10 +80,10 @@
 <header class="fixed w-full top-0 z-50 bg-prussian_blue shadow-lg border-b border-yinmn_blue">
     <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
         
-        <a href="#hero" class="block">
-          <img src="logo-tayf.png" alt="İTÜ Tayf Logo" class="h-10 w-auto"> 
+        <a href="#hero" class="flex items-center gap-3">
+            <img src="logo-tayf.png" alt="İTÜ Tayf Logo" class="h-12 w-auto"> <span class="text-2xl font-heading font-bold text-timberwolf">İTÜ TAYF</span>
         </a>
-
+        
         <div class="flex items-center gap-8">
             <a href="#project" class="text-timberwolf hover:text-blue_gray transition" data-key="navProject"></a>
             <a href="#team" class="text-timberwolf hover:text-blue_gray transition" data-key="navTeam"></a>
@@ -91,10 +91,8 @@
             <a href="#contact" class="text-timberwolf hover:text-blue_gray transition" data-key="navContact"></a>
             
             <div class="flex gap-2 ml-4 border-l border-yinmn_blue pl-4">
-                <button onclick="setLanguage('tr')" class="text-blue_gray font-semibold transition">TR</button>
-                <span class="text-yinmn_blue">|</span>
-                <button onclick="setLanguage('en')" class="text-timberwolf hover:text-blue_gray font-semibold transition">EN</button>
-            </div>
+                <button id="lang-tr" onclick="setLanguage('tr')" class="font-semibold transition"></button> <span class="text-yinmn_blue">|</span>
+                <button id="lang-en" onclick="setLanguage('en')" class="font-semibold transition"></button> </div>
         </div>
     </nav>
 </header>
@@ -334,18 +332,42 @@
             }
         };
 
-        function setLanguage(lang) {
-            const elements = document.querySelectorAll('[data-key]');
-            elements.forEach(el => {
-                const key = el.getAttribute('data-key');
-                if (langData[lang] && langData[lang][key]) {
-                    el.innerText = langData[lang][key];
-                }
-            });
-        }
+function setLanguage(lang) {
+        // 1. Update all text elements
+        const elements = document.querySelectorAll('[data-key]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-key');
+            if (langData[lang] && langData[lang][key]) {
+                el.innerText = langData[lang][key];
+            }
+        });
 
-        // Set default language to Turkish on page load
+        // === THIS IS THE FIX ===
+        // 2. Update button styles
+        const btnTR = document.getElementById('lang-tr');
+        const btnEN = document.getElementById('lang-en');
+        
+        const activeClass = 'text-blue_gray'; // Active color
+        const inactiveClass = 'text-timberwolf opacity-70 hover:text-blue_gray'; // Inactive color
+
+        if (lang === 'tr') {
+            btnTR.className = 'font-semibold transition ' + activeClass;
+            btnEN.className = 'font-semibold transition ' + inactiveClass;
+            btnTR.innerText = 'TR'; // Ensure text is set
+            btnEN.innerText = 'EN'; // Ensure text is set
+        } else {
+            btnEN.className = 'font-semibold transition ' + activeClass;
+            btnTR.className = 'font-semibold transition ' + inactiveClass;
+            btnTR.innerText = 'TR'; // Ensure text is set
+            btnEN.innerText = 'EN'; // Ensure text is set
+        }
+        // === END OF FIX ===
+    }
+
+    // Set default language to Turkish on page load
+    document.addEventListener('DOMContentLoaded', () => {
         setLanguage('tr');
+    });
     </script>
     <script>
   // Wait for the HTML document to be fully loaded before running the script
