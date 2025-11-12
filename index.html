@@ -4,158 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İTÜ TAYF - Model Uydu Takımı</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        prussian_blue: '#062b46',
+                        timberwolf: '#d7d9d3',
+                        yinmn_blue: '#3b5b82',
+                        blue_gray: '#6e92b6'
+                    },
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        heading: ['Exo 2', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         html {
             scroll-behavior: smooth;
         }
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 700;
+        }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-prussian_blue text-timberwolf">
     <!-- Header -->
-    <header class="fixed w-full top-0 z-50 bg-white shadow-md">
+    <header class="fixed w-full top-0 z-50 bg-prussian_blue shadow-lg border-b border-yinmn_blue">
         <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="text-2xl font-bold text-blue-950">İTÜ TAYF</div>
+            <div class="text-2xl font-heading font-bold text-timberwolf">İTÜ TAYF</div>
             <div class="flex items-center gap-8">
-                <a href="#project" class="text-gray-700 hover:text-blue-950 transition" data-key="navProject"></a>
-                <a href="#team" class="text-gray-700 hover:text-blue-950 transition" data-key="navTeam"></a>
-                <a href="#sponsor" class="text-gray-700 hover:text-blue-950 transition" data-key="navSponsor"></a>
-                <a href="#contact" class="text-gray-700 hover:text-blue-950 transition" data-key="navContact"></a>
-                <div class="flex gap-2 ml-4 border-l border-gray-300 pl-4">
-                    <button onclick="setLanguage('tr')" class="text-gray-700 hover:text-blue-950 font-semibold transition">TR</button>
-                    <span class="text-gray-400">|</span>
-                    <button onclick="setLanguage('en')" class="text-gray-700 hover:text-blue-950 font-semibold transition">EN</button>
+                <a href="#project" class="text-timberwolf hover:text-blue_gray transition" data-key="navProject"></a>
+                <a href="#team" class="text-timberwolf hover:text-blue_gray transition" data-key="navTeam"></a>
+                <a href="#sponsor" class="text-timberwolf hover:text-blue_gray transition" data-key="navSponsor"></a>
+                <a href="#contact" class="text-timberwolf hover:text-blue_gray transition" data-key="navContact"></a>
+                <div class="flex gap-2 ml-4 border-l border-yinmn_blue pl-4">
+                    <button onclick="setLanguage('tr')" class="text-timberwolf hover:text-blue_gray font-semibold transition">TR</button>
+                    <span class="text-yinmn_blue">|</span>
+                    <button onclick="setLanguage('en')" class="text-timberwolf hover:text-blue_gray font-semibold transition">EN</button>
                 </div>
             </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-950 to-blue-900 text-white pt-20">
+    <section id="hero" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-prussian_blue to-yinmn_blue text-timberwolf pt-20">
         <div class="container mx-auto px-6 text-center">
-            <h1 class="text-5xl md:text-6xl font-bold mb-6" data-key="heroTitle"></h1>
-            <p class="text-xl md:text-2xl mb-12 max-w-4xl mx-auto text-gray-200" data-key="heroSubtitle"></p>
+            <h1 class="text-5xl md:text-6xl font-heading mb-6" data-key="heroTitle"></h1>
+            <p class="text-xl md:text-2xl mb-12 max-w-4xl mx-auto opacity-90" data-key="heroSubtitle"></p>
             <div class="flex gap-4 justify-center flex-wrap">
-                <a href="#project" class="bg-white text-blue-950 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg" data-key="heroBtnProject"></a>
-                <a href="#sponsor" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-950 transition" data-key="heroBtnSponsor"></a>
+                <a href="#project" class="bg-blue_gray text-prussian_blue px-8 py-4 rounded-lg font-bold hover:opacity-90 transition shadow-lg" data-key="heroBtnProject"></a>
+                <a href="#sponsor" class="bg-transparent border-2 border-blue_gray text-timberwolf px-8 py-4 rounded-lg font-bold hover:bg-blue_gray hover:text-prussian_blue transition" data-key="heroBtnSponsor"></a>
             </div>
         </div>
     </section>
 
     <!-- Project Section -->
-    <section id="project" class="py-20 bg-white">
+    <section id="project" class="py-20 bg-prussian_blue">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-4xl font-bold text-blue-950 mb-6" data-key="projectTitle"></h2>
-                    <p class="text-lg text-gray-700 leading-relaxed" data-key="projectText"></p>
+                    <h2 class="text-4xl font-heading mb-6" data-key="projectTitle"></h2>
+                    <p class="text-lg leading-relaxed opacity-90" data-key="projectText"></p>
                 </div>
                 <div>
-                    <h3 class="text-2xl font-semibold text-blue-950 mb-6" data-key="galleryTitle"></h3>
+                    <h3 class="text-2xl font-heading mb-6" data-key="galleryTitle"></h3>
                     <div class="grid grid-cols-2 gap-4">
                         <!-- Replace placeholder.jpg with actual render images -->
                         <!-- Image 1: Front view of satellite -->
-                        <img src="placeholder.jpg" alt="Satellite Render 1" class="w-full h-48 object-cover rounded-lg shadow-lg bg-gray-200">
+                        <img src="placeholder.jpg" alt="Satellite Render 1" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
                         <!-- Image 2: Side view of satellite -->
-                        <img src="placeholder.jpg" alt="Satellite Render 2" class="w-full h-48 object-cover rounded-lg shadow-lg bg-gray-200">
+                        <img src="placeholder.jpg" alt="Satellite Render 2" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
                         <!-- Image 3: Internal components -->
-                        <img src="placeholder.jpg" alt="Satellite Render 3" class="w-full h-48 object-cover rounded-lg shadow-lg bg-gray-200">
+                        <img src="placeholder.jpg" alt="Satellite Render 3" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
                         <!-- Image 4: Deployment configuration -->
-                        <img src="placeholder.jpg" alt="Satellite Render 4" class="w-full h-48 object-cover rounded-lg shadow-lg bg-gray-200">
+                        <img src="placeholder.jpg" alt="Satellite Render 4" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
                     </div>
                     <!-- Image 5: Full system assembly -->
-                    <img src="placeholder.jpg" alt="Satellite Render 5" class="w-full h-64 object-cover rounded-lg shadow-lg bg-gray-200 mt-4">
+                    <img src="placeholder.jpg" alt="Satellite Render 5" class="w-full h-64 object-cover rounded-lg shadow-lg bg-yinmn_blue mt-4">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="py-20 bg-gray-50">
+    <section id="team" class="py-20 bg-yinmn_blue">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-blue-950 text-center mb-16" data-key="teamTitle"></h2>
+            <h2 class="text-4xl font-heading text-center mb-16" data-key="teamTitle"></h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
                 <!-- Team Card 1 -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-                    <div class="w-12 h-12 bg-blue-950 rounded-lg mb-4 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-prussian_blue p-6 rounded-lg shadow-lg hover:shadow-xl transition border border-blue_gray">
+                    <div class="w-12 h-12 bg-blue_gray rounded-lg mb-4 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-prussian_blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-blue-950 mb-3" data-key="teamCard1Title"></h3>
-                    <p class="text-gray-600" data-key="teamCard1Text"></p>
+                    <h3 class="text-xl font-heading mb-3" data-key="teamCard1Title"></h3>
+                    <p class="opacity-90" data-key="teamCard1Text"></p>
                 </div>
                 <!-- Team Card 2 -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-                    <div class="w-12 h-12 bg-blue-950 rounded-lg mb-4 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-prussian_blue p-6 rounded-lg shadow-lg hover:shadow-xl transition border border-blue_gray">
+                    <div class="w-12 h-12 bg-blue_gray rounded-lg mb-4 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-prussian_blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-blue-950 mb-3" data-key="teamCard2Title"></h3>
-                    <p class="text-gray-600" data-key="teamCard2Text"></p>
+                    <h3 class="text-xl font-heading mb-3" data-key="teamCard2Title"></h3>
+                    <p class="opacity-90" data-key="teamCard2Text"></p>
                 </div>
                 <!-- Team Card 3 -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-                    <div class="w-12 h-12 bg-blue-950 rounded-lg mb-4 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-prussian_blue p-6 rounded-lg shadow-lg hover:shadow-xl transition border border-blue_gray">
+                    <div class="w-12 h-12 bg-blue_gray rounded-lg mb-4 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-prussian_blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-blue-950 mb-3" data-key="teamCard3Title"></h3>
-                    <p class="text-gray-600" data-key="teamCard3Text"></p>
+                    <h3 class="text-xl font-heading mb-3" data-key="teamCard3Title"></h3>
+                    <p class="opacity-90" data-key="teamCard3Text"></p>
                 </div>
                 <!-- Team Card 4 -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-                    <div class="w-12 h-12 bg-blue-950 rounded-lg mb-4 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-prussian_blue p-6 rounded-lg shadow-lg hover:shadow-xl transition border border-blue_gray">
+                    <div class="w-12 h-12 bg-blue_gray rounded-lg mb-4 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-prussian_blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-blue-950 mb-3" data-key="teamCard4Title"></h3>
-                    <p class="text-gray-600" data-key="teamCard4Text"></p>
+                    <h3 class="text-xl font-heading mb-3" data-key="teamCard4Title"></h3>
+                    <p class="opacity-90" data-key="teamCard4Text"></p>
                 </div>
                 <!-- Team Card 5 -->
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-                    <div class="w-12 h-12 bg-blue-950 rounded-lg mb-4 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-prussian_blue p-6 rounded-lg shadow-lg hover:shadow-xl transition border border-blue_gray">
+                    <div class="w-12 h-12 bg-blue_gray rounded-lg mb-4 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-prussian_blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-blue-950 mb-3" data-key="teamCard5Title"></h3>
-                    <p class="text-gray-600" data-key="teamCard5Text"></p>
+                    <h3 class="text-xl font-heading mb-3" data-key="teamCard5Title"></h3>
+                    <p class="opacity-90" data-key="teamCard5Text"></p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Sponsor CTA Section -->
-    <section id="sponsor" class="py-20 bg-blue-950 text-white">
+    <section id="sponsor" class="py-20 bg-prussian_blue">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6" data-key="sponsorTitle"></h2>
-            <p class="text-xl mb-12 max-w-3xl mx-auto text-gray-200" data-key="sponsorText"></p>
-            <a href="ITU_Tayf_Tanitim_Dosyasi.pdf" download class="inline-block bg-white text-blue-950 px-10 py-4 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg" data-key="sponsorBtn"></a>
+            <h2 class="text-4xl font-heading mb-6" data-key="sponsorTitle"></h2>
+            <p class="text-xl mb-12 max-w-3xl mx-auto opacity-90" data-key="sponsorText"></p>
+            <a href="ITU_Tayf_Tanitim_Dosyasi.pdf" download class="inline-block bg-blue_gray text-prussian_blue px-10 py-4 rounded-lg font-bold hover:opacity-90 transition shadow-lg" data-key="sponsorBtn"></a>
         </div>
     </section>
 
     <!-- Contact & Footer Section -->
-    <section id="contact" class="py-20 bg-gray-50">
+    <section id="contact" class="py-20 bg-yinmn_blue">
         <div class="container mx-auto px-6">
             <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-4xl font-bold text-blue-950 mb-6" data-key="contactTitle"></h2>
-                <p class="text-lg text-gray-700 mb-8" data-key="contactText"></p>
-                <p class="text-lg text-gray-700 mb-8" data-key="contactLead"></p>
+                <h2 class="text-4xl font-heading mb-6" data-key="contactTitle"></h2>
+                <p class="text-lg mb-8 opacity-90" data-key="contactText"></p>
+                <p class="text-lg mb-8 opacity-90" data-key="contactLead"></p>
                 <div class="flex gap-4 justify-center mb-8">
-                    <a href="mailto:tayf.takimi@itu.edu.tr" class="bg-blue-950 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-900 transition">E-posta Gönder</a>
+                    <a href="mailto:itutayf@example.com" class="bg-blue_gray text-prussian_blue px-8 py-3 rounded-lg font-bold hover:opacity-90 transition">E-posta Gönder</a>
                 </div>
                 <div class="flex gap-6 justify-center">
-                    <a href="https://www.linkedin.com/company/i%CC%87t%C3%BC-tayf/" target="_blank" class="text-blue-950 hover:text-blue-700 transition">
+                    <a href="https://www.linkedin.com/company/i%CC%87t%C3%BC-tayf/" target="_blank" class="text-blue_gray hover:text-timberwolf transition">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                         </svg>
                     </a>
-                    <a href="https://instagram.com/itu.tayf" target="_blank" class="text-blue-950 hover:text-blue-700 transition">
+                    <a href="https://instagram.com/itutayf" target="_blank" class="text-blue_gray hover:text-timberwolf transition">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
@@ -166,8 +194,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-blue-950 text-white py-6">
-        <div class="container mx-auto px-6 text-center">
+    <footer class="bg-prussian_blue text-timberwolf py-6 border-t border-yinmn_blue">
+        <div class="container mx-auto px-6 text-center opacity-75">
             <p>&copy; 2025 İTÜ TAYF Model Uydu Takımı. Tüm hakları saklıdır.</p>
         </div>
     </footer>
@@ -179,10 +207,10 @@
                 "navTeam": "Ekip",
                 "navSponsor": "Sponsorluk",
                 "navContact": "İletişim",
-                "heroTitle": "İTÜ TAYF",
+                "heroTitle": "İTÜ TAYF: Geleceğin Uydu Mühendisleri",
                 "heroSubtitle": "İstanbul Teknik Üniversitesi Uçak ve Uzay Bilimleri Fakültesi bünyesinde, TEKNOFEST için uydu teknolojileri geliştiriyoruz.",
                 "heroBtnProject": "Projemizi Keşfedin",
-                "heroBtnSponsor": "Bizi Destekleyin (Sponsorluk)",
+                "heroBtnSponsor": "Bize Katılın (Sponsorluk)",
                 "projectTitle": "TEKNOFEST Model Uydu Projemiz",
                 "projectText": "Ekibimiz, telemetri verilerini toplamak, yer istasyonuna iletmek ve pasif bir yükü (örneğin bir kamera sistemi) başarıyla çalıştırmak üzere tasarlanmış bir model uydu geliştirmektedir. Bu proje, üyelerimize sistem mühendisliği, entegrasyon ve proje yönetimi konularında benzersiz bir tecrübe kazandırmaktadır.",
                 "galleryTitle": "Uydu Modelimiz",
@@ -202,17 +230,17 @@
                 "sponsorBtn": "Tanıtım Dosyasını İndir",
                 "contactTitle": "İletişime Geçin",
                 "contactText": "Projemiz hakkında daha fazla bilgi almak veya iş birliği fırsatlarını görüşmek için bize ulaşın.",
-                "contactLead": "tayf.takimi@itu.edu.tr"
+                "contactLead": "Organizasyon Lideri: [Your Name Here]"
             },
             "en": {
                 "navProject": "Project",
                 "navTeam": "Team",
                 "navSponsor": "Sponsorship",
                 "navContact": "Contact",
-                "heroTitle": "İTÜ TAYF",
+                "heroTitle": "İTÜ TAYF: Engineers of Future Satellites",
                 "heroSubtitle": "Developing advanced satellite technology for TEKNOFEST within the ITU Faculty of Aeronautics and Astronautics.",
                 "heroBtnProject": "Discover Our Project",
-                "heroBtnSponsor": "Support Us (Sponsorship)",
+                "heroBtnSponsor": "Join Us (Sponsorship)",
                 "projectTitle": "Our TEKNOFEST Model Satellite Project",
                 "projectText": "Our team is developing a model satellite designed to collect telemetry data, transmit it to a ground station, and successfully operate a passive payload (e.g., a camera system). This project provides our members with unique experience in systems engineering, integration, and project management.",
                 "galleryTitle": "Our Satellite Model",
@@ -232,7 +260,7 @@
                 "sponsorBtn": "Download Sponsorship Deck",
                 "contactTitle": "Get In Touch",
                 "contactText": "Contact us to learn more about our project or to discuss partnership opportunities.",
-                "contactLead": "tayf.takimi@itu.edu.tr"
+                "contactLead": "Organization Lead: [Your Name Here]"
             }
         };
 
