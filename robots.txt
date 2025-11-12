@@ -3,16 +3,16 @@ User-agent: *
 Disallow: /api/
 Disallow: /admin/
 Disallow: /drafts/
+
+# Keep assets crawlable/renderable
 Allow: /assets/
 Allow: /images/
-# If you run a SPA, keep JS/CSS crawlable:
 Allow: /*.js$
 Allow: /*.css$
 
-# Helpful: don’t index query hash “pages” if you use them for modals, etc.
+# Don’t index tracking param variants (some crawlers ignore this,
+# but Google/Bing respect it as a crawl hint)
 Disallow: /*?*utm_*
 Disallow: /*?*fbclid=*
-# (optional) throttle temporary params:
-Noindex: /*?*preview=*
 
 Sitemap: https://tayf.itu.edu.tr/sitemap.xml
