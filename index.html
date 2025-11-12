@@ -126,16 +126,16 @@
                     <div class="grid grid-cols-2 gap-4">
                         <!-- Replace placeholder.jpg with actual render images -->
                         <!-- Image 1: Front view of satellite -->
-                        <img src="placeholder.jpg" alt="Satellite Render 1" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
+                        <img src="4.jpg" alt="Satellite Render 1" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
                         <!-- Image 2: Side view of satellite -->
-                        <img src="placeholder.jpg" alt="Satellite Render 2" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
+                        <img src="2.png" alt="Satellite Render 2" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
                         <!-- Image 3: Internal components -->
-                        <img src="placeholder.jpg" alt="Satellite Render 3" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
+                        <img src="3.png" alt="Satellite Render 3" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
                         <!-- Image 4: Deployment configuration -->
-                        <img src="placeholder.jpg" alt="Satellite Render 4" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
+                        <img src="6.webp" alt="Satellite Render 4" class="w-full h-48 object-cover rounded-lg shadow-lg bg-yinmn_blue">
                     </div>
                     <!-- Image 5: Full system assembly -->
-                    <img src="placeholder.jpg" alt="Satellite Render 5" class="w-full h-64 object-cover rounded-lg shadow-lg bg-yinmn_blue mt-4">
+                    <img src="1.jpg" alt="Satellite Render 5" class="w-full h-64 object-cover rounded-lg shadow-lg bg-yinmn_blue mt-4">
                 </div>
             </div>
         </div>
@@ -209,26 +209,6 @@
             <a href="ITU_Tayf_Tanitim_Dosyasi.pdf" download class="inline-block bg-blue_gray text-prussian_blue px-10 py-4 rounded-lg font-bold hover:opacity-90 transition shadow-lg" data-key="sponsorBtn"></a>
         </div>
     </section>
-<section id="apod" class="bg-yinmn_blue py-16 px-6"> <div class="max-w-4xl mx-auto">
-    
-    <h2 class="font-exo_2 text-3xl font-bold text-timberwolf text-center mb-8">
-      Astronomy Picture of the Day
-    </h2>
-    
-    <div id="apod-container" class="bg-prussian_blue p-4 rounded-lg shadow-lg">
-      <img id="apod-image" src="" alt="NASA Picture of the Day" class="w-full h-auto rounded-md mb-4"/>
-      
-      <h3 id="apod-title" class="font-exo_2 text-2xl font-bold text-timberwolf mb-2">
-        Loading Image...
-      </h3>
-      
-      <p id="apod-explanation" class="font-open_sans text-timberwolf">
-        Please wait as we fetch today's image from the NASA archives.
-      </p>
-    </div>
-
-  </div>
-</section>
     <!-- Contact & Footer Section -->
     <section id="contact" class="py-20 bg-yinmn_blue">
         <div class="container mx-auto px-6">
@@ -363,56 +343,6 @@ function setLanguage(lang) {
         setLanguage('tr');
     });
     </script>
-    <script>
-  // Wait for the HTML document to be fully loaded before running the script
-  document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- YOUR TASK ---
-    // Replace 'DEMO_KEY' with the real API key you got from api.nasa.gov
-    const apiKey = 'EJbHG3NHr8CJWHTCAieoCjd2P2aqBXRG8GTRHbsR'; 
-    // -----------------
 
-    const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
-
-    // Get the HTML elements we need to update
-    const imageElement = document.getElementById('apod-image');
-    const titleElement = document.getElementById('apod-title');
-    const explanationElement = document.getElementById('apod-explanation');
-
-    // Use async/await to fetch the data
-    async function getNasaApod() {
-      try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-
-        // Check if the media type is an image (APOD is sometimes a video)
-        if (data.media_type === 'image') {
-          // Update the HTML elements with the data from NASA
-          imageElement.src = data.url;
-          imageElement.alt = data.title;
-          titleElement.innerText = data.title;
-          explanationElement.innerText = data.explanation;
-        } else {
-          // If it's a video or something else, just say so.
-          titleElement.innerText = 'Today\'s APOD is not an image.';
-          explanationElement.innerText = data.explanation;
-          imageElement.style.display = 'none'; // Hide the broken image tag
-        }
-
-      } catch (error) {
-        console.error('Error fetching NASA APOD data:', error);
-        titleElement.innerText = 'Error loading image';
-        explanationElement.innerText = 'Could not fetch data from NASA. Please try again later.';
-      }
-    }
-
-    // Run the function!
-    getNasaApod();
-  });
-</script>
 </body>
 </html>
