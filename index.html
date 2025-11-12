@@ -126,6 +126,17 @@
     /* subtle hero animations */
     @keyframes logo-pop { 0% {opacity:0; transform: translateY(6px) scale(.98);} 100% {opacity:1; transform: translateY(0) scale(1);} }
     @keyframes title-slide { 0% {opacity:0; transform: translateY(8px);} 100% {opacity:1; transform: translateY(0);} }
+    /* reuse title-slide keyframes; just add utility classes + reduced-motion */
+.animate-subtitle-slide { animation: title-slide .5s ease-out .18s both; }
+.animate-cta-fade      { animation: title-slide .5s ease-out .26s both; }
+
+/* respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-subtitle-slide,
+  .animate-cta-fade {
+    animation: none !important;
+  }
+}
     .animate-logo-pop { animation: logo-pop .5s ease-out .05s both; }
     .animate-title-slide { animation: title-slide .5s ease-out .12s both; }
     @media (prefers-reduced-motion: reduce) { .animate-logo-pop,.animate-title-slide { animation: none !important; } }
