@@ -1,0 +1,6 @@
+# Allow all search engines to crawl the entire site.
+User-agent: *
+Allow: /
+
+# Tell all search engines where to find the sitemap.
+Sitemap: https://tayf.itu.edu.tr/sitemap.xml
