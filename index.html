@@ -62,7 +62,7 @@
       "@type": "Organization",
       "name": "İTÜ Tayf Model Uydu Takımı",
       "url": "https://tayf.itu.edu.tr/", // <-- REPLACE THIS
-      "logo": "https://tayf.itu.edu.tr/images/logo-tayf-brand.png", // <-- REPLACE THIS
+      "logo": "https://tayf.itu.edu.tr/images/logo-tayf.png", // <-- REPLACE THIS
       "sameAs": [
         "https://www.linkedin.com/company/i%CC%87t%C3%BC-tayf/", // <-- REPLACE THIS
         "https://www.instagram.com/itu.tayf/" // <-- REPLACE THIS
@@ -77,22 +77,27 @@
 </head>
 <body class="bg-prussian_blue text-timberwolf">
     <!-- Header -->
-    <header class="fixed w-full top-0 z-50 bg-prussian_blue shadow-lg border-b border-yinmn_blue">
-        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="text-2xl font-heading font-bold text-timberwolf">İTÜ TAYF</div>
-            <div class="flex items-center gap-8">
-                <a href="#project" class="text-timberwolf hover:text-blue_gray transition" data-key="navProject"></a>
-                <a href="#team" class="text-timberwolf hover:text-blue_gray transition" data-key="navTeam"></a>
-                <a href="#sponsor" class="text-timberwolf hover:text-blue_gray transition" data-key="navSponsor"></a>
-                <a href="#contact" class="text-timberwolf hover:text-blue_gray transition" data-key="navContact"></a>
-                <div class="flex gap-2 ml-4 border-l border-yinmn_blue pl-4">
-                    <button onclick="setLanguage('tr')" class="text-timberwolf hover:text-blue_gray font-semibold transition">TR</button>
-                    <span class="text-yinmn_blue">|</span>
-                    <button onclick="setLanguage('en')" class="text-timberwolf hover:text-blue_gray font-semibold transition">EN</button>
-                </div>
+<header class="fixed w-full top-0 z-50 bg-prussian_blue shadow-lg border-b border-yinmn_blue">
+    <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+        
+        <a href="#hero" class="block">
+          <img src="logo-tayf.png" alt="İTÜ Tayf Logo" class="h-10 w-auto"> 
+        </a>
+
+        <div class="flex items-center gap-8">
+            <a href="#project" class="text-timberwolf hover:text-blue_gray transition" data-key="navProject"></a>
+            <a href="#team" class="text-timberwolf hover:text-blue_gray transition" data-key="navTeam"></a>
+            <a href="#sponsor" class="text-timberwolf hover:text-blue_gray transition" data-key="navSponsor"></a>
+            <a href="#contact" class="text-timberwolf hover:text-blue_gray transition" data-key="navContact"></a>
+            
+            <div class="flex gap-2 ml-4 border-l border-yinmn_blue pl-4">
+                <button onclick="setLanguage('tr')" class="text-blue_gray font-semibold transition">TR</button>
+                <span class="text-yinmn_blue">|</span>
+                <button onclick="setLanguage('en')" class="text-timberwolf hover:text-blue_gray font-semibold transition">EN</button>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
 
     <!-- Hero Section -->
 <section 
