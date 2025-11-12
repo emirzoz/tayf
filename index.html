@@ -132,42 +132,58 @@
   </style>
 </head>
 <body class="bg-prussian_blue text-timberwolf">
-  <!-- Header -->
-  <header class="fixed w-full top-0 z-50">
-    <nav class="relative bg-[#6E92B6]/15 backdrop-blur border-b-2 border-[#6E92B6]">
-      <!-- accent gradient line -->
-      <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#6E92B6] to-transparent opacity-60"></div>
+<!-- Header -->
+<header class="fixed w-full top-0 z-50">
+  <nav class="relative bg-[#6E92B6]/15 backdrop-blur border-b-2 border-[#6E92B6]">
+    <!-- accent gradient line -->
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#6E92B6] to-transparent opacity-60"></div>
 
-      <div class="container mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#hero" class="text-2xl font-heading font-bold text-timberwolf focus:outline-none focus:ring-2 focus:ring-[#6E92B6] rounded-sm">İTÜ TAYF</a>
+    <div class="container mx-auto px-6 h-16 flex items-center justify-between">
+      <!-- brand -->
+      <a href="#hero"
+         class="text-2xl font-heading font-bold text-timberwolf focus:outline-none focus:ring-2 focus:ring-[#6E92B6] rounded-sm">
+        İTÜ TAYF
+      </a>
 
-        <div class="hidden md:flex items-center gap-8">
-          <a href="#project" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8 decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2 focus:ring-[#6E92B6] rounded-sm" data-key="navProject">Proje</a>
-          <a href="#team" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8 decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2 focus:ring-[#6E92B6] rounded-sm" data-key="navTeam">Ekip</a>
-          <a href="#sponsor" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8 decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2 focus:ring-[#6E92B6] rounded-sm" data-key="navSponsor">Sponsorluk</a>
-          <a href="#contact" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8 decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2 focus:ring-[#6E92B6] rounded-sm" data-key="navContact">İletişim</a>
+      <!-- desktop nav -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#project" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8
+           decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2
+           focus:ring-[#6E92B6] rounded-sm" data-key="navProject">Proje</a>
+        <a href="#team" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8
+           decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2
+           focus:ring-[#6E92B6] rounded-sm" data-key="navTeam">Ekip</a>
+        <a href="#sponsor" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8
+           decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2
+           focus:ring-[#6E92B6] rounded-sm" data-key="navSponsor">Sponsorluk</a>
+        <a href="#contact" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8
+           decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2
+           focus:ring-[#6E92B6] rounded-sm" data-key="navContact">İletişim</a>
 
-          <div class="flex gap-2 ml-4 border-l border-yinmn_blue pl-4">
-            <button id="lang-tr" onclick="setLanguage('tr')" class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">TR</button>
-            <span class="text-yinmn_blue">|</span>
-            <button id="lang-en" onclick="setLanguage('en')" class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">EN</button>
-          </div>
+        <div class="flex gap-2 ml-4 border-l border-yinmn_blue pl-4">
+          <button id="lang-tr" onclick="setLanguage('tr')"
+                  class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20
+                         focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">TR</button>
+          <span class="text-yinmn_blue">|</span>
+          <button id="lang-en" onclick="setLanguage('en')"
+                  class="font-semibold px-2 py-1 rounded-md hover:bg[#6E92B6]/20
+                         focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">EN</button>
         </div>
+      </div>
 
-<!-- mobile language switcher -->
-<div class="md:hidden flex items-center gap-2">
-  <button id="lang-tr-mobile"
-          onclick="setLanguage('tr')"
-          class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">
-    TR
-  </button>
-  <span class="text-yinmn_blue">|</span>
-  <button id="lang-en-mobile"
-          onclick="setLanguage('en')"
-          class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">
-    EN
-  </button>
-</div>
+      <!-- mobile language switcher (shows only < md) -->
+      <div class="md:hidden ml-auto flex items-center gap-2">
+        <button id="lang-tr-mobile" onclick="setLanguage('tr')"
+                class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20
+                       focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">TR</button>
+        <span class="text-yinmn_blue">|</span>
+        <button id="lang-en-mobile" onclick="setLanguage('en')"
+                class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20
+                       focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">EN</button>
+      </div>
+    </div> <!-- /container -->
+  </nav>
+</header>
 
 
   <!-- Hero Section -->
