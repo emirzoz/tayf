@@ -36,6 +36,7 @@
 
   <!-- Preload hero bg for faster LCP -->
   <link rel="preload" as="image" href="iss033e009282~orig-min.jpg" imagesrcset="iss033e009282~orig-min.jpg 1x" fetchpriority="high">
+  <link rel="preload" as="image" href="logo-tayf.png">
 
   <!-- JSON-LD (tr + en) -->
   <script type="application/ld+json">
@@ -161,6 +162,7 @@
   <section id="hero" class="min-h-screen flex items-center justify-center text-timberwolf pt-24"
     style="background: linear-gradient(rgba(6,43,70,0.7), rgba(6,43,70,0.7)), url('iss033e009282~orig-min.jpg'); background-size: cover; background-position: center center;">
     <div class="container mx-auto px-6 text-center">
+      <img src="logo-tayf.png" alt="İTÜ TAYF logo" width="180" height="180" class="mx-auto mb-4 h-16 md:h-20 w-auto drop-shadow" loading="eager" decoding="async">
       <h1 class="text-5xl md:text-6xl font-heading font-bold mb-6" data-key="heroTitle"></h1>
       <p class="text-xl md:text-2xl mb-12 max-w-4xl mx-auto opacity-90" data-key="heroSubtitle"></p>
       <div class="flex gap-4 justify-center flex-wrap">
@@ -387,4 +389,23 @@
 
     // Default language
     document.addEventListener('DOMContentLoaded', () => { setLanguage('tr'); });
-  // Active nav link highlighting + aria-current\n    function updateAriaCurrent() {\n      const links = document.querySelectorAll('nav a[href^="#"]');\n      const hash = window.location.hash || '#hero';\n      links.forEach(a => {\n        a.classList.remove('underline','decoration-[#6E92B6]');\n        if (a.getAttribute('href') === hash) {\n          a.setAttribute('aria-current','page');\n          a.classList.add('underline','decoration-[#6E92B6]');\n        } else {\n          a.removeAttribute('aria-current');\n        }\n      });\n    }\n    window.addEventListener('hashchange', updateAriaCurrent);\n    document.addEventListener('DOMContentLoaded', updateAriaCurrent);\n  </script>\n\n</body>\n
+  // Active nav link highlighting + aria-current
+    function updateAriaCurrent() {
+      const links = document.querySelectorAll('nav a[href^="#"]');
+      const hash = window.location.hash || '#hero';
+      links.forEach(a => {
+        a.classList.remove('underline','decoration-[#6E92B6]');
+        if (a.getAttribute('href') === hash) {
+          a.setAttribute('aria-current','page');
+          a.classList.add('underline','decoration-[#6E92B6]');
+        } else {
+          a.removeAttribute('aria-current');
+        }
+      });
+    }
+    window.addEventListener('hashchange', updateAriaCurrent);
+    document.addEventListener('DOMContentLoaded', updateAriaCurrent);
+  </script>
+
+</body>
+</html>
