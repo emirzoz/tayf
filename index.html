@@ -41,10 +41,27 @@
 </head>
 <body class="bg-prussian_blue text-timberwolf">
     <!-- Header -->
-   <section 
+    <header class="fixed w-full top-0 z-50 bg-prussian_blue shadow-lg border-b border-yinmn_blue">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="text-2xl font-heading font-bold text-timberwolf">İTÜ TAYF</div>
+            <div class="flex items-center gap-8">
+                <a href="#project" class="text-timberwolf hover:text-blue_gray transition" data-key="navProject"></a>
+                <a href="#team" class="text-timberwolf hover:text-blue_gray transition" data-key="navTeam"></a>
+                <a href="#sponsor" class="text-timberwolf hover:text-blue_gray transition" data-key="navSponsor"></a>
+                <a href="#contact" class="text-timberwolf hover:text-blue_gray transition" data-key="navContact"></a>
+                <div class="flex gap-2 ml-4 border-l border-yinmn_blue pl-4">
+                    <button onclick="setLanguage('tr')" class="text-timberwolf hover:text-blue_gray font-semibold transition">TR</button>
+                    <span class="text-yinmn_blue">|</span>
+                    <button onclick="setLanguage('en')" class="text-timberwolf hover:text-blue_gray font-semibold transition">EN</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+<section 
       id="hero" 
       class="min-h-screen flex items-center justify-center text-timberwolf pt-20"
-      
       style="
         background: 
           linear-gradient(rgba(6, 43, 70, 0.7), rgba(6, 43, 70, 0.7)), 
@@ -52,32 +69,16 @@
         background-size: cover;
         background-position: center center;
       "
-    >
-      <div class="container mx-auto px-6 text-center">
-            
-        <h1 class="text-5xl md:text-6xl font-exo_2 font-bold mb-6" data-key="heroTitle"></h1>
-        
-        <p class="text-xl md:text-2xl font-open_sans mb-12 max-w-4xl mx-auto opacity-90" data-key="heroSubtitle"></p>
-        
-        <div class="flex gap-4 justify-center flex-wrap">
-          <a href="#project" classs="bg-blue_gray text-prussian_blue px-8 py-4 rounded-lg font-bold font-open_sans hover:opacity-90 transition shadow-lg" data-key="heroBtnProject"></a>
-          
-          <a href="#sponsor" class="bg-transparent border-2 border-blue_gray text-timberwolf px-8 py-4 rounded-lg font-bold font-open_sans hover:bg-blue_gray hover:text-prussian_blue transition" data-key="heroBtnSponsor"></a>
-        </div>
+  >
+    <div class="container mx-auto px-6 text-center">
+      <h1 class="text-5xl md:text-6xl font-exo_2 font-bold mb-6" data-key="heroTitle"></h1>
+      <p class="text-xl md:text-2xl font-open_sans mb-12 max-w-4xl mx-auto opacity-90" data-key="heroSubtitle"></p>
+      <div class="flex gap-4 justify-center flex-wrap">
+        <a href="#project" class="bg-blue_gray text-prussian_blue px-8 py-4 rounded-lg font-bold font-open_sans hover:opacity-90 transition shadow-lg" data-key="heroBtnProject"></a>
+        <a href="#sponsor" class="bg-transparent border-2 border-blue_gray text-timberwolf px-8 py-4 rounded-lg font-bold font-open_sans hover:bg-blue_gray hover:text-prussian_blue transition" data-key="heroBtnSponsor"></a>
       </div>
-    </section>
-
-    <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-prussian_blue to-yinmn_blue text-timberwolf pt-20">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-5xl md:text-6xl font-heading mb-6" data-key="heroTitle"></h1>
-            <p class="text-xl md:text-2xl mb-12 max-w-4xl mx-auto opacity-90" data-key="heroSubtitle"></p>
-            <div class="flex gap-4 justify-center flex-wrap">
-                <a href="#project" class="bg-blue_gray text-prussian_blue px-8 py-4 rounded-lg font-bold hover:opacity-90 transition shadow-lg" data-key="heroBtnProject"></a>
-                <a href="#sponsor" class="bg-transparent border-2 border-blue_gray text-timberwolf px-8 py-4 rounded-lg font-bold hover:bg-blue_gray hover:text-prussian_blue transition" data-key="heroBtnSponsor"></a>
-            </div>
-        </div>
-    </section>
+    </div>
+  </section>
 
     <!-- Project Section -->
     <section id="project" class="py-20 bg-prussian_blue">
