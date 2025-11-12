@@ -1,6 +1,18 @@
-# Allow all search engines to crawl the entire site.
+# robots.txt (root)
 User-agent: *
-Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /drafts/
+Allow: /assets/
+Allow: /images/
+# If you run a SPA, keep JS/CSS crawlable:
+Allow: /*.js$
+Allow: /*.css$
 
-# Tell all search engines where to find the sitemap.
+# Helpful: don’t index query hash “pages” if you use them for modals, etc.
+Disallow: /*?*utm_*
+Disallow: /*?*fbclid=*
+# (optional) throttle temporary params:
+Noindex: /*?*preview=*
+
 Sitemap: https://tayf.itu.edu.tr/sitemap.xml
