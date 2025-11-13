@@ -312,16 +312,60 @@
       </div>
 
       <!-- RIGHT: gallery (as before; replace with tabs/3D later if you like) -->
-      <div>
-        <h3 class="text-2xl font-heading mb-6" data-key="galleryTitle"></h3>
-        <div class="grid grid-cols-2 gap-4">
-          <img src="images/1.jpg" alt="Uydu render – ön görünüm" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-          <img src="images/5.jpeg" alt="Uydu render – detay" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-          <img src="images/7.jpg" alt="Uydu render – yanal görünüm" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-          <img src="images/8.jpeg" alt="Uydu render – bileşen yakın plan" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-        </div>
-        <img src="images/6.png" alt="Uydu render – genel görünüm" loading="lazy" decoding="async" width="1200" height="800" class="w-full h-64 object-contain rounded-lg shadow-lg bg-yinmn_blue mt-4">
-      </div>
+<!-- RIGHT: media tabs (Gallery / 3D Model) -->
+<div>
+  <h3 class="text-2xl font-heading mb-4" data-key="galleryTitle"></h3>
+
+  <!-- Tabs -->
+  <div class="flex gap-2 mb-4" role="tablist" aria-label="Project media">
+    <button id="tab-gallery" role="tab" aria-selected="true" aria-controls="panel-gallery"
+            class="px-3 py-1 rounded-md bg-[#6E92B6]/20 text-timberwolf border border-[#6E92B6]/40 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
+            data-key="tabGallery">Galeri</button>
+    <button id="tab-3d" role="tab" aria-selected="false" aria-controls="panel-3d"
+            class="px-3 py-1 rounded-md text-timberwolf/80 hover:text-timberwolf border border-transparent hover:border-[#6E92B6]/40 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
+            data-key="tab3D">3B Model</button>
+  </div>
+
+  <!-- Panel: Gallery (default) -->
+  <div id="panel-gallery" role="tabpanel" aria-labelledby="tab-gallery">
+    <div class="grid grid-cols-2 gap-4">
+      <img src="images/1.jpg" alt="Uydu render – ön görünüm" loading="lazy" decoding="async"
+           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+      <img src="images/5.jpeg" alt="Uydu render – detay" loading="lazy" decoding="async"
+           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+      <img src="images/7.jpg" alt="Uydu render – yanal görünüm" loading="lazy" decoding="async"
+           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+      <img src="images/8.jpeg" alt="Uydu render – bileşen yakın plan" loading="lazy" decoding="async"
+           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+    </div>
+    <img src="images/6.png" alt="Uydu render – genel görünüm" loading="lazy" decoding="async"
+         width="1200" height="800" class="w-full h-64 object-contain rounded-lg shadow-lg bg-yinmn_blue mt-4">
+  </div>
+
+  <!-- Panel: 3D Model (lazy, hidden initially) -->
+  <div id="panel-3d" role="tabpanel" aria-labelledby="tab-3d" class="hidden">
+    <model-viewer id="satModel"
+      src=""  <!-- set by JS on first open -->
+      poster="/images/sat-poster.jpg"
+      loading="lazy"
+      reveal="interaction"
+      camera-controls
+      touch-action="pan-y"
+      auto-rotate
+      auto-rotate-delay="4000"
+      rotation-per-second="15deg"
+      exposure="1"
+      shadow-intensity="0.4"
+      style="width:100%; height:380px; background: rgba(255,255,255,0.02); border-radius:0.75rem;"
+      aria-label="3B uydu modeli">
+      <!-- Optional hotspots -->
+      <!-- <button slot="hotspot-obc" data-position="0.10 0.12 0.03" class="px-2 py-1 rounded bg-[#6E92B6] text-prussian_blue text-sm">OBC</button> -->
+      <noscript><img src="/images/sat-poster.jpg" alt="Uydu 3B önizleme" width="1200" height="675"></noscript>
+    </model-viewer>
+    <p class="mt-3 text-timberwolf/70 text-sm" data-key="hintPan">İpucu: Parmağınızla çevirin, iki parmakla yakınlaştırın.</p>
+  </div>
+</div>
+
 
     </div>
   </div>
@@ -486,6 +530,10 @@
       contactTitle: "İletişime Geçin",
       contactText: "Projemiz hakkında daha fazla bilgi almak veya iş birliği fırsatlarını görüşmek için bize ulaşın.",
       contactLead: "tayf.takimi@itu.edu.tr"
+
+      tabGallery: "Galeri",
+      tab3D: "3B Model",
+      hintPan: "İpucu: Parmağınızla çevirin, iki parmakla yakınlaştırın.",
     },
 
     en: {
@@ -545,6 +593,9 @@
       contactTitle: "Get In Touch",
       contactText: "Contact us to learn more about our project or to discuss partnership opportunities.",
       contactLead: "tayf.takimi@itu.edu.tr"
+      tabGallery: "Gallery",
+      tab3D: "3D Model",
+      hintPan: "Tip: Drag to rotate, pinch to zoom.",
     }
   };
 
@@ -656,6 +707,54 @@
     els.forEach(el => obs.observe(el));
   })();
 </script>
+  <script>
+  (function() {
+    const tabG = document.getElementById('tab-gallery');
+    const tab3 = document.getElementById('tab-3d');
+    const panG = document.getElementById('panel-gallery');
+    const pan3 = document.getElementById('panel-3d');
+    const mv   = document.getElementById('satModel');
+    if (!tabG || !tab3 || !panG || !pan3 || !mv) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) mv.removeAttribute('auto-rotate');
+
+    let modelLoaded = false;
+    function loadModelSrcOnce() {
+      if (modelLoaded) return;
+      const isSmall = window.matchMedia('(max-width: 768px)').matches;
+      mv.src = isSmall ? '/3d/satellite-lite.glb' : '/3d/satellite.glb';  // <-- set your paths
+      modelLoaded = true;
+    }
+
+    function activate(which) {
+      const is3D = (which === '3d');
+      tabG.setAttribute('aria-selected', String(!is3D));
+      tab3.setAttribute('aria-selected', String(is3D));
+
+      tabG.classList.toggle('bg-[#6E92B6]/20', !is3D);
+      tabG.classList.toggle('border-[#6E92B6]/40', !is3D);
+      tab3.classList.toggle('bg-[#6E92B6]/20',  is3D);
+      tab3.classList.toggle('border-[#6E92B6]/40',  is3D);
+
+      panG.classList.toggle('hidden', is3D);
+      pan3.classList.toggle('hidden', !is3D);
+      if (is3D) loadModelSrcOnce();
+    }
+
+    tabG.addEventListener('click', () => activate('gallery'));
+    tab3.addEventListener('click', () => activate('3d'));
+
+    // keyboard nav
+    [tabG, tab3].forEach(b => b.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        (e.target === tabG ? tab3 : tabG).focus();
+      }
+    }));
+  })();
+</script>
+
 
 </body>
 </html>
