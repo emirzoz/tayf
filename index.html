@@ -240,6 +240,59 @@
   .solar{ --S:min(420px,92vw); }
   .planet{ --size:18px; }
 }
+/* --- remove planet descriptions --- */
+.planet .planet-label,
+.planet .tooltip-bubble {
+  display: none !important;
+}
+
+/* --- hover animation on planets --- */
+.planet{
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+/* soft glow + scale on hover/focus */
+.planet:hover,
+.planet:focus-visible{
+  transform: translate(-50%, -50%) rotate(0)
+             translateX(calc(var(--S) * var(--s) * .5))
+             scale(1.35);
+  filter: brightness(1.12);
+  box-shadow:
+    0 0 0 3px rgba(110,146,182,.55),
+    0 10px 24px rgba(110,146,182,.28),
+    0 0 24px 6px rgba(110,146,182,.18);
+}
+
+/* pulse ring (decorative) */
+.planet::after{
+  content:"";
+  position:absolute; inset:-6px;
+  border-radius:9999px;
+  box-shadow: 0 0 0 2px rgba(110,146,182,.35);
+  opacity:0; transform: scale(.8);
+  transition: opacity .2s ease;
+  pointer-events:none;
+}
+.planet:hover::after,
+.planet:focus-visible::after{
+  opacity:1;
+  animation: pulse-glow 1.6s ease-out infinite;
+}
+
+@keyframes pulse-glow{
+  0%   { transform: scale(.85); opacity:.55; box-shadow: 0 0 0 2px rgba(110,146,182,.35); }
+  70%  { transform: scale(1.25); opacity:0;   box-shadow: 0 0 0 10px rgba(110,146,182,.0); }
+  100% { transform: scale(1.25); opacity:0; }
+}
+
+/* optional: pause the orbit while hovering a planet (supported on modern browsers) */
+@supports(selector(:has(*))){
+  .orbit-wrapper:has(.planet:hover){
+    animation-play-state: paused;
+  }
+}
+
 
 /* =========================
    MOBILE JOIN CARDS + ICONS
