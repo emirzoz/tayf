@@ -148,98 +148,97 @@
     #join .group { transform: translateZ(0); transition: transform .25s ease, box-shadow .25s ease; }
     #join .group:hover { transform: translateY(-2px); }
 }
-/* =========================
-   SOLAR: layout + variables
-   ========================= */
-.solar {
-  /* put this on the visual container (<div class="solar"> … ) */
-  position: relative;
-  aspect-ratio: 1 / 1;
-  /* one source of truth for sizing */
-  --S: min(560px, 90vw);
-  width: var(--S);
-  height: var(--S);
-  margin-inline: auto;
-  isolation: isolate;
-}
+/* --- SOLAR INTERACTION / LAYERING --- */
+.solar { position: relative; --S: min(560px, 90vw); width: var(--S); height: var(--S); margin-inline:auto; isolation:isolate; }
 
-/* Thin orbit rings — share the same scale variable as their planet */
 .orbit-ring {
-  position: absolute;
-  inset: 0;
-  border: 1px dashed rgba(110,146,182,.35);
-  border-radius: 9999px;
-  pointer-events: none;
-  transform: scale(var(--s, .30)); /* default if not set */
+  position:absolute; inset:0;
+  border:1px dashed rgba(110,146,182,.35);
+  border-radius:9999px;
+  pointer-events:none;                /* rings never block clicks */
+  transform: scale(var(--s, .30));
 }
 
-/* Exactly one --s per orbit “lane” */
-.ring-1, .lane-1 { --s: .30; }
-.ring-2, .lane-2 { --s: .46; }
-.ring-3, .lane-3 { --s: .62; }
-.ring-4, .lane-4 { --s: .78; }
-.ring-5, .lane-5 { --s: .94; }
+.ring-1, .lane-1 { --s:.30; }
+.ring-2, .lane-2 { --s:.46; }
+.ring-3, .lane-3 { --s:.62; }
+.ring-4, .lane-4 { --s:.78; }
+.ring-5, .lane-5 { --s:.94; }
 
-/* Rotating wrapper matches the ring’s radius by reusing --s */
-.orbit-wrapper {
-  position: absolute;
-  inset: 0;
-  transform-origin: 50% 50%;
-  animation: orbit-spin 22s linear infinite;
+.orbit-wrapper{
+  position:absolute; inset:0;
+  transform-origin:50% 50%;
+  animation: orbit-spin var(--dur, 32s) linear infinite;
   will-change: transform;
+  z-index: 1;
+  pointer-events: none;               /* wrapper never catches events */
 }
-.orbit-wrapper.dur-22 { animation-duration: 22s; }
-.orbit-wrapper.dur-28 { animation-duration: 28s; }
-.orbit-wrapper.dur-34 { animation-duration: 34s; }
-.orbit-wrapper.dur-40 { animation-duration: 40s; }
-.orbit-wrapper.dur-46 { animation-duration: 46s; }
+/* slower orbits + expose --dur for counter-rotation */
+.dur-22{ --dur: 32s; animation-duration:32s; }
+.dur-28{ --dur: 38s; animation-duration:38s; }
+.dur-34{ --dur: 46s; animation-duration:46s; }
+.dur-40{ --dur: 54s; animation-duration:54s; }
+.dur-46{ --dur: 62s; animation-duration:62s; }
 
 @keyframes orbit-spin { to { transform: rotate(360deg); } }
 
-/* Planet sits on the ring’s rim using the same scale (--s) and container size (--S) */
-.planet {
-  --size: 20px;
-  position: absolute;
-  top: 50%; left: 50%;
-  width: var(--size); height: var(--size);
-  /* radius = half of (container * scale) */
-  transform: translate(-50%, -50%)
-             rotate(0)
+/* Planet sits on ring; only the planet should be clickable */
+.planet{
+  --size:20px;
+  position:absolute; top:50%; left:50%;
+  width:var(--size); height:var(--size);
+  transform: translate(-50%,-50%) rotate(0)
              translateX(calc(var(--S) * var(--s) * 0.5));
-  border-radius: 9999px;
+  border-radius:9999px;
   background: radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
   box-shadow: 0 0 0 2px rgba(110,146,182,.5), 0 8px 18px rgba(110,146,182,.15);
-  display: grid; place-items: center;
-  outline: none;
+  display:grid; place-items:center;
+  outline:none;
+  z-index: 2;                         /* above wrappers/rings */
+  pointer-events: auto;               /* clickable again */
 }
-.planet:focus-visible { box-shadow: 0 0 0 3px #6E92B6, 0 8px 18px rgba(110,146,182,.25); }
+.planet:focus-visible{ box-shadow: 0 0 0 3px #6E92B6, 0 8px 18px rgba(110,146,182,.25); }
 
-/* Label bubble */
-.planet-label {
-  position: absolute;
-  top: -34px; left: 50%; transform: translateX(-50%);
-  white-space: nowrap; font-size: 12px; color: rgba(215,217,211,.9);
-  background: rgba(6,43,70,.6); border: 1px solid rgba(110,146,182,.3);
-  padding: 2px 8px; border-radius: 9999px;
+/* Keep text readable: counter-rotate at the same speed as its lane */
+@keyframes counter-spin { to { transform: translateX(-50%) rotate(-360deg); } }
+
+.planet-label{
+  position:absolute; top:-34px; left:50%;
+  transform: translateX(-50%);
+  white-space:nowrap; font-size:12px; color:rgba(215,217,211,.9);
+  background:rgba(6,43,70,.6); border:1px solid rgba(110,146,182,.3);
+  padding:2px 8px; border-radius:9999px;
+  animation: counter-spin var(--dur,32s) linear infinite;
+  transform-origin: 50% 50%;
 }
 
-/* Tooltip on hover/focus */
-.tooltip-bubble {
-  pointer-events: none;
-  position: absolute; top: 30px; left: 50%; transform: translateX(-50%) translateY(-4px);
-  background: rgba(6,43,70,.9);
-  border: 1px solid rgba(110,146,182,.4);
-  padding: 6px 10px; border-radius: 10px;
-  color: #d7d9d3; font-size: 12px;
-  opacity: 0; transition: opacity .15s ease, transform .15s ease;
+.tooltip-bubble{
+  pointer-events:none;
+  position:absolute; top:30px; left:50%;
+  transform: translateX(-50%) translateY(-4px);
+  background:rgba(6,43,70,.9);
+  border:1px solid rgba(110,146,182,.4);
+  padding:6px 10px; border-radius:10px;
+  color:#d7d9d3; font-size:12px;
+  opacity:0; transition: opacity .15s ease, transform .15s ease;
   transform-origin: top center;
+  /* also keep tooltip upright */
+  animation: counter-spin var(--dur,32s) linear infinite;
 }
 .planet:hover .tooltip-bubble,
-.planet:focus-visible .tooltip-bubble { opacity: 1; transform: translateX(-50%) translateY(0); }
+.planet:focus-visible .tooltip-bubble{ opacity:1; transform: translateX(-50%) translateY(0); }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .orbit-wrapper { animation: none !important; }
+/* Reduced motion = no spins */
+@media (prefers-reduced-motion: reduce){
+  .orbit-wrapper{ animation:none !important; }
+  .planet-label, .tooltip-bubble{ animation:none !important; }
+}
+
+/* Minor sizing tweaks */
+@media (min-width:1024px){ .planet{ --size:22px; } }
+@media (max-width:480px){
+  .solar{ --S:min(420px,92vw); }
+  .planet{ --size:18px; }
 }
 
 /* =========================
