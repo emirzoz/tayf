@@ -148,22 +148,45 @@
     #join .group { transform: translateZ(0); transition: transform .25s ease, box-shadow .25s ease; }
     #join .group:hover { transform: translateY(-2px); }
 }
-/* Solar system orbits */
+/* =========================
+   SOLAR: layout + variables
+   ========================= */
+.solar {
+  /* put this on the visual container (<div class="solar"> … ) */
+  position: relative;
+  aspect-ratio: 1 / 1;
+  /* one source of truth for sizing */
+  --S: min(560px, 90vw);
+  width: var(--S);
+  height: var(--S);
+  margin-inline: auto;
+  isolation: isolate;
+}
+
+/* Thin orbit rings — share the same scale variable as their planet */
 .orbit-ring {
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   border: 1px dashed rgba(110,146,182,.35);
   border-radius: 9999px;
-  transform: scale(.30);
+  pointer-events: none;
+  transform: scale(var(--s, .30)); /* default if not set */
 }
-.orbit-ring.ring-2 { transform: scale(.46); }
-.orbit-ring.ring-3 { transform: scale(.62); }
-.orbit-ring.ring-4 { transform: scale(.78); }
-.orbit-ring.ring-5 { transform: scale(.94); }
 
-/* Rotating wrapper; the planet sits at the rim using translateX(var(--orbit)) */
+/* Exactly one --s per orbit “lane” */
+.ring-1, .lane-1 { --s: .30; }
+.ring-2, .lane-2 { --s: .46; }
+.ring-3, .lane-3 { --s: .62; }
+.ring-4, .lane-4 { --s: .78; }
+.ring-5, .lane-5 { --s: .94; }
+
+/* Rotating wrapper matches the ring’s radius by reusing --s */
 .orbit-wrapper {
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
   animation: orbit-spin 22s linear infinite;
+  will-change: transform;
 }
 .orbit-wrapper.dur-22 { animation-duration: 22s; }
 .orbit-wrapper.dur-28 { animation-duration: 28s; }
@@ -173,12 +196,16 @@
 
 @keyframes orbit-spin { to { transform: rotate(360deg); } }
 
-/* Planet */
+/* Planet sits on the ring’s rim using the same scale (--s) and container size (--S) */
 .planet {
   --size: 20px;
-  position: absolute; top: 50%; left: 50%;
+  position: absolute;
+  top: 50%; left: 50%;
   width: var(--size); height: var(--size);
-  transform: rotate(0) translateX(var(--orbit)) translateY(-50%);
+  /* radius = half of (container * scale) */
+  transform: translate(-50%, -50%)
+             rotate(0)
+             translateX(calc(var(--S) * var(--s) * 0.5));
   border-radius: 9999px;
   background: radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
   box-shadow: 0 0 0 2px rgba(110,146,182,.5), 0 8px 18px rgba(110,146,182,.15);
@@ -187,9 +214,10 @@
 }
 .planet:focus-visible { box-shadow: 0 0 0 3px #6E92B6, 0 8px 18px rgba(110,146,182,.25); }
 
-/* Planet label that faces user (counter-rotate) */
+/* Label bubble */
 .planet-label {
-  position: absolute; top: -34px; left: 50%; transform: translateX(-50%);
+  position: absolute;
+  top: -34px; left: 50%; transform: translateX(-50%);
   white-space: nowrap; font-size: 12px; color: rgba(215,217,211,.9);
   background: rgba(6,43,70,.6); border: 1px solid rgba(110,146,182,.3);
   padding: 2px 8px; border-radius: 9999px;
@@ -198,18 +226,25 @@
 /* Tooltip on hover/focus */
 .tooltip-bubble {
   pointer-events: none;
-  position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
+  position: absolute; top: 30px; left: 50%; transform: translateX(-50%) translateY(-4px);
   background: rgba(6,43,70,.9);
   border: 1px solid rgba(110,146,182,.4);
   padding: 6px 10px; border-radius: 10px;
   color: #d7d9d3; font-size: 12px;
   opacity: 0; transition: opacity .15s ease, transform .15s ease;
-  transform-origin: top center; transform: translateX(-50%) translateY(-4px);
+  transform-origin: top center;
 }
 .planet:hover .tooltip-bubble,
 .planet:focus-visible .tooltip-bubble { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* Mobile join cards */
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-wrapper { animation: none !important; }
+}
+
+/* =========================
+   MOBILE JOIN CARDS + ICONS
+   ========================= */
 .join-card {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 14px 16px; border-radius: 14px;
@@ -220,13 +255,65 @@
 .join-card:hover { transform: translateY(-2px); opacity: .95; box-shadow: 0 8px 22px rgba(110,146,182,.15); }
 .join-card:focus-visible { outline: none; box-shadow: 0 0 0 3px #6E92B6; }
 
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .orbit-wrapper { animation: none !important; }
+.icon-join {
+  width: 1.25rem; height: 1.25rem;
+  margin-right: .5rem;
+  color: #6E92B6;
+  stroke-width: 2;
+  flex-shrink: 0;
 }
+
+/* Optional: size tweaks by breakpoint */
+@media (min-width: 1024px) {
+  .planet { --size: 22px; }
+}
+@media (max-width: 480px) {
+  .solar { --S: min(420px, 92vw); }
+  .planet { --size: 18px; }
+}
+
 
   </style>
 </head>
+  <!-- SVG SPRITE: reused department icons (hidden) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <!-- Mekanik -->
+  <symbol id="icon-mekanik" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+  </symbol>
+
+  <!-- Elektronik -->
+  <symbol id="icon-elektronik" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 9h6v6H9V9z"/>
+  </symbol>
+
+  <!-- Uçuş Yazılımı -->
+  <symbol id="icon-ucus" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+  </symbol>
+
+  <!-- Yer İstasyonu -->
+  <symbol id="icon-yer" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/>
+  </symbol>
+
+  <!-- Organizasyon & Sponsorluk -->
+  <symbol id="icon-org" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/>
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+  </symbol>
+</svg>
+
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <body class="bg-prussian_blue text-timberwolf">
 <!-- Header -->
@@ -533,8 +620,18 @@
     </p>
 
     <!-- SOLAR SYSTEM (desktop and up) -->
+  <!-- Join Section: Solar System (desktop) + Cards (mobile) -->
+<section id="join" class="relative py-20 bg-prussian_blue border-t border-[#6E92B6]/30 overflow-hidden">
+  <div class="container mx-auto px-6 relative">
+    <h2 class="text-4xl font-heading mb-4" data-key="joinTitle">Takıma Katıl</h2>
+    <p class="text-lg opacity-90 max-w-3xl" data-key="joinLead">
+      Her gezegen bir ekip: rolünü seç, yörüngeye katıl.
+    </p>
+
+    <!-- SOLAR SYSTEM (desktop and up) -->
     <div class="hidden lg:grid place-items-center mt-10">
-      <div class="relative w-[720px] h-[720px] max-w-[80vw] max-h-[80vw]">
+      <!-- The square stage; --R defines base radius for orbits -->
+      <div class="solar relative w-[720px] h-[720px] max-w-[80vw] max-h-[80vw]" style="--R: min(38vmin, 320px);">
         <!-- Sun / Core -->
         <div class="absolute inset-0 grid place-items-center">
           <div class="relative z-10">
@@ -544,22 +641,21 @@
           </div>
         </div>
 
-        <!-- Orbit rings (decorative) -->
-        <div class="absolute inset-0">
-          <div class="orbit-ring"></div>
-          <div class="orbit-ring ring-2"></div>
-          <div class="orbit-ring ring-3"></div>
-          <div class="orbit-ring ring-4"></div>
-          <div class="orbit-ring ring-5"></div>
-        </div>
+        <!-- Orbit rings (perfectly centered circles sized from --R) -->
+        <span class="orbit-ring" style="--x:.30"></span>
+        <span class="orbit-ring" style="--x:.46"></span>
+        <span class="orbit-ring" style="--x:.62"></span>
+        <span class="orbit-ring" style="--x:.78"></span>
+        <span class="orbit-ring" style="--x:.94"></span>
 
-        <!-- Orbits with planets (each orbit is a rotating wrapper; planet sits on rim) -->
+        <!-- Orbits with planets (rotate wrapper; planet sits at radius) -->
+
         <!-- 1) Mekanik -->
         <div class="orbit-wrapper dur-22">
           <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
              target="_blank" rel="noopener noreferrer"
              class="planet tooltip"
-             style="--orbit: 15%;"
+             style="--radius: calc(var(--R)*.32); --size: 22px;"
              aria-label="Mekanik — Başvur">
             <span class="tooltip-bubble">Mekanik<br><i>Başvur</i></span>
             <span class="planet-label">Mekanik</span>
@@ -571,7 +667,7 @@
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
              target="_blank" rel="noopener noreferrer"
              class="planet tooltip"
-             style="--orbit: 27%; --size: 18px;"
+             style="--radius: calc(var(--R)*.46); --size: 20px;"
              aria-label="Elektronik — Başvur">
             <span class="tooltip-bubble">Elektronik<br><i>Başvur</i></span>
             <span class="planet-label">Elektronik</span>
@@ -583,7 +679,7 @@
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
              target="_blank" rel="noopener noreferrer"
              class="planet tooltip"
-             style="--orbit: 39%; --size: 16px;"
+             style="--radius: calc(var(--R)*.60); --size: 18px;"
              aria-label="Uçuş Yazılımı — Başvur">
             <span class="tooltip-bubble">Uçuş Yazılımı<br><i>Başvur</i></span>
             <span class="planet-label">Uçuş Yazılımı</span>
@@ -595,7 +691,7 @@
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
              target="_blank" rel="noopener noreferrer"
              class="planet tooltip"
-             style="--orbit: 51%; --size: 20px;"
+             style="--radius: calc(var(--R)*.74); --size: 22px;"
              aria-label="Yer İstasyonu — Başvur">
             <span class="tooltip-bubble">Yer İstasyonu<br><i>Başvur</i></span>
             <span class="planet-label">Yer İstasyonu</span>
@@ -607,7 +703,7 @@
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
              target="_blank" rel="noopener noreferrer"
              class="planet tooltip"
-             style="--orbit: 63%; --size: 22px;"
+             style="--radius: calc(var(--R)*.88); --size: 24px;"
              aria-label="Organizasyon & Sponsorluk — Başvur">
             <span class="tooltip-bubble">Organizasyon &amp; Sponsorluk<br><i>Başvur</i></span>
             <span class="planet-label">Org &amp; Sponsorluk</span>
@@ -616,30 +712,49 @@
       </div>
     </div>
 
-    <!-- MOBILE CARDS (fallback) -->
-    <div class="grid sm:grid-cols-2 gap-4 mt-10 lg:hidden">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
-         target="_blank" rel="noopener" class="join-card">Mekanik</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
-         target="_blank" rel="noopener" class="join-card">Elektronik</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
-         target="_blank" rel="noopener" class="join-card">Uçuş Yazılımı</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-         target="_blank" rel="noopener" class="join-card">Yer İstasyonu</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
-         target="_blank" rel="noopener" class="join-card sm:col-span-2">Organizasyon &amp; Sponsorluk</a>
-    </div>
+   <!-- MOBILE CARDS -->
+<div class="grid sm:grid-cols-2 gap-4 mt-10 lg:hidden">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
+     target="_blank" rel="noopener" class="join-card">
+    <svg class="icon-join" aria-hidden="true"><use href="#icon-mekanik"/></svg>
+    Mekanik
+  </a>
+
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
+     target="_blank" rel="noopener" class="join-card">
+    <svg class="icon-join" aria-hidden="true"><use href="#icon-elektronik"/></svg>
+    Elektronik
+  </a>
+
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
+     target="_blank" rel="noopener" class="join-card">
+    <svg class="icon-join" aria-hidden="true"><use href="#icon-ucus"/></svg>
+    Uçuş Yazılımı
+  </a>
+
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+     target="_blank" rel="noopener" class="join-card">
+    <svg class="icon-join" aria-hidden="true"><use href="#icon-yer"/></svg>
+    Yer İstasyonu
+  </a>
+
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
+     target="_blank" rel="noopener" class="join-card sm:col-span-2">
+    <svg class="icon-join" aria-hidden="true"><use href="#icon-org"/></svg>
+    Organizasyon &amp; Sponsorluk
+  </a>
+</div>
+
 
     <!-- Perks row -->
     <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4 mt-10 text-timberwolf/80">
       <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">🚀 Uçtan uca gerçek donanım</div>
-      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">🧪 Atölye & test altyapısı</div>
-      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">📚 Eğitim & mentorluk</div>
+      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">🧪 Atölye &amp; test altyapısı</div>
+      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">📚 Eğitim &amp; mentorluk</div>
       <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">🤝 Sektörle erken temas</div>
     </div>
   </div>
 </section>
-
 
 
   <!-- Contact & Footer Section -->
