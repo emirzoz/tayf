@@ -151,7 +151,8 @@
 /* ===== SOLAR (final) ===== */
 .solar{
   position:relative;
-  --S:min(560px,90vw);               /* stage size */
+  --S: min(560px, 90vw);       /* square stage size */
+  --R: calc(var(--S) * .5);    /* base radius = half of stage */
   width:var(--S); height:var(--S);
   margin-inline:auto; isolation:isolate;
 }
@@ -161,7 +162,7 @@
   position:absolute; inset:0;
   border:1px dashed rgba(110,146,182,.35);
   border-radius:9999px; pointer-events:none;
-  transform:scale(var(--x,.30));
+  transform: scale(var(--x, .30));  /* .30, .46, .62, .78, .94 */
 }
 
 /* wrappers do NOT spin; they only hold per-lane speed classes */
@@ -172,20 +173,20 @@
   --size:20px;
   position:absolute; top:50%; left:50%;
   width:var(--size); height:var(--size);
-  transform:translate(-50%,-50%);
-  offset-path:circle(var(--radius) at 50% 50%);
-  offset-distance:0%;
-  offset-rotate:0deg;                 /* keep upright */
-  animation:orbit-move var(--dur,44s) linear infinite;
+  transform: translate(-50%, -50%);
+  offset-path: circle(calc(var(--R) * var(--x)) at 50% 50%);
+  offset-distance: 0%;
+  offset-rotate: 0deg;                /* label stays upright */
+  animation: orbit-move var(--dur, 44s) linear infinite;
 
   border-radius:9999px;
-  background:radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
-  box-shadow:0 0 0 2px rgba(110,146,182,.5), 0 8px 18px rgba(110,146,182,.15);
+  background: radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
+  box-shadow: 0 0 0 2px rgba(110,146,182,.5), 0 8px 18px rgba(110,146,182,.15);
   display:grid; place-items:center;
-  z-index:2; pointer-events:auto;
-  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  z-index:3; pointer-events:auto;
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
 }
-@keyframes orbit-move{ to{ offset-distance:100%; } }
+@keyframes orbit-move { to { offset-distance: 100%; } }
 
 /* per-lane speeds (slower) */
 .orbit-wrapper.dur-22 .planet{ --dur:40s; }
@@ -651,58 +652,58 @@
     </div>
 
     <!-- Orbit rings (under everything) -->
-    <span class="orbit-ring" style="--x:.30"></span>
-    <span class="orbit-ring" style="--x:.46"></span>
-    <span class="orbit-ring" style="--x:.62"></span>
-    <span class="orbit-ring" style="--x:.78"></span>
-    <span class="orbit-ring" style="--x:.94"></span>
+      <span class="orbit-ring" style="--x:.30"></span>
+      <span class="orbit-ring" style="--x:.46"></span>
+      <span class="orbit-ring" style="--x:.62"></span>
+      <span class="orbit-ring" style="--x:.78"></span>
+      <span class="orbit-ring" style="--x:.94"></span>
 
     <!-- Orbits with planets -->
     <div class="orbit-wrapper dur-22">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
          target="_blank" rel="noopener"
          class="planet"
-         style="--radius: calc(var(--R)*.32); --size: 22px;"
+         style="--x:.30; --size:22px;"
          aria-label="Mekanik Ekibi">
         <span class="planet-label" data-key="teamCard1Title"></span>
       </a>
     </div>
 
     <div class="orbit-wrapper dur-28">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
          target="_blank" rel="noopener"
          class="planet"
-         style="--radius: calc(var(--R)*.46); --size: 20px;"
+         style="--x:.46; --size:20px;"
          aria-label="Elektronik Ekibi">
         <span class="planet-label" data-key="teamCard2Title"></span>
       </a>
     </div>
 
     <div class="orbit-wrapper dur-34">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
          target="_blank" rel="noopener"
          class="planet"
-         style="--radius: calc(var(--R)*.60); --size: 18px;"
+         style="--x:.62; --size:18px;"
          aria-label="Uçuş Yazılımı Ekibi">
         <span class="planet-label" data-key="teamCard3Title"></span>
       </a>
     </div>
 
     <div class="orbit-wrapper dur-40">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
          target="_blank" rel="noopener"
          class="planet"
-         style="--radius: calc(var(--R)*.74); --size: 22px;"
+         style="--x:.78; --size:22px;"
          aria-label="Yer İstasyonu Ekibi">
         <span class="planet-label" data-key="teamCard4Title"></span>
       </a>
     </div>
 
     <div class="orbit-wrapper dur-46">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
          target="_blank" rel="noopener"
          class="planet"
-         style="--radius: calc(var(--R)*.88); --size: 24px;"
+         style="--x:.94; --size:24px;"
          aria-label="Organizasyon & Tasarım Ekibi">
         <span class="planet-label" data-key="teamCard5Title"></span>
       </a>
