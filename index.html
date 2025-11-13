@@ -263,67 +263,70 @@
 
 
 
-  <!-- Project Section -->
-  <section id="project" class="py-20 bg-prussian_blue">
-    <div class="container mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="text-4xl font-heading mb-6" data-key="projectTitle"></h2>
-          <p class="text-lg leading-relaxed opacity-90" data-key="projectText"></p>
-        </div>
-        <div>
-          <h3 class="text-2xl font-heading mb-6" data-key="galleryTitle"></h3>
-          <div class="grid grid-cols-2 gap-4">
-            <img src="images/1.jpg" alt="Uydu render – ön görünüm" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-            <img src="images/5.jpeg" alt="Uydu render – detay" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-            <img src="images/7.jpg" alt="Uydu render – yanal görünüm" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-            <img src="images/8.jpeg" alt="Uydu render – bileşen yakın plan" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+<!-- Project Section -->
+<section id="project" class="py-20 bg-prussian_blue">
+  <div class="container mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      
+      <!-- LEFT: text + achievements/goals -->
+      <div>
+        <h2 class="text-4xl font-heading mb-6" data-key="projectTitle"></h2>
+        <p class="text-lg leading-relaxed opacity-90" data-key="projectText"></p>
+
+        <!-- Extra: achievements + goals (inside the same column) -->
+        <div class="mt-8 pt-8 border-t border-[#6E92B6]/30 space-y-6">
+          <!-- Achievements -->
+          <section aria-labelledby="achievements-title">
+            <h3 id="achievements-title"
+                class="text-2xl font-heading mb-3 text-[#6E92B6]"
+                data-key="projectAchievementsTitle"></h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li data-key="ach1"></li>
+              <li data-key="ach2"></li>
+              <li data-key="ach3"></li>
+            </ul>
+          </section>
+
+          <!-- Goals -->
+          <section aria-labelledby="goals-title">
+            <h3 id="goals-title"
+                class="text-2xl font-heading mb-3 text-[#6E92B6]"
+                data-key="projectGoalsTitle"></h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li data-key="goal1"></li>
+              <li data-key="goal2"></li>
+              <li data-key="goal3"></li>
+            </ul>
+          </section>
+
+          <!-- Badges -->
+          <div class="flex flex-wrap gap-3 pt-2">
+            <span class="px-3 py-1 rounded-lg bg-prussian_blue/40 border border-[#6E92B6]/40"
+                  data-key="badgeFounded"></span>
+            <span class="px-3 py-1 rounded-lg bg-prussian_blue/40 border border-[#6E92B6]/40">
+              <span data-key="badgeDRScorePrefix">DR Skoru: </span>
+              <span class="countup" data-target="96.5">0</span>/100
+            </span>
           </div>
-          <img src="images/6.png" alt="Uydu render – genel görünüm" loading="lazy" decoding="async" width="1200" height="800" class="w-full h-64 object-contain rounded-lg shadow-lg bg-yinmn_blue mt-4">
         </div>
       </div>
+
+      <!-- RIGHT: gallery (as before; replace with tabs/3D later if you like) -->
+      <div>
+        <h3 class="text-2xl font-heading mb-6" data-key="galleryTitle"></h3>
+        <div class="grid grid-cols-2 gap-4">
+          <img src="images/1.jpg" alt="Uydu render – ön görünüm" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+          <img src="images/5.jpeg" alt="Uydu render – detay" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+          <img src="images/7.jpg" alt="Uydu render – yanal görünüm" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+          <img src="images/8.jpeg" alt="Uydu render – bileşen yakın plan" loading="lazy" decoding="async" width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+        </div>
+        <img src="images/6.png" alt="Uydu render – genel görünüm" loading="lazy" decoding="async" width="1200" height="800" class="w-full h-64 object-contain rounded-lg shadow-lg bg-yinmn_blue mt-4">
+      </div>
+
     </div>
-    <!-- Extra: achievements + goals -->
-<div class="mt-8 space-y-6">
-  <!-- Achievements -->
-  <section aria-labelledby="achievements-title">
-    <h3 id="achievements-title"
-        class="text-2xl font-heading mb-3 text-[#6E92B6]"
-        data-key="projectAchievementsTitle"></h3>
-
-    <ul class="list-disc pl-5 space-y-2">
-      <li data-key="ach1"></li>
-      <li data-key="ach2"></li>
-      <li data-key="ach3"></li>
-    </ul>
-  </section>
-
-  <!-- Goals -->
-  <section aria-labelledby="goals-title">
-    <h3 id="goals-title"
-        class="text-2xl font-heading mb-3 text-[#6E92B6]"
-        data-key="projectGoalsTitle"></h3>
-
-    <ul class="list-disc pl-5 space-y-2">
-      <li data-key="goal1"></li>
-      <li data-key="goal2"></li>
-      <li data-key="goal3"></li>
-    </ul>
-  </section>
-
-  <!-- Small badge row -->
-  <div class="flex flex-wrap gap-3 pt-2">
-    <span class="px-3 py-1 rounded-lg bg-prussian_blue/40 border border-[#6E92B6]/40"
-          data-key="badgeFounded"></span>
-<span class="px-3 py-1 rounded-lg bg-prussian_blue/40 border border-[#6E92B6]/40">
-  <span data-key="badgeDRScorePrefix">DR Skoru: </span>
-  <span class="countup" data-target="96.5">0</span>/100
-</span>
-
   </div>
-</div>
+</section>
 
-  </section>
 
   <!-- Team Section -->
   <section id="team" class="py-20 bg-yinmn_blue">
