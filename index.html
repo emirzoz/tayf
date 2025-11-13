@@ -143,6 +143,7 @@
     .tabular-nums { font-variant-numeric: tabular-nums; }
   </style>
 </head>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <body class="bg-prussian_blue text-timberwolf">
 <!-- Header -->
 <header class="fixed w-full top-0 z-50">
@@ -472,6 +473,7 @@
 
   <!-- Language + a11y/script fixes -->
 <script>
+<script>
   const langData = {
     tr: {
       navProject: "Proje",
@@ -485,13 +487,10 @@
       heroBtnSponsor: "Bize Destek Olun (Sponsorluk)",
 
       projectTitle: "TEKNOFEST Model Uydu Projemiz",
-      // UPDATED project narrative (single source of truth)
-      projectText:
-        "İTÜ Tayf ekibi, havacılık ve uzay sektöründe özellikle haberleşme teknolojileri alanında kendini geliştirmeyi ve bu yönde ürünler üretmeyi vizyon olarak belirlemiştir. 2024–2025 döneminde Teknofest Model Uydu Yarışması’na hazırlanırken, gelecekte Amerika ve Avrupa’daki çeşitli model uydu yarışmalarına katılmayı hedeflemektedir. Ayrıca, üzerinde çalıştığı yenilikçi AR-GE projeleri ile sektörde öncü olmayı ve bu projeleri girişime dönüştürmeyi amaçlamaktadır.",
+      projectText: "İTÜ Tayf ekibi, havacılık ve uzay sektöründe özellikle haberleşme teknolojileri alanında kendini geliştirmeyi ve bu yönde ürünler üretmeyi vizyon olarak belirlemiştir. 2024–2025 döneminde Teknofest Model Uydu Yarışması’na hazırlanırken, gelecekte Amerika ve Avrupa’daki çeşitli model uydu yarışmalarına katılmayı hedeflemektedir. Ayrıca, üzerinde çalıştığı yenilikçi AR-GE projeleri ile sektörde öncü olmayı ve bu projeleri girişime dönüştürmeyi amaçlamaktadır.",
 
       galleryTitle: "Uydu Modelimiz",
 
-      // Project extras
       projectAchievementsTitle: "Başarılarımız",
       ach1: "2023 Teknofest Model Uydu: DR (Design Review) raporundan 96.5/100 puan.",
       ach2: "2022’de kuruldu; disiplinler arası ekip yapısı ve süreçler oluşturuldu.",
@@ -506,7 +505,6 @@
       badgeDRScore: "DR Skoru: 96.5/100",
       badgeDRScorePrefix: "DR Skoru: ",
 
-      // Tabs (ready for when you enable them)
       tabGallery: "Galeri",
       tab3D: "3B Model",
       hintPan: "İpucu: Parmağınızla çevirin, iki parmakla yakınlaştırın.",
@@ -530,10 +528,6 @@
       contactTitle: "İletişime Geçin",
       contactText: "Projemiz hakkında daha fazla bilgi almak veya iş birliği fırsatlarını görüşmek için bize ulaşın.",
       contactLead: "tayf.takimi@itu.edu.tr"
-
-      tabGallery: "Galeri",
-      tab3D: "3B Model",
-      hintPan: "İpucu: Parmağınızla çevirin, iki parmakla yakınlaştırın.",
     },
 
     en: {
@@ -548,13 +542,10 @@
       heroBtnSponsor: "Support Us (Sponsorship)",
 
       projectTitle: "Our TEKNOFEST Model Satellite Project",
-      // UPDATED project narrative
-      projectText:
-        "ITU Tayf’s vision is to develop products in aerospace—especially in communications technologies. While preparing for the TEKNOFEST Model Satellite Competition in 2024–2025, we aim to participate in various model satellite competitions in the US and Europe. We also plan to lead with innovative R&D projects and turn them into ventures.",
+      projectText: "ITU Tayf’s vision is to develop products in aerospace—especially in communications technologies. While preparing for the TEKNOFEST Model Satellite Competition in 2024–2025, we aim to participate in various model satellite competitions in the US and Europe. We also plan to lead with innovative R&D projects and turn them into ventures.",
 
       galleryTitle: "Our Satellite Model",
 
-      // Project extras
       projectAchievementsTitle: "Our Achievements",
       ach1: "TEKNOFEST 2023 Model Satellite: 96.5/100 in the Design Review (DR) report.",
       ach2: "Founded in 2022; built a cross-disciplinary team and processes.",
@@ -569,7 +560,6 @@
       badgeDRScore: "DR Score: 96.5/100",
       badgeDRScorePrefix: "DR Score: ",
 
-      // Tabs
       tabGallery: "Gallery",
       tab3D: "3D Model",
       hintPan: "Tip: Drag to rotate, pinch to zoom.",
@@ -593,11 +583,9 @@
       contactTitle: "Get In Touch",
       contactText: "Contact us to learn more about our project or to discuss partnership opportunities.",
       contactLead: "tayf.takimi@itu.edu.tr"
-      tabGallery: "Gallery",
-      tab3D: "3D Model",
-      hintPan: "Tip: Drag to rotate, pinch to zoom.",
     }
   };
+
 
 
 
