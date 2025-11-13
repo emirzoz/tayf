@@ -249,12 +249,12 @@
 
 /* just in case any old rule was reintroduced */
 .planet .tooltip-bubble{ display:none !important; }
-/* Stacking order inside .solar (it already has isolation:isolate) */
+/* stacking inside .solar */
 .orbit-ring { z-index: 0; }
-#solar-core { position: relative; z-index: 1; pointer-events: none; } /* core under planets, not clickable */
-.orbit-wrapper { z-index: 2; pointer-events: none; }                  /* wrapper never catches events */
-.orbit-wrapper .planet { z-index: 3; pointer-events: auto; }          /* planets clickable */
-.orbit-wrapper .planet .planet-label { z-index: 4; pointer-events: none; } /* labels above everything */
+#solar-core { z-index: 1; pointer-events: none; }
+.orbit-wrapper { z-index: 2; pointer-events: none; }
+.orbit-wrapper .planet { z-index: 3; pointer-events: auto; }
+.orbit-wrapper .planet .planet-label { z-index: 4; pointer-events: none; }
 
 
 /* =========================
@@ -634,90 +634,84 @@
       Her gezegen bir ekip: rolünü seç, yörüngeye katıl.
     </p>
 
-<!-- SOLAR SYSTEM (desktop and up) -->
 <div class="hidden lg:grid place-items-center mt-10">
-  <!-- Stage: one source of truth for orbit radius -->
+  <!-- Stage -->
   <div class="solar" style="--S:min(560px,90vw); --R:min(38vmin,320px);">
 
+    <!-- SUN / CORE (now inside .solar) -->
+    <div class="absolute inset-0 grid place-items-center" style="z-index:1; pointer-events:none;">
+      <div id="solar-core"
+           class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]
+                  shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50
+                  grid place-items-center">
+        <span class="text-prussian_blue font-heading text-sm px-2 text-center">
+          İTÜ TAYF<br><span class="text-xs opacity-80"></span>
+        </span>
+      </div>
+    </div>
 
-
-    <!-- Rings (use the SAME factors as planets) -->
+    <!-- Orbit rings (under everything) -->
     <span class="orbit-ring" style="--x:.30"></span>
     <span class="orbit-ring" style="--x:.46"></span>
     <span class="orbit-ring" style="--x:.62"></span>
     <span class="orbit-ring" style="--x:.78"></span>
     <span class="orbit-ring" style="--x:.94"></span>
 
-<!-- 1) Mekanik -->
-<div class="orbit-wrapper dur-22">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
-     target="_blank" rel="noopener"
-     class="planet"
-     style="--radius: calc(var(--R)*.32); --size: 22px;"
-     aria-label="Mekanik Ekibi">
-    <span class="planet-label" data-key="teamCard1Title"></span>
-  </a>
-</div>
-
-<!-- 2) Elektronik -->
-<div class="orbit-wrapper dur-28">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
-     target="_blank" rel="noopener"
-     class="planet"
-     style="--radius: calc(var(--R)*.46); --size: 20px;"
-     aria-label="Elektronik Ekibi">
-    <span class="planet-label" data-key="teamCard2Title"></span>
-  </a>
-</div>
-
-<!-- 3) Uçuş Yazılımı -->
-<div class="orbit-wrapper dur-34">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
-     target="_blank" rel="noopener"
-     class="planet"
-     style="--radius: calc(var(--R)*.60); --size: 18px;"
-     aria-label="Uçuş Yazılımı Ekibi">
-    <span class="planet-label" data-key="teamCard3Title"></span>
-  </a>
-</div>
-
-<!-- 4) Yer İstasyonu -->
-<div class="orbit-wrapper dur-40">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-     target="_blank" rel="noopener"
-     class="planet"
-     style="--radius: calc(var(--R)*.74); --size: 22px;"
-     aria-label="Yer İstasyonu Ekibi">
-    <span class="planet-label" data-key="teamCard4Title"></span>
-  </a>
-</div>
-
-<!-- 5) Organizasyon & Tasarım -->
-<div class="orbit-wrapper dur-46">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
-     target="_blank" rel="noopener"
-     class="planet"
-     style="--radius: calc(var(--R)*.88); --size: 24px;"
-     aria-label="Organizasyon & Tasarım Ekibi">
-    <span class="planet-label" data-key="teamCard5Title"></span>
-  </a>
-</div>
-
-  </div>
-</div>
-<!-- Sun / Core -->
-<div class="absolute inset-0 grid place-items-center">
-  <div class="relative">
-    <div id="solar-core"
-         class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]
-                shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50
-                grid place-items-center">
-      <span class="text-prussian_blue font-heading text-sm px-2 text-center">
-        İTÜ TAYF<br><span class="text-xs opacity-80"></span>
-      </span>
+    <!-- Orbits with planets -->
+    <div class="orbit-wrapper dur-22">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
+         target="_blank" rel="noopener"
+         class="planet"
+         style="--radius: calc(var(--R)*.32); --size: 22px;"
+         aria-label="Mekanik Ekibi">
+        <span class="planet-label" data-key="teamCard1Title"></span>
+      </a>
     </div>
+
+    <div class="orbit-wrapper dur-28">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
+         target="_blank" rel="noopener"
+         class="planet"
+         style="--radius: calc(var(--R)*.46); --size: 20px;"
+         aria-label="Elektronik Ekibi">
+        <span class="planet-label" data-key="teamCard2Title"></span>
+      </a>
+    </div>
+
+    <div class="orbit-wrapper dur-34">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
+         target="_blank" rel="noopener"
+         class="planet"
+         style="--radius: calc(var(--R)*.60); --size: 18px;"
+         aria-label="Uçuş Yazılımı Ekibi">
+        <span class="planet-label" data-key="teamCard3Title"></span>
+      </a>
+    </div>
+
+    <div class="orbit-wrapper dur-40">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+         target="_blank" rel="noopener"
+         class="planet"
+         style="--radius: calc(var(--R)*.74); --size: 22px;"
+         aria-label="Yer İstasyonu Ekibi">
+        <span class="planet-label" data-key="teamCard4Title"></span>
+      </a>
+    </div>
+
+    <div class="orbit-wrapper dur-46">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
+         target="_blank" rel="noopener"
+         class="planet"
+         style="--radius: calc(var(--R)*.88); --size: 24px;"
+         aria-label="Organizasyon & Tasarım Ekibi">
+        <span class="planet-label" data-key="teamCard5Title"></span>
+      </a>
+    </div>
+
   </div>
 </div>
+
+
 
 
 
