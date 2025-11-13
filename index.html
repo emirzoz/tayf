@@ -178,7 +178,7 @@
                          focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">TR</button>
           <span class="text-yinmn_blue">|</span>
           <button id="lang-en" onclick="setLanguage('en')"
-                  class="font-semibold px-2 py-1 rounded-md hover:bg[#6E92B6]/20
+                  class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20
                          focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">EN</button>
         </div>
       </div>
@@ -427,95 +427,128 @@
   </footer>
 
   <!-- Language + a11y/script fixes -->
-  <script>
-    const langData = {
-      tr: {
-        navProject: "Proje",
-        navTeam: "Ekip",
-        navSponsor: "Sponsorluk",
-        navContact: "İletişim",
-        heroTitle: "İTÜ TAYF: Yörüngedeki İmzamız",
-        heroSubtitle: "İstanbul Teknik Üniversitesi Uçak ve Uzay Bilimleri Fakültesi bünyesinde, TEKNOFEST için uydu teknolojileri geliştiriyoruz.",
-        heroBtnProject: "Projemizi Keşfedin",
-        heroBtnSponsor: "Bize Destek Olun (Sponsorluk)",
-        projectTitle: "TEKNOFEST Model Uydu Projemiz",
-        projectText: "Ekibimiz, telemetri verilerini toplamak, yer istasyonuna iletmek ve pasif bir yükü (örneğin bir kamera sistemi) başarıyla çalıştırmak üzere tasarlanmış bir model uydu geliştirmektedir. Bu proje, üyelerimize sistem mühendisliği, entegrasyon ve proje yönetimi konularında benzersiz bir tecrübe kazandırmaktadır.",
-        galleryTitle: "Uydu Modelimiz",
-        teamTitle: "Disiplinlerarası Teknik Kadromuz",
-        teamCard1Title: "Mekanik Ekibi",
-        teamCard1Text: "Uydunun ana şasisini, yük taşıyıcı sistemlerini ve fırlatma ortamının zorlu koşullarına dayanacak yapısal bütünlüğü tasarlar ve üretir.",
-        teamCard2Title: "Elektronik Ekibi",
-        teamCard2Text: "Güç dağıtım kartları, telemetri sensörleri ve ana uçuş bilgisayarı dahil olmak üzere tüm aviyonik sistemlerin tasarımından ve entegrasyonundan sorumludur.",
-        teamCard3Title: "Uçuş Yazılımı Ekibi",
-        teamCard3Text: "Sensör verilerini işleyen, telemetri paketlerini oluşturan ve yer istasyonu komutlarını yürüten gömülü yazılımı geliştirir.",
-        teamCard4Title: "Yer İstasyonu Ekibi",
-        teamCard4Text: "Uydudan gelen verileri almak, işlemek ve komutları uydumuza iletmek için gerekli anten ve yazılım altyapısını kurar ve yönetir.",
-        teamCard5Title: "Organizasyon & Tasarım Ekibi",
-        teamCard5Text: "Proje yönetimini, lojistiği, kurumsal ilişkileri ve sponsorluk süreçlerini yürüterek teknik ekibin önünü açar.",
-        sponsorTitle: "Vizyonumuza Ortak Olun",
-        sponsorText: "Türkiye'nin Milli Teknoloji Hamlesi'ne katkıda bulunacak genç mühendislere yatırım yapın. İTÜ Tayf, sektör liderleriyle iş birliği yapmaya ve geleceğin teknolojilerini birlikte geliştirmeye hazırdır.",
-        sponsorBtn: "Tanıtım Dosyasını İndir",
-        contactTitle: "İletişime Geçin",
-        contactText: "Projemiz hakkında daha fazla bilgi almak veya iş birliği fırsatlarını görüşmek için bize ulaşın.",
-        contactLead: "tayf.takimi@itu.edu.tr"
-        badgeDRScorePrefix: "DR Skoru: ",
-        projectText: "İTÜ Tayf ekibi, havacılık ve uzay sektöründe özellikle haberleşme teknolojileri alanında kendini geliştirmeyi ve bu yönde ürünler üretmeyi vizyon olarak belirlemiştir. 2024–2025 döneminde Teknofest Model Uydu Yarışması’na hazırlanırken, gelecekte Amerika ve Avrupa’daki çeşitli model uydu yarışmalarına katılmayı hedeflemektedir. Ayrıca, üzerinde çalıştığı yenilikçi AR-GE projeleri ile sektörde öncü olmayı ve bu projeleri girişime dönüştürmeyi amaçlamaktadır.",
-        projectAchievementsTitle: "Başarılarımız",
-        ach1: "2023 Teknofest Model Uydu: DR (Design Review) raporundan 96.5/100 puan.",
-        ach2: "2022’de kuruldu; disiplinler arası ekip yapısı ve süreçler oluşturuldu.",
-        ach3: "2024–2025’te uydumuzu önemli ölçüde geliştirdik; önceki deneyimlerden öğrenerek bu yıl daha güçlü bir katılım için hazırlandık.",
-        projectGoalsTitle: "Hedeflerimiz",
-        goal1: "2025–2026’ta ABD/Avrupa’daki CanSat ve benzeri model uydu yarışmalarına katılım.",
-        goal2: "Teknofest Model Uydu’da daha güçlü bir geri dönüş ve uçtan uca uçuşa hazır entegrasyon.",
-        goal3: "Yeni AR-GE projelerini ticarileştirip girişime dönüştürmek (ör. haberleşme/electronics pod).",
-        badgeFounded: "Kuruluş: 2022",
-        badgeDRScore: "DR Skoru: 96.5/100",
+<script>
+  const langData = {
+    tr: {
+      navProject: "Proje",
+      navTeam: "Ekip",
+      navSponsor: "Sponsorluk",
+      navContact: "İletişim",
 
-      },
-      en: {
-        navProject: "Project",
-        navTeam: "Team",
-        navSponsor: "Sponsorship",
-        navContact: "Contact",
-        heroTitle: "İTÜ TAYF: Our Signature in Orbit",
-        heroSubtitle: "Developing advanced satellite technology for TEKNOFEST within the ITU Faculty of Aeronautics and Astronautics.",
-        heroBtnProject: "Discover Our Project",
-        heroBtnSponsor: "Support Us (Sponsorship)",
-        projectTitle: "Our TEKNOFEST Model Satellite Project",
-        projectText: "Our team is developing a model satellite designed to collect telemetry data, transmit it to a ground station, and successfully operate a passive payload (e.g., a camera system). This project provides our members with unique experience in systems engineering, integration, and project management.",
-        galleryTitle: "Our Satellite Model",
-        teamTitle: "Our Interdisciplinary Technical Team",
-        teamCard1Title: "Mechanical Team",
-        teamCard1Text: "Designs and manufactures the satellite's main chassis, payload carrying systems, and the structural integrity to withstand launch conditions.",
-        teamCard2Title: "Electronics Team",
-        teamCard2Text: "Responsible for the design and integration of all avionics, including power distribution boards, telemetry sensors, and the main flight computer.",
-        teamCard3Title: "Flight Software Team",
-        teamCard3Text: "Develops the embedded software that processes sensor data, creates telemetry packets, and executes ground station commands.",
-        teamCard4Title: "Ground Station Team",
-        teamCard4Text: "Builds and manages the antenna and software infrastructure necessary to receive and process data from our satellite and transmit commands.",
-        teamCard5Title: "Organization & Design Team",
-        teamCard5Text: "Manages project timelines, logistics, corporate relations, and sponsorship processes, clearing the path for the technical teams.",
-        sponsorTitle: "Partner With Our Vision",
-        sponsorText: "Invest in the young engineers who will contribute to Turkey's National Technology Initiative. İTÜ Tayf is ready to collaborate with industry leaders to develop the technologies of the future.",
-        sponsorBtn: "Download Sponsorship Deck",
-        contactTitle: "Get In Touch",
-        contactText: "Contact us to learn more about our project or to discuss partnership opportunities.",
-        contactLead: "tayf.takimi@itu.edu.tr"
-        badgeDRScorePrefix: "DR Score: ",
-        projectText: "ITU Tayf’s vision is to develop products in aerospace—especially in communications technologies. While preparing for the TEKNOFEST Model Satellite Competition in 2024–2025, we aim to participate in various model satellite competitions in the US and Europe. We also plan to lead with innovative R&D projects and turn them into ventures.",
-        projectAchievementsTitle: "Our Achievements",
-        ach1: "TEKNOFEST 2023 Model Satellite: 96.5/100 in the Design Review (DR) report.",
-        ach2: "Founded in 2022; built a cross-disciplinary team and processes.",
-        ach3: "In 2024–2025 we significantly improved our satellite; leveraging past experience to compete much stronger this year.",
-        projectGoalsTitle: "Our Goals",
-        goal1: "Join US/EU CanSat and similar competitions in 2025–2026.",
-        goal2: "A stronger return to TEKNOFEST with end-to-end, flight-ready integration.",
-        goal3: "Commercialize new R&D projects (e.g., comms/electronics pod) into a startup.",
-        badgeFounded: "Founded: 2022",
-        badgeDRScore: "DR Score: 96.5/100",
+      heroTitle: "İTÜ TAYF: Yörüngedeki İmzamız",
+      heroSubtitle: "İstanbul Teknik Üniversitesi Uçak ve Uzay Bilimleri Fakültesi bünyesinde, TEKNOFEST için uydu teknolojileri geliştiriyoruz.",
+      heroBtnProject: "Projemizi Keşfedin",
+      heroBtnSponsor: "Bize Destek Olun (Sponsorluk)",
 
-      }
-    };
+      projectTitle: "TEKNOFEST Model Uydu Projemiz",
+      // UPDATED project narrative (single source of truth)
+      projectText:
+        "İTÜ Tayf ekibi, havacılık ve uzay sektöründe özellikle haberleşme teknolojileri alanında kendini geliştirmeyi ve bu yönde ürünler üretmeyi vizyon olarak belirlemiştir. 2024–2025 döneminde Teknofest Model Uydu Yarışması’na hazırlanırken, gelecekte Amerika ve Avrupa’daki çeşitli model uydu yarışmalarına katılmayı hedeflemektedir. Ayrıca, üzerinde çalıştığı yenilikçi AR-GE projeleri ile sektörde öncü olmayı ve bu projeleri girişime dönüştürmeyi amaçlamaktadır.",
+
+      galleryTitle: "Uydu Modelimiz",
+
+      // Project extras
+      projectAchievementsTitle: "Başarılarımız",
+      ach1: "2023 Teknofest Model Uydu: DR (Design Review) raporundan 96.5/100 puan.",
+      ach2: "2022’de kuruldu; disiplinler arası ekip yapısı ve süreçler oluşturuldu.",
+      ach3: "2024–2025’te uydumuzu önemli ölçüde geliştirdik; önceki deneyimlerden öğrenerek bu yıl daha güçlü bir katılım için hazırlandık.",
+
+      projectGoalsTitle: "Hedeflerimiz",
+      goal1: "2025–2026’ta ABD/Avrupa’daki CanSat ve benzeri model uydu yarışmalarına katılım.",
+      goal2: "Teknofest Model Uydu’da daha güçlü bir geri dönüş ve uçtan uca uçuşa hazır entegrasyon.",
+      goal3: "Yeni AR-GE projelerini ticarileştirip girişime dönüştürmek (ör. haberleşme/electronics pod).",
+
+      badgeFounded: "Kuruluş: 2022",
+      badgeDRScore: "DR Skoru: 96.5/100",
+      badgeDRScorePrefix: "DR Skoru: ",
+
+      // Tabs (ready for when you enable them)
+      tabGallery: "Galeri",
+      tab3D: "3B Model",
+      hintPan: "İpucu: Parmağınızla çevirin, iki parmakla yakınlaştırın.",
+
+      teamTitle: "Disiplinlerarası Teknik Kadromuz",
+      teamCard1Title: "Mekanik Ekibi",
+      teamCard1Text: "Uydunun ana şasisini, yük taşıyıcı sistemlerini ve fırlatma ortamının zorlu koşullarına dayanacak yapısal bütünlüğü tasarlar ve üretir.",
+      teamCard2Title: "Elektronik Ekibi",
+      teamCard2Text: "Güç dağıtım kartları, telemetri sensörleri ve ana uçuş bilgisayarı dahil olmak üzere tüm aviyonik sistemlerin tasarımından ve entegrasyonundan sorumludur.",
+      teamCard3Title: "Uçuş Yazılımı Ekibi",
+      teamCard3Text: "Sensör verilerini işleyen, telemetri paketlerini oluşturan ve yer istasyonu komutlarını yürüten gömülü yazılımı geliştirir.",
+      teamCard4Title: "Yer İstasyonu Ekibi",
+      teamCard4Text: "Uydudan gelen verileri almak, işlemek ve komutları uydumuza iletmek için gerekli anten ve yazılım altyapısını kurar ve yönetir.",
+      teamCard5Title: "Organizasyon & Tasarım Ekibi",
+      teamCard5Text: "Proje yönetimini, lojistiği, kurumsal ilişkileri ve sponsorluk süreçlerini yürüterek teknik ekibin önünü açar.",
+
+      sponsorTitle: "Vizyonumuza Ortak Olun",
+      sponsorText: "Türkiye'nin Milli Teknoloji Hamlesi'ne katkıda bulunacak genç mühendislere yatırım yapın. İTÜ Tayf, sektör liderleriyle iş birliği yapmaya ve geleceğin teknolojilerini birlikte geliştirmeye hazırdır.",
+      sponsorBtn: "Tanıtım Dosyasını İndir",
+
+      contactTitle: "İletişime Geçin",
+      contactText: "Projemiz hakkında daha fazla bilgi almak veya iş birliği fırsatlarını görüşmek için bize ulaşın.",
+      contactLead: "tayf.takimi@itu.edu.tr"
+    },
+
+    en: {
+      navProject: "Project",
+      navTeam: "Team",
+      navSponsor: "Sponsorship",
+      navContact: "Contact",
+
+      heroTitle: "İTÜ TAYF: Our Signature in Orbit",
+      heroSubtitle: "Developing advanced satellite technology for TEKNOFEST within the ITU Faculty of Aeronautics and Astronautics.",
+      heroBtnProject: "Discover Our Project",
+      heroBtnSponsor: "Support Us (Sponsorship)",
+
+      projectTitle: "Our TEKNOFEST Model Satellite Project",
+      // UPDATED project narrative
+      projectText:
+        "ITU Tayf’s vision is to develop products in aerospace—especially in communications technologies. While preparing for the TEKNOFEST Model Satellite Competition in 2024–2025, we aim to participate in various model satellite competitions in the US and Europe. We also plan to lead with innovative R&D projects and turn them into ventures.",
+
+      galleryTitle: "Our Satellite Model",
+
+      // Project extras
+      projectAchievementsTitle: "Our Achievements",
+      ach1: "TEKNOFEST 2023 Model Satellite: 96.5/100 in the Design Review (DR) report.",
+      ach2: "Founded in 2022; built a cross-disciplinary team and processes.",
+      ach3: "In 2024–2025 we significantly improved our satellite; leveraging past experience to compete much stronger this year.",
+
+      projectGoalsTitle: "Our Goals",
+      goal1: "Join US/EU CanSat and similar competitions in 2025–2026.",
+      goal2: "A stronger return to TEKNOFEST with end-to-end, flight-ready integration.",
+      goal3: "Commercialize new R&D projects (e.g., comms/electronics pod) into a startup.",
+
+      badgeFounded: "Founded: 2022",
+      badgeDRScore: "DR Score: 96.5/100",
+      badgeDRScorePrefix: "DR Score: ",
+
+      // Tabs
+      tabGallery: "Gallery",
+      tab3D: "3D Model",
+      hintPan: "Tip: Drag to rotate, pinch to zoom.",
+
+      teamTitle: "Our Interdisciplinary Technical Team",
+      teamCard1Title: "Mechanical Team",
+      teamCard1Text: "Designs and manufactures the satellite's main chassis, payload carrying systems, and the structural integrity to withstand launch conditions.",
+      teamCard2Title: "Electronics Team",
+      teamCard2Text: "Responsible for the design and integration of all avionics, including power distribution boards, telemetry sensors, and the main flight computer.",
+      teamCard3Title: "Flight Software Team",
+      teamCard3Text: "Develops the embedded software that processes sensor data, creates telemetry packets, and executes ground station commands.",
+      teamCard4Title: "Ground Station Team",
+      teamCard4Text: "Builds and manages the antenna and software infrastructure necessary to receive and process data from our satellite and transmit commands.",
+      teamCard5Title: "Organization & Design Team",
+      teamCard5Text: "Manages project timelines, logistics, corporate relations, and sponsorship processes, clearing the path for the technical teams.",
+
+      sponsorTitle: "Partner With Our Vision",
+      sponsorText: "Invest in the young engineers who will contribute to Turkey's National Technology Initiative. İTÜ Tayf is ready to collaborate with industry leaders to develop the technologies of the future.",
+      sponsorBtn: "Download Sponsorship Deck",
+
+      contactTitle: "Get In Touch",
+      contactText: "Contact us to learn more about our project or to discuss partnership opportunities.",
+      contactLead: "tayf.takimi@itu.edu.tr"
+    }
+  };
+
+
 
     function setLanguage(lang) {
     // 1) Update text content
