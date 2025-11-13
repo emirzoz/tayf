@@ -148,113 +148,93 @@
     #join .group { transform: translateZ(0); transition: transform .25s ease, box-shadow .25s ease; }
     #join .group:hover { transform: translateY(-2px); }
 }
-/* ============== SOLAR (clean version) ============== */
-/* Stage */
+/* ===== SOLAR (final) ===== */
 .solar{
-  position: relative;
-  --S: min(560px, 90vw);              /* stage size */
-  width: var(--S); height: var(--S);
-  margin-inline: auto;
-  isolation: isolate;
+  position:relative;
+  --S:min(560px,90vw);               /* stage size */
+  width:var(--S); height:var(--S);
+  margin-inline:auto; isolation:isolate;
 }
 
-/* Orbit rings (use the SAME factors as planets) */
+/* rings use the same factors as planets */
 .orbit-ring{
-  position: absolute; inset: 0;
-  border: 1px dashed rgba(110,146,182,.35);
-  border-radius: 9999px;
-  pointer-events: none;
-  transform: scale(var(--x, .30));    /* <-- ring factor from inline --x */
+  position:absolute; inset:0;
+  border:1px dashed rgba(110,146,182,.35);
+  border-radius:9999px; pointer-events:none;
+  transform:scale(var(--x,.30));
 }
 
-/* We no longer spin the wrappers */
-.orbit-wrapper{
-  position: absolute; inset: 0;
-  pointer-events: none;               /* wrappers never block clicks */
-  z-index: 1;
-}
+/* wrappers do NOT spin; they only hold per-lane speed classes */
+.orbit-wrapper{ position:absolute; inset:0; pointer-events:none; z-index:1; }
 
-/* Planets move along a circle motion-path around the center */
+/* planets move along a circle path; labels don’t rotate */
 .planet{
-  --size: 20px;
-  position: absolute; top: 50%; left: 50%;
-  width: var(--size); height: var(--size);
-  transform: translate(-50%, -50%);   /* anchor at center */
-  offset-path: circle(var(--radius) at 50% 50%); /* <-- radius from inline --radius */
-  offset-distance: 0%;
-  offset-rotate: 0deg;                /* keep content upright */
-  animation: orbit-move var(--dur, 40s) linear infinite;
-  border-radius: 9999px;
-  background: radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
-  box-shadow: 0 0 0 2px rgba(110,146,182,.5), 0 8px 18px rgba(110,146,182,.15);
-  display: grid; place-items: center;
-  outline: none;
-  z-index: 2;
-  pointer-events: auto;               /* clickable */
-  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  --size:20px;
+  position:absolute; top:50%; left:50%;
+  width:var(--size); height:var(--size);
+  transform:translate(-50%,-50%);
+  offset-path:circle(var(--radius) at 50% 50%);
+  offset-distance:0%;
+  offset-rotate:0deg;                 /* keep upright */
+  animation:orbit-move var(--dur,44s) linear infinite;
+
+  border-radius:9999px;
+  background:radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
+  box-shadow:0 0 0 2px rgba(110,146,182,.5), 0 8px 18px rgba(110,146,182,.15);
+  display:grid; place-items:center;
+  z-index:2; pointer-events:auto;
+  transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
 }
-@keyframes orbit-move { to { offset-distance: 100%; } }
+@keyframes orbit-move{ to{ offset-distance:100%; } }
 
-/* Slower per-lane durations */
-.orbit-wrapper.dur-22 .planet{ --dur: 36s; }
-.orbit-wrapper.dur-28 .planet{ --dur: 44s; }
-.orbit-wrapper.dur-34 .planet{ --dur: 52s; }
-.orbit-wrapper.dur-40 .planet{ --dur: 60s; }
-.orbit-wrapper.dur-46 .planet{ --dur: 68s; }
+/* per-lane speeds (slower) */
+.orbit-wrapper.dur-22 .planet{ --dur:40s; }
+.orbit-wrapper.dur-28 .planet{ --dur:48s; }
+.orbit-wrapper.dur-34 .planet{ --dur:56s; }
+.orbit-wrapper.dur-40 .planet{ --dur:64s; }
+.orbit-wrapper.dur-46 .planet{ --dur:72s; }
 
-/* Labels: visible, readable, don’t spin */
+/* labels visible, readable */
 .planet .planet-label{
-  position: absolute; top: -34px; left: 50%; transform: translateX(-50%);
-  white-space: nowrap; font-size: 12px; color: rgba(215,217,211,.9);
-  background: rgba(6,43,70,.6); border: 1px solid rgba(110,146,182,.3);
-  padding: 2px 8px; border-radius: 9999px;
-  display: block;
+  position:absolute; top:-34px; left:50%; transform:translateX(-50%);
+  white-space:nowrap; font-size:12px; color:rgba(215,217,211,.9);
+  background:rgba(6,43,70,.6); border:1px solid rgba(110,146,182,.3);
+  padding:2px 8px; border-radius:9999px; display:block;
 }
 
-/* Hide descriptions/tooltips for now */
-.planet .tooltip-bubble{ display: none !important; }
+/* (you asked to remove descriptions) — keep tooltips off */
+.planet .tooltip-bubble{ display:none !important; }
 
-/* Hover/focus: soft glow + scale; and pause orbit for easier clicking */
+/* hover/focus: glow + slight scale; pause its own orbit for clicking */
 .planet:hover,
 .planet:focus-visible{
-  transform: translate(-50%, -50%) scale(1.35);
-  filter: brightness(1.12);
-  box-shadow:
-    0 0 0 3px rgba(110,146,182,.55),
-    0 10px 24px rgba(110,146,182,.28),
-    0 0 24px 6px rgba(110,146,182,.18);
-  animation-play-state: paused;
+  transform:translate(-50%,-50%) scale(1.28);
+  filter:brightness(1.12);
+  box-shadow:0 0 0 3px rgba(110,146,182,.55),
+             0 10px 24px rgba(110,146,182,.28),
+             0 0 24px 6px rgba(110,146,182,.18);
+  animation-play-state:paused;
 }
-.planet:focus-visible{ box-shadow: 0 0 0 3px #6E92B6, 0 10px 24px rgba(110,146,182,.28); }
-
-/* Decorative pulse ring on hover */
 .planet::after{
   content:""; position:absolute; inset:-6px; border-radius:9999px;
-  box-shadow: 0 0 0 2px rgba(110,146,182,.35);
-  opacity: 0; transform: scale(.8); transition: opacity .2s ease;
-  pointer-events: none;
+  box-shadow:0 0 0 2px rgba(110,146,182,.35);
+  opacity:0; transform:scale(.85); transition:opacity .2s ease;
+  pointer-events:none;
 }
 .planet:hover::after,
 .planet:focus-visible::after{
-  opacity: 1; animation: pulse-glow 1.8s ease-out infinite;
+  opacity:1; animation:pulse-glow 1.8s ease-out infinite;
 }
 @keyframes pulse-glow{
-  0%{ transform: scale(.85); opacity:.55; box-shadow:0 0 0 2px rgba(110,146,182,.35); }
-  70%{ transform: scale(1.25); opacity:0;   box-shadow:0 0 0 10px rgba(110,146,182,0); }
-  100%{ transform: scale(1.25); opacity:0; }
+  0%{ transform:scale(.85); opacity:.55; box-shadow:0 0 0 2px rgba(110,146,182,.35); }
+  70%{ transform:scale(1.25); opacity:0; box-shadow:0 0 0 10px rgba(110,146,182,0); }
+  100%{ transform:scale(1.25); opacity:0; }
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .planet{ animation: none !important; }
-}
-
-/* Size tweaks */
-@media (min-width:1024px){ .planet{ --size: 22px; } }
-@media (max-width:480px){
-  .solar{ --S: min(420px, 92vw); }
-  .planet{ --size: 18px; }
-}
+/* reduced motion */
+@media (prefers-reduced-motion:reduce){ .planet{ animation:none !important; } }
+@media (min-width:1024px){ .planet{ --size:22px; } }
+@media (max-width:480px){ .solar{ --S:min(420px,92vw); } .planet{ --size:18px; } }
 
 
 /* =========================
@@ -636,67 +616,70 @@
 
 <!-- SOLAR SYSTEM (desktop and up) -->
 <div class="hidden lg:grid place-items-center mt-10">
-  <div class="solar">
-    <!-- Sun / Core -->
-    <div class="absolute inset-0 grid place-items-center">
-      <div class="relative z-10">
-        <div class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82] shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50 grid place-items-center">
-          <span class="text-prussian_blue font-heading text-sm px-2 text-center">
-            İTÜ TAYF<br><span class="text-xs opacity-80">Core</span>
-          </span>
-        </div>
+  <!-- Stage: one source of truth for orbit radius -->
+  <div class="solar" style="--S:min(560px,90vw); --R:min(38vmin,320px);">
+    <!-- Core -->
+    <div class="absolute inset-0 grid place-items-center z-10">
+      <div class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82] shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50 grid place-items-center">
+        <span class="text-prussian_blue font-heading text-sm px-2 text-center">
+          İTÜ TAYF<br><span class="text-xs opacity-80">Core</span>
+        </span>
       </div>
     </div>
 
-    <!-- Orbit rings (purely visual) -->
-    <div class="orbit-ring ring-1"></div>
-    <div class="orbit-ring ring-2"></div>
-    <div class="orbit-ring ring-3"></div>
-    <div class="orbit-ring ring-4"></div>
-    <div class="orbit-ring ring-5"></div>
+    <!-- Rings (use the SAME factors as planets) -->
+    <span class="orbit-ring" style="--x:.30"></span>
+    <span class="orbit-ring" style="--x:.46"></span>
+    <span class="orbit-ring" style="--x:.62"></span>
+    <span class="orbit-ring" style="--x:.78"></span>
+    <span class="orbit-ring" style="--x:.94"></span>
 
-    <!-- Rotating lanes + planets -->
-    <div class="orbit-wrapper lane-1 dur-22">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
-         target="_blank" rel="noopener noreferrer"
-         class="planet" style="--size:22px" aria-label="Mekanik — Başvur">
-        <span class="tooltip-bubble">Mekanik<br><i>Başvur</i></span>
+    <!-- Lane 1: Mekanik -->
+    <div class="orbit-wrapper dur-22">
+      <a class="planet"
+         href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
+         target="_blank" rel="noopener"
+         style="--radius:calc(var(--R)*.30); --dur:40s;">
         <span class="planet-label">Mekanik</span>
       </a>
     </div>
 
-    <div class="orbit-wrapper lane-2 dur-28">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
-         target="_blank" rel="noopener noreferrer"
-         class="planet" style="--size:20px" aria-label="Elektronik — Başvur">
-        <span class="tooltip-bubble">Elektronik<br><i>Başvur</i></span>
+    <!-- Lane 2: Elektronik -->
+    <div class="orbit-wrapper dur-28">
+      <a class="planet"
+         href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
+         target="_blank" rel="noopener"
+         style="--radius:calc(var(--R)*.46); --dur:48s;">
         <span class="planet-label">Elektronik</span>
       </a>
     </div>
 
-    <div class="orbit-wrapper lane-3 dur-34">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
-         target="_blank" rel="noopener noreferrer"
-         class="planet" style="--size:18px" aria-label="Uçuş Yazılımı — Başvur">
-        <span class="tooltip-bubble">Uçuş Yazılımı<br><i>Başvur</i></span>
+    <!-- Lane 3: Uçuş Yazılımı -->
+    <div class="orbit-wrapper dur-34">
+      <a class="planet"
+         href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
+         target="_blank" rel="noopener"
+         style="--radius:calc(var(--R)*.62); --dur:56s;">
         <span class="planet-label">Uçuş Yazılımı</span>
       </a>
     </div>
 
-    <div class="orbit-wrapper lane-4 dur-40">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-         target="_blank" rel="noopener noreferrer"
-         class="planet" style="--size:22px" aria-label="Yer İstasyonu — Başvur">
-        <span class="tooltip-bubble">Yer İstasyonu<br><i>Başvur</i></span>
+    <!-- Lane 4: Yer İstasyonu -->
+    <div class="orbit-wrapper dur-40">
+      <a class="planet"
+         href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+         target="_blank" rel="noopener"
+         style="--radius:calc(var(--R)*.78); --dur:64s;">
         <span class="planet-label">Yer İstasyonu</span>
       </a>
     </div>
 
-    <div class="orbit-wrapper lane-5 dur-46">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
-         target="_blank" rel="noopener noreferrer"
-         class="planet" style="--size:24px" aria-label="Organizasyon & Sponsorluk — Başvur">
-        <span class="tooltip-bubble">Organizasyon &amp; Sponsorluk<br><i>Başvur</i></span>
+    <!-- Lane 5: Organizasyon & Sponsorluk -->
+    <div class="orbit-wrapper dur-46">
+      <a class="planet"
+         href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
+         target="_blank" rel="noopener"
+         style="--radius:calc(var(--R)*.94); --dur:72s;">
         <span class="planet-label">Org &amp; Sponsorluk</span>
       </a>
     </div>
