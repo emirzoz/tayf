@@ -249,6 +249,12 @@
 
 /* just in case any old rule was reintroduced */
 .planet .tooltip-bubble{ display:none !important; }
+/* Stacking order inside .solar (it already has isolation:isolate) */
+.orbit-ring { z-index: 0; }
+#solar-core { position: relative; z-index: 1; pointer-events: none; } /* core under planets, not clickable */
+.orbit-wrapper { z-index: 2; pointer-events: none; }                  /* wrapper never catches events */
+.orbit-wrapper .planet { z-index: 3; pointer-events: auto; }          /* planets clickable */
+.orbit-wrapper .planet .planet-label { z-index: 4; pointer-events: none; } /* labels above everything */
 
 
 /* =========================
@@ -632,14 +638,7 @@
 <div class="hidden lg:grid place-items-center mt-10">
   <!-- Stage: one source of truth for orbit radius -->
   <div class="solar" style="--S:min(560px,90vw); --R:min(38vmin,320px);">
-   <!-- Core -->
-<div class="absolute inset-0 grid place-items-center z-10" style="pointer-events:none">
-  <div class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82] shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50 grid place-items-center">
-    <span class="text-prussian_blue font-heading text-sm px-2 text-center">
-      İTÜ TAYF<br><span class="text-xs opacity-80">Core</span>
-    </span>
-  </div>
-</div>
+
 
 
     <!-- Rings (use the SAME factors as planets) -->
@@ -649,57 +648,77 @@
     <span class="orbit-ring" style="--x:.78"></span>
     <span class="orbit-ring" style="--x:.94"></span>
 
-    <!-- Lane 1: Mekanik -->
-    <div class="orbit-wrapper dur-22">
-      <a class="planet"
-         href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
-         target="_blank" rel="noopener"
-         style="--radius:calc(var(--R)*.30); --dur:40s;">
-        <span class="planet-label">Mekanik</span>
-      </a>
-    </div>
+<!-- 1) Mekanik -->
+<div class="orbit-wrapper dur-22">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
+     target="_blank" rel="noopener"
+     class="planet"
+     style="--radius: calc(var(--R)*.32); --size: 22px;"
+     aria-label="Mekanik Ekibi">
+    <span class="planet-label" data-key="teamCard1Title"></span>
+  </a>
+</div>
 
-    <!-- Lane 2: Elektronik -->
-    <div class="orbit-wrapper dur-28">
-      <a class="planet"
-         href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
-         target="_blank" rel="noopener"
-         style="--radius:calc(var(--R)*.46); --dur:48s;">
-        <span class="planet-label">Elektronik</span>
-      </a>
-    </div>
+<!-- 2) Elektronik -->
+<div class="orbit-wrapper dur-28">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
+     target="_blank" rel="noopener"
+     class="planet"
+     style="--radius: calc(var(--R)*.46); --size: 20px;"
+     aria-label="Elektronik Ekibi">
+    <span class="planet-label" data-key="teamCard2Title"></span>
+  </a>
+</div>
 
-    <!-- Lane 3: Uçuş Yazılımı -->
-    <div class="orbit-wrapper dur-34">
-      <a class="planet"
-         href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
-         target="_blank" rel="noopener"
-         style="--radius:calc(var(--R)*.62); --dur:56s;">
-        <span class="planet-label">Uçuş Yazılımı</span>
-      </a>
-    </div>
+<!-- 3) Uçuş Yazılımı -->
+<div class="orbit-wrapper dur-34">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
+     target="_blank" rel="noopener"
+     class="planet"
+     style="--radius: calc(var(--R)*.60); --size: 18px;"
+     aria-label="Uçuş Yazılımı Ekibi">
+    <span class="planet-label" data-key="teamCard3Title"></span>
+  </a>
+</div>
 
-    <!-- Lane 4: Yer İstasyonu -->
-    <div class="orbit-wrapper dur-40">
-      <a class="planet"
-         href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-         target="_blank" rel="noopener"
-         style="--radius:calc(var(--R)*.78); --dur:64s;">
-        <span class="planet-label">Yer İstasyonu</span>
-      </a>
-    </div>
+<!-- 4) Yer İstasyonu -->
+<div class="orbit-wrapper dur-40">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+     target="_blank" rel="noopener"
+     class="planet"
+     style="--radius: calc(var(--R)*.74); --size: 22px;"
+     aria-label="Yer İstasyonu Ekibi">
+    <span class="planet-label" data-key="teamCard4Title"></span>
+  </a>
+</div>
 
-    <!-- Lane 5: Organizasyon & Sponsorluk -->
-    <div class="orbit-wrapper dur-46">
-      <a class="planet"
-         href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
-         target="_blank" rel="noopener"
-         style="--radius:calc(var(--R)*.94); --dur:72s;">
-        <span class="planet-label">Org &amp; Sponsorluk</span>
-      </a>
+<!-- 5) Organizasyon & Tasarım -->
+<div class="orbit-wrapper dur-46">
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
+     target="_blank" rel="noopener"
+     class="planet"
+     style="--radius: calc(var(--R)*.88); --size: 24px;"
+     aria-label="Organizasyon & Tasarım Ekibi">
+    <span class="planet-label" data-key="teamCard5Title"></span>
+  </a>
+</div>
+
+  </div>
+</div>
+<!-- Sun / Core -->
+<div class="absolute inset-0 grid place-items-center">
+  <div class="relative">
+    <div id="solar-core"
+         class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]
+                shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50
+                grid place-items-center">
+      <span class="text-prussian_blue font-heading text-sm px-2 text-center">
+        İTÜ TAYF<br><span class="text-xs opacity-80"></span>
+      </span>
     </div>
   </div>
 </div>
+
 
 
    <!-- MOBILE CARDS -->
@@ -707,44 +726,52 @@
   <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
      target="_blank" rel="noopener" class="join-card">
     <svg class="icon-join" aria-hidden="true"><use href="#icon-mekanik"/></svg>
-    Mekanik
+    <span data-key="teamCard1Title">Mekanik Ekibi</span>
   </a>
 
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
      target="_blank" rel="noopener" class="join-card">
     <svg class="icon-join" aria-hidden="true"><use href="#icon-elektronik"/></svg>
-    Elektronik
+    <span data-key="teamCard2Title">Elektronik Ekibi</span>
   </a>
 
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
      target="_blank" rel="noopener" class="join-card">
     <svg class="icon-join" aria-hidden="true"><use href="#icon-ucus"/></svg>
-    Uçuş Yazılımı
+    <span data-key="teamCard3Title">Uçuş Yazılımı Ekibi</span>
   </a>
 
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
      target="_blank" rel="noopener" class="join-card">
     <svg class="icon-join" aria-hidden="true"><use href="#icon-yer"/></svg>
-    Yer İstasyonu
+    <span data-key="teamCard4Title">Yer İstasyonu Ekibi</span>
   </a>
 
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
      target="_blank" rel="noopener" class="join-card sm:col-span-2">
     <svg class="icon-join" aria-hidden="true"><use href="#icon-org"/></svg>
-    Organizasyon &amp; Sponsorluk
+    <span data-key="teamCard5Title">Organizasyon &amp; Tasarım Ekibi</span>
   </a>
 </div>
 
 
+
     <!-- Perks row -->
-    <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4 mt-10 text-timberwolf/80">
-      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">🚀 Uçtan uca gerçek donanım</div>
-      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">🧪 Atölye &amp; test altyapısı</div>
-      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">📚 Eğitim &amp; mentorluk</div>
-      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">🤝 Sektörle erken temas</div>
-    </div>
+<div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4 mt-10 text-timberwolf/80">
+  <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">
+    🚀 <span data-key="joinItem1">Gerçek donanım üzerinde uçtan uca deneyim</span>
   </div>
-</section>
+  <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">
+    🧪 <span data-key="joinItem2">Yarışma standardında süreç ve dokümantasyon</span>
+  </div>
+  <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">
+    📚 <span data-key="joinItem3">Atölye imkânı ve mentor desteği</span>
+  </div>
+  <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">
+    🤝 <span data-key="joinItem4">Sektörle erken tanışma ve referans</span>
+  </div>
+</div>
+
 
 
   <!-- Contact & Footer Section -->
