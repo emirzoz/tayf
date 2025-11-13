@@ -148,194 +148,73 @@
     #join .group { transform: translateZ(0); transition: transform .25s ease, box-shadow .25s ease; }
     #join .group:hover { transform: translateY(-2px); }
 }
-/* --- SOLAR INTERACTION / LAYERING --- */
-.solar { position: relative; --S: min(560px, 90vw); width: var(--S); height: var(--S); margin-inline:auto; isolation:isolate; }
-
-.orbit-ring {
-  position:absolute; inset:0;
-  border:1px dashed rgba(110,146,182,.35);
-  border-radius:9999px;
-  pointer-events:none;                /* rings never block clicks */
-  transform: scale(var(--s, .30));
+/* ============== SOLAR (clean version) ============== */
+/* Stage */
+.solar{
+  position: relative;
+  --S: min(560px, 90vw);              /* stage size */
+  width: var(--S); height: var(--S);
+  margin-inline: auto;
+  isolation: isolate;
 }
 
-.ring-1, .lane-1 { --s:.30; }
-.ring-2, .lane-2 { --s:.46; }
-.ring-3, .lane-3 { --s:.62; }
-.ring-4, .lane-4 { --s:.78; }
-.ring-5, .lane-5 { --s:.94; }
+/* Orbit rings (use the SAME factors as planets) */
+.orbit-ring{
+  position: absolute; inset: 0;
+  border: 1px dashed rgba(110,146,182,.35);
+  border-radius: 9999px;
+  pointer-events: none;
+  transform: scale(var(--x, .30));    /* <-- ring factor from inline --x */
+}
 
+/* We no longer spin the wrappers */
 .orbit-wrapper{
-  position:absolute; inset:0;
-  transform-origin:50% 50%;
-  animation: orbit-spin var(--dur, 32s) linear infinite;
-  will-change: transform;
+  position: absolute; inset: 0;
+  pointer-events: none;               /* wrappers never block clicks */
   z-index: 1;
-  pointer-events: none;               /* wrapper never catches events */
 }
-/* slower orbits + expose --dur for counter-rotation */
-.dur-22{ --dur: 32s; animation-duration:32s; }
-.dur-28{ --dur: 38s; animation-duration:38s; }
-.dur-34{ --dur: 46s; animation-duration:46s; }
-.dur-40{ --dur: 54s; animation-duration:54s; }
-.dur-46{ --dur: 62s; animation-duration:62s; }
 
-@keyframes orbit-spin { to { transform: rotate(360deg); } }
-
-/* Planet sits on ring; only the planet should be clickable */
+/* Planets move along a circle motion-path around the center */
 .planet{
-  --size:20px;
-  position:absolute; top:50%; left:50%;
-  width:var(--size); height:var(--size);
-  transform: translate(-50%,-50%) rotate(0)
-             translateX(calc(var(--S) * var(--s) * 0.5));
-  border-radius:9999px;
+  --size: 20px;
+  position: absolute; top: 50%; left: 50%;
+  width: var(--size); height: var(--size);
+  transform: translate(-50%, -50%);   /* anchor at center */
+  offset-path: circle(var(--radius) at 50% 50%); /* <-- radius from inline --radius */
+  offset-distance: 0%;
+  offset-rotate: 0deg;                /* keep content upright */
+  animation: orbit-move var(--dur, 40s) linear infinite;
+  border-radius: 9999px;
   background: radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
   box-shadow: 0 0 0 2px rgba(110,146,182,.5), 0 8px 18px rgba(110,146,182,.15);
-  display:grid; place-items:center;
-  outline:none;
-  z-index: 2;                         /* above wrappers/rings */
-  pointer-events: auto;               /* clickable again */
-}
-.planet:focus-visible{ box-shadow: 0 0 0 3px #6E92B6, 0 8px 18px rgba(110,146,182,.25); }
-
-/* Keep text readable: counter-rotate at the same speed as its lane */
-@keyframes counter-spin { to { transform: translateX(-50%) rotate(-360deg); } }
-
-.planet-label{
-  position:absolute; top:-34px; left:50%;
-  transform: translateX(-50%);
-  white-space:nowrap; font-size:12px; color:rgba(215,217,211,.9);
-  background:rgba(6,43,70,.6); border:1px solid rgba(110,146,182,.3);
-  padding:2px 8px; border-radius:9999px;
-  animation: counter-spin var(--dur,32s) linear infinite;
-  transform-origin: 50% 50%;
-}
-
-.tooltip-bubble{
-  pointer-events:none;
-  position:absolute; top:30px; left:50%;
-  transform: translateX(-50%) translateY(-4px);
-  background:rgba(6,43,70,.9);
-  border:1px solid rgba(110,146,182,.4);
-  padding:6px 10px; border-radius:10px;
-  color:#d7d9d3; font-size:12px;
-  opacity:0; transition: opacity .15s ease, transform .15s ease;
-  transform-origin: top center;
-  /* also keep tooltip upright */
-  animation: counter-spin var(--dur,32s) linear infinite;
-}
-.planet:hover .tooltip-bubble,
-.planet:focus-visible .tooltip-bubble{ opacity:1; transform: translateX(-50%) translateY(0); }
-
-/* Reduced motion = no spins */
-@media (prefers-reduced-motion: reduce){
-  .orbit-wrapper{ animation:none !important; }
-  .planet-label, .tooltip-bubble{ animation:none !important; }
-}
-
-/* Minor sizing tweaks */
-@media (min-width:1024px){ .planet{ --size:22px; } }
-@media (max-width:480px){
-  .solar{ --S:min(420px,92vw); }
-  .planet{ --size:18px; }
-}
-/* --- remove planet descriptions --- */
-.planet .planet-label,
-.planet .tooltip-bubble {
-  display: none !important;
-}
-
-/* --- hover animation on planets --- */
-.planet{
+  display: grid; place-items: center;
+  outline: none;
+  z-index: 2;
+  pointer-events: auto;               /* clickable */
   transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
 }
-
-/* soft glow + scale on hover/focus */
-.planet:hover,
-.planet:focus-visible{
-  transform: translate(-50%, -50%) rotate(0)
-             translateX(calc(var(--S) * var(--s) * .5))
-             scale(1.35);
-  filter: brightness(1.12);
-  box-shadow:
-    0 0 0 3px rgba(110,146,182,.55),
-    0 10px 24px rgba(110,146,182,.28),
-    0 0 24px 6px rgba(110,146,182,.18);
-}
-
-/* pulse ring (decorative) */
-.planet::after{
-  content:"";
-  position:absolute; inset:-6px;
-  border-radius:9999px;
-  box-shadow: 0 0 0 2px rgba(110,146,182,.35);
-  opacity:0; transform: scale(.8);
-  transition: opacity .2s ease;
-  pointer-events:none;
-}
-.planet:hover::after,
-.planet:focus-visible::after{
-  opacity:1;
-  animation: pulse-glow 1.6s ease-out infinite;
-}
-
-@keyframes pulse-glow{
-  0%   { transform: scale(.85); opacity:.55; box-shadow: 0 0 0 2px rgba(110,146,182,.35); }
-  70%  { transform: scale(1.25); opacity:0;   box-shadow: 0 0 0 10px rgba(110,146,182,.0); }
-  100% { transform: scale(1.25); opacity:0; }
-}
-
-/* optional: pause the orbit while hovering a planet (supported on modern browsers) */
-@supports(selector(:has(*))){
-  .orbit-wrapper:has(.planet:hover){
-    animation-play-state: paused;
-  }
-}
-/* make wrappers "transparent" to clicks so every planet is clickable */
-.orbit-wrapper{ pointer-events: none !important; animation: none !important; }
-.orbit-wrapper .planet{ pointer-events: auto; }
-
-/* restore labels, keep descriptions (tooltips) hidden */
-.planet .planet-label{ display: block !important; }
-.planet .tooltip-bubble{ display: none !important; }
-
-/* --- switch to motion-path so content doesn't rotate --- */
-/* remove old translateX-based placement and spin; use circle path instead */
-.planet{
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);    /* center anchor */
-  /* each planet already has --radius inline (e.g., calc(var(--R)*.46)) */
-  offset-path: circle(var(--radius) at 50% 50%);
-  offset-distance: 0%;
-  offset-rotate: 0deg;                  /* <- keeps label upright */
-  animation: orbit-move var(--dur, 32s) linear infinite;
-  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
-}
-
-/* slower by default; individual lanes slower via wrappers */
 @keyframes orbit-move { to { offset-distance: 100%; } }
 
-/* per-orbit speeds (tweak to taste) */
+/* Slower per-lane durations */
 .orbit-wrapper.dur-22 .planet{ --dur: 36s; }
 .orbit-wrapper.dur-28 .planet{ --dur: 44s; }
 .orbit-wrapper.dur-34 .planet{ --dur: 52s; }
 .orbit-wrapper.dur-40 .planet{ --dur: 60s; }
 .orbit-wrapper.dur-46 .planet{ --dur: 68s; }
 
-/* labels style (non-rotating) */
+/* Labels: visible, readable, don’t spin */
 .planet .planet-label{
-  position: absolute;
-  top: -34px; left: 50%;
-  transform: translateX(-50%);
+  position: absolute; top: -34px; left: 50%; transform: translateX(-50%);
   white-space: nowrap; font-size: 12px; color: rgba(215,217,211,.9);
-  background: rgba(6,43,70,.6);
-  border: 1px solid rgba(110,146,182,.3);
+  background: rgba(6,43,70,.6); border: 1px solid rgba(110,146,182,.3);
   padding: 2px 8px; border-radius: 9999px;
+  display: block;
 }
 
-/* hover animation (kept) */
+/* Hide descriptions/tooltips for now */
+.planet .tooltip-bubble{ display: none !important; }
+
+/* Hover/focus: soft glow + scale; and pause orbit for easier clicking */
 .planet:hover,
 .planet:focus-visible{
   transform: translate(-50%, -50%) scale(1.35);
@@ -344,27 +223,38 @@
     0 0 0 3px rgba(110,146,182,.55),
     0 10px 24px rgba(110,146,182,.28),
     0 0 24px 6px rgba(110,146,182,.18);
+  animation-play-state: paused;
 }
+.planet:focus-visible{ box-shadow: 0 0 0 3px #6E92B6, 0 10px 24px rgba(110,146,182,.28); }
 
-/* decorative pulse ring */
+/* Decorative pulse ring on hover */
 .planet::after{
   content:""; position:absolute; inset:-6px; border-radius:9999px;
   box-shadow: 0 0 0 2px rgba(110,146,182,.35);
-  opacity:0; transform: scale(.8); transition: opacity .2s ease;
-  pointer-events:none;
+  opacity: 0; transform: scale(.8); transition: opacity .2s ease;
+  pointer-events: none;
 }
 .planet:hover::after,
 .planet:focus-visible::after{
-  opacity:1; animation: pulse-glow 1.8s ease-out infinite;
+  opacity: 1; animation: pulse-glow 1.8s ease-out infinite;
 }
 @keyframes pulse-glow{
   0%{ transform: scale(.85); opacity:.55; box-shadow:0 0 0 2px rgba(110,146,182,.35); }
-  70%{ transform: scale(1.25); opacity:0; box-shadow:0 0 0 10px rgba(110,146,182,0); }
+  70%{ transform: scale(1.25); opacity:0;   box-shadow:0 0 0 10px rgba(110,146,182,0); }
   100%{ transform: scale(1.25); opacity:0; }
 }
 
-/* pause the planet's own orbit while hovering (helps clicks) */
-.planet:hover{ animation-play-state: paused; }
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .planet{ animation: none !important; }
+}
+
+/* Size tweaks */
+@media (min-width:1024px){ .planet{ --size: 22px; } }
+@media (max-width:480px){
+  .solar{ --S: min(420px, 92vw); }
+  .planet{ --size: 18px; }
+}
 
 
 /* =========================
