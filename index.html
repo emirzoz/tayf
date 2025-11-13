@@ -144,6 +144,11 @@
     .animate-title-slide { animation: title-slide .5s ease-out .12s both; }
     @media (prefers-reduced-motion: reduce) { .animate-logo-pop,.animate-title-slide { animation: none !important; } }
     .tabular-nums { font-variant-numeric: tabular-nums; }
+    @media (prefers-reduced-motion: no-preference) {
+    #join .group { transform: translateZ(0); transition: transform .25s ease, box-shadow .25s ease; }
+    #join .group:hover { transform: translateY(-2px); }
+}
+
   </style>
 </head>
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -443,82 +448,176 @@
       <a href="ITU_Tayf_Tanitim_Dosyasi.pdf" download class="inline-block bg-blue_gray text-prussian_blue px-10 py-4 rounded-lg font-bold transition shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]" data-key="sponsorBtn"></a>
     </div>
   </section>
-<!-- Join Section -->
-<section id="join" class="py-20 bg-prussian_blue border-t border-[#6E92B6]/30">
-  <div class="container mx-auto px-6">
-    <h2 class="text-4xl font-heading mb-4" data-key="joinTitle"></h2>
-    <p class="text-lg opacity-90 max-w-3xl" data-key="joinLead"></p>
+<!-- Join Section (visual cards) -->
+<section id="join" class="relative py-20 bg-yinmn_blue border-t border-[#6E92B6]/30 overflow-hidden">
+  <!-- decorative background -->
+  <div class="pointer-events-none absolute inset-0 opacity-[.08]">
+    <div class="absolute -top-24 -left-24 w-[520px] h-[520px] rounded-full blur-3xl"
+         style="background: radial-gradient(closest-side, #6E92B6 0%, transparent 70%);"></div>
+    <div class="absolute -bottom-32 -right-20 w-[460px] h-[460px] rounded-full blur-3xl"
+         style="background: radial-gradient(closest-side, #3b5b82 0%, transparent 70%);"></div>
+  </div>
 
-    <!-- Buttons grid -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-      <!-- Mechanical -->
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
-         target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center justify-center px-5 py-3 rounded-lg font-semibold
-                bg-blue_gray text-prussian_blue hover:opacity-90 transition shadow-lg
-                focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
-         aria-label="Mekanik başvuru formu (yeni pencerede açılır)">
-        <span data-key="joinTrackMech">Mekanik: yapı, entegrasyon, üretim</span>
-      </a>
+  <div class="container mx-auto px-6 relative">
+    <h2 class="text-4xl font-heading mb-4 animate-title-slide" data-key="joinTitle">Takıma Katıl</h2>
+    <p class="text-lg opacity-90 max-w-3xl animate-subtitle-slide" data-key="joinLead">
+      Gerçek bir uçağı uzaya hazırlarken rol al. Zaman ayırabileceğin alanı seç, birlikte üretelim.
+    </p>
 
-      <!-- Electronics -->
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
-         target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center justify-center px-5 py-3 rounded-lg font-semibold
-                bg-blue_gray text-prussian_blue hover:opacity-90 transition shadow-lg
-                focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
-         aria-label="Elektronik başvuru formu (yeni pencerede açılır)">
-        <span data-key="joinTrackElec">Elektronik: güç, telemetri, kart tasarımı</span>
-      </a>
+    <!-- Cards grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      <!-- Card template: gradient border + glass card -->
+      <!-- MEKANİK -->
+      <div class="p-[1px] rounded-2xl bg-gradient-to-b from-[#6E92B6] to-transparent hover:from-[#6E92B6] hover:to-[#6E92B6]/10 transition">
+        <div class="h-full rounded-2xl bg-prussian_blue/60 backdrop-blur-sm p-6 hover:shadow-xl hover:shadow-[#6E92B6]/10 transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]">
+              <!-- icon (wrench) -->
+              <svg class="w-6 h-6 text-prussian_blue" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M22 19.07l-7.05-7.06a5.5 5.5 0 01-7.78-7.79l3.18 3.18 2.12-2.12-3.18-3.18a5.5 5.5 0 007.79 7.78L21.06 18l.94 1.07zM7 17a3 3 0 11-4.24 4.24A3 3 0 017 17z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-heading" data-key="joinMechTitle">Mekanik</h3>
+          </div>
+          <p class="mt-3 text-timberwolf/80 leading-relaxed" data-key="joinMechDesc">
+            Yapı tasarımı, entegrasyon, üretim ve test süreçleri.
+          </p>
+          <div class="mt-5 flex items-center justify-between">
+            <span class="text-sm text-timberwolf/60" data-key="joinApplyShort">Başvuru ~3 dk</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold bg-blue_gray text-prussian_blue
+                      focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:opacity-90 transition group-hover:translate-x-0.5">
+              <span data-key="joinApply">Başvur</span>
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 01.083 1.32l-.083.094-5 5a1 1 0 01-1.497-1.32l.083-.094L13.585 10H4a1 1 0 01-.117-1.993L4 8h9.585l-3.292-3.293a1 1 0 01-.083-1.32l.083-.094z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
 
-      <!-- Flight Software -->
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
-         target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center justify-center px-5 py-3 rounded-lg font-semibold
-                bg-blue_gray text-prussian_blue hover:opacity-90 transition shadow-lg
-                focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
-         aria-label="Uçuş yazılımı başvuru formu (yeni pencerede açılır)">
-        <span data-key="joinTrackSoft">Uçuş Yazılımı: gömülü yazılım, telemetri</span>
-      </a>
+      <!-- ELEKTRONİK -->
+      <div class="p-[1px] rounded-2xl bg-gradient-to-b from-[#6E92B6] to-transparent hover:from-[#6E92B6] hover:to-[#6E92B6]/10 transition">
+        <div class="h-full rounded-2xl bg-prussian_blue/60 backdrop-blur-sm p-6 hover:shadow-xl hover:shadow-[#6E92B6]/10 transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]">
+              <!-- chip icon -->
+              <svg class="w-6 h-6 text-prussian_blue" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M9 3h6v2h2a2 2 0 012 2v2h2v2h-2v2h2v2h-2v2a2 2 0 01-2 2h-2v2H9v-2H7a2 2 0 01-2-2v-2H3v-2h2v-2H3V9h2V7a2 2 0 012-2h2V3zm-2 6v6h10V9H7z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-heading" data-key="joinElecTitle">Elektronik</h3>
+          </div>
+          <p class="mt-3 text-timberwolf/80 leading-relaxed" data-key="joinElecDesc">
+            Güç, telemetri, PCB tasarımı ve entegrasyon.
+          </p>
+          <div class="mt-5 flex items-center justify-between">
+            <span class="text-sm text-timberwolf/60" data-key="joinApplyShort">Başvuru ~3 dk</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold bg-blue_gray text-prussian_blue
+                      focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:opacity-90 transition group-hover:translate-x-0.5">
+              <span data-key="joinApply">Başvur</span>
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 01.083 1.32l-.083.094-5 5a1 1 0 01-1.497-1.32l.083-.094L13.585 10H4a1 1 0 01-.117-1.993L4 8h9.585l-3.292-3.293a1 1 0 01-.083-1.32l.083-.094z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
 
-      <!-- Ground Station -->
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-         target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center justify-center px-5 py-3 rounded-lg font-semibold
-                bg-blue_gray text-prussian_blue hover:opacity-90 transition shadow-lg
-                focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
-         aria-label="Yer istasyonu başvuru formu (yeni pencerede açılır)">
-        <span data-key="joinTrackGround">Yer İstasyonu: RF, anten, yer yazılımı</span>
-      </a>
+      <!-- UÇUŞ YAZILIMI -->
+      <div class="p-[1px] rounded-2xl bg-gradient-to-b from-[#6E92B6] to-transparent hover:from-[#6E92B6] hover:to-[#6E92B6]/10 transition">
+        <div class="h-full rounded-2xl bg-prussian_blue/60 backdrop-blur-sm p-6 hover:shadow-xl hover:shadow-[#6E92B6]/10 transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]">
+              <!-- code icon -->
+              <svg class="w-6 h-6 text-prussian_blue" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M8.7 15.3l-3-3 3-3 1.4 1.4L8.8 12l1.3 1.3-1.4 1.4zm6.6 0l-1.4-1.4 1.3-1.3-1.3-1.3 1.4-1.4 3 3-3 3zM13.2 4l2 0-4.4 16h-2L13.2 4z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-heading" data-key="joinSoftTitle">Uçuş Yazılımı</h3>
+          </div>
+          <p class="mt-3 text-timberwolf/80 leading-relaxed" data-key="joinSoftDesc">
+            Gömülü yazılım, sensör verisi, telemetri paketleri.
+          </p>
+          <div class="mt-5 flex items-center justify-between">
+            <span class="text-sm text-timberwolf/60" data-key="joinApplyShort">Başvuru ~3 dk</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold bg-blue_gray text-prussian_blue
+                      focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:opacity-90 transition group-hover:translate-x-0.5">
+              <span data-key="joinApply">Başvur</span>
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 01.083 1.32l-.083.094-5 5a1 1 0 01-1.497-1.32l.083-.094L13.585 10H4a1 1 0 01-.117-1.993L4 8h9.585l-3.292-3.293a1 1 0 01-.083-1.32l.083-.094z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
 
-      <!-- Organization & Sponsorship -->
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
-         target="_blank" rel="noopener noreferrer"
-         class="inline-flex items-center justify-center px-5 py-3 rounded-lg font-semibold
-                bg-blue_gray text-prussian_blue hover:opacity-90 transition shadow-lg
-                focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
-         aria-label="Organizasyon ve sponsorluk başvuru formu (yeni pencerede açılır)">
-        <span data-key="joinTrackBiz">Organizasyon & Sponsorluk: operasyon, medya</span>
-      </a>
+      <!-- YER İSTASYONU -->
+      <div class="p-[1px] rounded-2xl bg-gradient-to-b from-[#6E92B6] to-transparent hover:from-[#6E92B6] hover:to-[#6E92B6]/10 transition">
+        <div class="h-full rounded-2xl bg-prussian_blue/60 backdrop-blur-sm p-6 hover:shadow-xl hover:shadow-[#6E92B6]/10 transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]">
+              <!-- antenna icon -->
+              <svg class="w-6 h-6 text-prussian_blue" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2a7 7 0 017 7h-2a5 5 0 00-10 0H5a7 7 0 017-7zm0 4a3 3 0 013 3h-2a1 1 0 10-2 0H9a3 3 0 013-3zm1 6v8h3v2H8v-2h3v-8H9l3-4 3 4h-2z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-heading" data-key="joinGroundTitle">Yer İstasyonu</h3>
+          </div>
+          <p class="mt-3 text-timberwolf/80 leading-relaxed" data-key="joinGroundDesc">
+            RF, anten sistemleri ve yer yazılımı altyapısı.
+          </p>
+          <div class="mt-5 flex items-center justify-between">
+            <span class="text-sm text-timberwolf/60" data-key="joinApplyShort">Başvuru ~3 dk</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold bg-blue_gray text-prussian_blue
+                      focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:opacity-90 transition group-hover:translate-x-0.5">
+              <span data-key="joinApply">Başvur</span>
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 01.083 1.32l-.083.094-5 5a1 1 0 01-1.497-1.32l.083-.094L13.585 10H4a1 1 0 01-.117-1.993L4 8h9.585l-3.292-3.293a1 1 0 01-.083-1.32l.083-.094z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORGANİZASYON & SPONSORLUK -->
+      <div class="p-[1px] rounded-2xl bg-gradient-to-b from-[#6E92B6] to-transparent hover:from-[#6E92B6] hover:to-[#6E92B6]/10 transition">
+        <div class="h-full rounded-2xl bg-prussian_blue/60 backdrop-blur-sm p-6 hover:shadow-xl hover:shadow-[#6E92B6]/10 transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]">
+              <!-- briefcase icon -->
+              <svg class="w-6 h-6 text-prussian_blue" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M10 3h4a2 2 0 012 2v1h3a3 3 0 013 3v3h-8v-2H10v2H2V9a3 3 0 013-3h3V5a2 2 0 012-2zm2 4h-2V5h2v2zM2 14h8v2h4v-2h8v4a3 3 0 01-3 3H5a3 3 0 01-3-3v-4z"/>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-heading" data-key="joinBizTitle">Organizasyon & Sponsorluk</h3>
+          </div>
+          <p class="mt-3 text-timberwolf/80 leading-relaxed" data-key="joinBizDesc">
+            Operasyon, medya, kurumsal ilişkiler ve etkinlikler.
+          </p>
+          <div class="mt-5 flex items-center justify-between">
+            <span class="text-sm text-timberwolf/60" data-key="joinApplyShort">Başvuru ~3 dk</span>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold bg-blue_gray text-prussian_blue
+                      focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:opacity-90 transition group-hover:translate-x-0.5">
+              <span data-key="joinApply">Başvur</span>
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 01.083 1.32l-.083.094-5 5a1 1 0 01-1.497-1.32l.083-.094L13.585 10H4a1 1 0 01-.117-1.993L4 8h9.585l-3.292-3.293a1 1 0 01-.083-1.32l.083-.094z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- What you’ll gain (optional small list) -->
-    <div class="grid md:grid-cols-2 gap-6 mt-10 text-timberwolf/80">
-      <div>
-        <h3 class="text-2xl font-heading mb-3" data-key="joinWhatYouGetTitle">Sana Ne Katar?</h3>
-        <ul class="list-disc pl-5 space-y-1">
-          <li data-key="joinItem1">Gerçek donanım üzerinde uçtan uca deneyim</li>
-          <li data-key="joinItem2">Yarışma standardında süreç ve dokümantasyon</li>
-          <li data-key="joinItem3">Atölye imkânı ve mentor desteği</li>
-          <li data-key="joinItem4">Sektörle erken tanışma ve referans</li>
-        </ul>
-      </div>
-      <p class="self-end text-sm" data-key="joinNote">
-        Not: Zaman ayırabileceğin bir rol seç; her rol için temel eğitim veriyoruz.
-      </p>
+    <!-- Mini perks row -->
+    <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4 mt-10 text-timberwolf/80">
+      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">🚀 <span data-key="joinPerk1">Uçtan uca gerçek donanım</span></div>
+      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">🧪 <span data-key="joinPerk2">Atölye & test altyapısı</span></div>
+      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">📚 <span data-key="joinPerk3">Eğitim & mentorluk</span></div>
+      <div class="px-4 py-3 rounded-xl border border-[#6E92B6]/30 bg-prussian_blue/40">🤝 <span data-key="joinPerk4">Sektörle erken temas</span></div>
     </div>
   </div>
 </section>
+
 
 
   <!-- Contact & Footer Section -->
