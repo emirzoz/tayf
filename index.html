@@ -235,6 +235,20 @@
 @media (prefers-reduced-motion:reduce){ .planet{ animation:none !important; } }
 @media (min-width:1024px){ .planet{ --size:22px; } }
 @media (max-width:480px){ .solar{ --S:min(420px,92vw); } .planet{ --size:18px; } }
+/* wrappers never intercept or animate */
+.orbit-wrapper{ pointer-events:none !important; animation:none !important; }
+
+/* planets are the only interactive pieces, above rings/core */
+.planet{ pointer-events:auto; z-index:50; }
+
+/* labels don’t block clicks and stay upright */
+.planet .planet-label{
+  pointer-events:none;          /* clicks go to the <a class="planet"> */
+  /* already upright: offset-rotate:0deg lives on .planet */
+}
+
+/* just in case any old rule was reintroduced */
+.planet .tooltip-bubble{ display:none !important; }
 
 
 /* =========================
@@ -618,14 +632,15 @@
 <div class="hidden lg:grid place-items-center mt-10">
   <!-- Stage: one source of truth for orbit radius -->
   <div class="solar" style="--S:min(560px,90vw); --R:min(38vmin,320px);">
-    <!-- Core -->
-    <div class="absolute inset-0 grid place-items-center z-10">
-      <div class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82] shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50 grid place-items-center">
-        <span class="text-prussian_blue font-heading text-sm px-2 text-center">
-          İTÜ TAYF<br><span class="text-xs opacity-80">Core</span>
-        </span>
-      </div>
-    </div>
+   <!-- Core -->
+<div class="absolute inset-0 grid place-items-center z-10" style="pointer-events:none">
+  <div class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82] shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50 grid place-items-center">
+    <span class="text-prussian_blue font-heading text-sm px-2 text-center">
+      İTÜ TAYF<br><span class="text-xs opacity-80">Core</span>
+    </span>
+  </div>
+</div>
+
 
     <!-- Rings (use the SAME factors as planets) -->
     <span class="orbit-ring" style="--x:.30"></span>
