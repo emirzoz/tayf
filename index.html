@@ -118,6 +118,9 @@
     }
   </script>
   <style>
+    .ratio-video { position: relative; padding-top: 56.25%; } /* 16:9 */
+    .ratio-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
     html { scroll-behavior: smooth; }
     body { font-family: 'Open Sans', sans-serif; }
     h1, h2, h3, h4, h5, h6 { font-family: 'Exo 2', sans-serif; font-weight: 700; }
@@ -344,27 +347,26 @@
   </div>
 
   <!-- Panel: 3D Model (lazy, hidden initially) -->
-  <div id="panel-3d" role="tabpanel" aria-labelledby="tab-3d" class="hidden">
-    <model-viewer id="satModel"
-      src=""  <!-- set by JS on first open -->
-      poster="/images/sat-poster.jpg"
+<!-- Panel: 3D Model (lazy, hidden initially) -->
+<div id="panel-3d" role="tabpanel" aria-labelledby="tab-3d" class="hidden">
+  <div class="rounded-xl overflow-hidden border border-[#6E92B6]/40 bg-white/5 ratio-video">
+    <iframe
+      title="Communication Satellite (Sketchfab)"
+      class="sketchfab-embed absolute inset-0 w-full h-full"
+      data-src="https://sketchfab.com/models/9a7ad3344edb4e598de848a5badb7416/embed?ui_theme=dark"
       loading="lazy"
-      reveal="interaction"
-      camera-controls
-      touch-action="pan-y"
-      auto-rotate
-      auto-rotate-delay="4000"
-      rotation-per-second="15deg"
-      exposure="1"
-      shadow-intensity="0.4"
-      style="width:100%; height:380px; background: rgba(255,255,255,0.02); border-radius:0.75rem;"
-      aria-label="3B uydu modeli">
-      <!-- Optional hotspots -->
-      <!-- <button slot="hotspot-obc" data-position="0.10 0.12 0.03" class="px-2 py-1 rounded bg-[#6E92B6] text-prussian_blue text-sm">OBC</button> -->
-      <noscript><img src="/images/sat-poster.jpg" alt="Uydu 3B önizleme" width="1200" height="675"></noscript>
-    </model-viewer>
-    <p class="mt-3 text-timberwolf/70 text-sm" data-key="hintPan">İpucu: Parmağınızla çevirin, iki parmakla yakınlaştırın.</p>
+      allow="autoplay; fullscreen; xr-spatial-tracking"
+      allowfullscreen
+      mozallowfullscreen="true"
+      webkitallowfullscreen="true"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
   </div>
+  <p class="mt-3 text-timberwolf/70 text-sm" data-key="hintPan">
+    İpucu: Parmağınızla modeli çevirin, iki parmakla yakınlaştırın.
+  </p>
+</div>
+
 </div>
 
 
@@ -694,53 +696,57 @@
     els.forEach(el => obs.observe(el));
   })();
 </script>
-  <script>
-  (function() {
-    const tabG = document.getElementById('tab-gallery');
-    const tab3 = document.getElementById('tab-3d');
-    const panG = document.getElementById('panel-gallery');
-    const pan3 = document.getElementById('panel-3d');
-    const mv   = document.getElementById('satModel');
-    if (!tabG || !tab3 || !panG || !pan3 || !mv) return;
+<!-- Tabs: Sketchfab lazy loader -->
+<script>
+(function () {
+  const tabG = document.getElementById('tab-gallery');
+  const tab3 = document.getElementById('tab-3d');
+  const panG = document.getElementById('panel-gallery');
+  const pan3 = document.getElementById('panel-3d');
+  if (!tabG || !tab3 || !panG || !pan3) return;
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) mv.removeAttribute('auto-rotate');
+  const iframe = pan3.querySelector('iframe.sketchfab-embed');
+  let iframeLoaded = false;
 
-    let modelLoaded = false;
-    function loadModelSrcOnce() {
-      if (modelLoaded) return;
-      const isSmall = window.matchMedia('(max-width: 768px)').matches;
-      mv.src = isSmall ? '/3d/satellite-lite.glb' : '/3d/satellite.glb';  // <-- set your paths
-      modelLoaded = true;
+  function loadIframeOnce() {
+    if (iframeLoaded || !iframe) return;
+    const src = iframe.getAttribute('data-src');
+    if (src) iframe.src = src;
+    iframeLoaded = true;
+  }
+
+  function activate(which) {
+    const is3D = which === '3d';
+
+    tabG.setAttribute('aria-selected', String(!is3D));
+    tab3.setAttribute('aria-selected', String(is3D));
+
+    tabG.classList.toggle('bg-[#6E92B6]/20', !is3D);
+    tabG.classList.toggle('border-[#6E92B6]/40', !is3D);
+    tab3.classList.toggle('bg-[#6E92B6]/20',  is3D);
+    tab3.classList.toggle('border-[#6E92B6]/40',  is3D);
+
+    panG.classList.toggle('hidden', is3D);
+    pan3.classList.toggle('hidden', !is3D);
+
+    if (is3D) loadIframeOnce();
+  }
+
+  tabG.addEventListener('click', () => activate('gallery'));
+  tab3.addEventListener('click', () => activate('3d'));
+
+  // keyboard nav
+  [tabG, tab3].forEach(b => b.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      (e.target === tabG ? tab3 : tabG).focus();
     }
-
-    function activate(which) {
-      const is3D = (which === '3d');
-      tabG.setAttribute('aria-selected', String(!is3D));
-      tab3.setAttribute('aria-selected', String(is3D));
-
-      tabG.classList.toggle('bg-[#6E92B6]/20', !is3D);
-      tabG.classList.toggle('border-[#6E92B6]/40', !is3D);
-      tab3.classList.toggle('bg-[#6E92B6]/20',  is3D);
-      tab3.classList.toggle('border-[#6E92B6]/40',  is3D);
-
-      panG.classList.toggle('hidden', is3D);
-      pan3.classList.toggle('hidden', !is3D);
-      if (is3D) loadModelSrcOnce();
-    }
-
-    tabG.addEventListener('click', () => activate('gallery'));
-    tab3.addEventListener('click', () => activate('3d'));
-
-    // keyboard nav
-    [tabG, tab3].forEach(b => b.addEventListener('keydown', e => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        e.preventDefault();
-        (e.target === tabG ? tab3 : tabG).focus();
-      }
-    }));
-  })();
+  }));
+})();
 </script>
+</body>
+</html>
+
 
 
 </body>
