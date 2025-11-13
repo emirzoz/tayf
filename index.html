@@ -148,74 +148,79 @@
     #join .group { transform: translateZ(0); transition: transform .25s ease, box-shadow .25s ease; }
     #join .group:hover { transform: translateY(-2px); }
 }
-/* ===== SOLAR (final) ===== */
+/* ===== SOLAR (stable circular orbits) ===== */
 .solar{
   position:relative;
-  --S: min(560px, 90vw);       /* square stage size */
-  --R: calc(var(--S) * .5);    /* base radius = half of stage */
+  --S:min(560px,90vw);
+  --R: calc(var(--S) * .5);          /* base radius = half the stage */
   width:var(--S); height:var(--S);
   margin-inline:auto; isolation:isolate;
 }
 
-/* rings use the same factors as planets */
+/* Rings use the SAME lane factor as planets */
 .orbit-ring{
   position:absolute; inset:0;
   border:1px dashed rgba(110,146,182,.35);
-  border-radius:9999px; pointer-events:none;
-  transform: scale(var(--x, .30));  /* .30, .46, .62, .78, .94 */
+  border-radius:9999px;
+  transform: scale(var(--x,.30));    /* .30, .46, .62, .78, .94 */
+  pointer-events:none;
+  z-index:0;
 }
 
-/* wrappers do NOT spin; they only hold per-lane speed classes */
-.orbit-wrapper{ position:absolute; inset:0; pointer-events:none; z-index:1; }
+/* Rotating lane wrapper (drives the orbit) */
+.orbit-wrapper{
+  position:absolute; inset:0;
+  animation: orbit-spin var(--dur, 44s) linear infinite;
+  transform-origin:50% 50%;
+  pointer-events:none;               /* never intercept clicks */
+  z-index:2;
+}
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
 
-/* planets move along a circle path; labels don’t rotate */
+/* Planet sits on the rim; wrapper rotation moves it in a circle */
 .planet{
   --size:20px;
   position:absolute; top:50%; left:50%;
   width:var(--size); height:var(--size);
-  transform: translate(-50%, -50%);
-  offset-path: circle(calc(var(--R) * var(--x)) at 50% 50%);
-  offset-distance: 0%;
-  offset-rotate: 0deg;                /* label stays upright */
-  animation: orbit-move var(--dur, 44s) linear infinite;
-
+  transform:
+    translate(-50%,-50%)
+    translateX(calc(var(--R) * var(--x)));  /* <- matches ring radius */
   border-radius:9999px;
   background: radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
   box-shadow: 0 0 0 2px rgba(110,146,182,.5), 0 8px 18px rgba(110,146,182,.15);
   display:grid; place-items:center;
-  z-index:3; pointer-events:auto;
+  z-index:3;
+  pointer-events:auto;               /* clickable */
   transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
 }
-@keyframes orbit-move { to { offset-distance: 100%; } }
 
-/* per-lane speeds (slower) */
-.orbit-wrapper.dur-22 .planet{ --dur:40s; }
-.orbit-wrapper.dur-28 .planet{ --dur:48s; }
-.orbit-wrapper.dur-34 .planet{ --dur:56s; }
-.orbit-wrapper.dur-40 .planet{ --dur:64s; }
-.orbit-wrapper.dur-46 .planet{ --dur:72s; }
-
-/* labels visible, readable */
-.planet .planet-label{
-  position:absolute; top:-34px; left:50%; transform:translateX(-50%);
+/* Labels: counter-rotate so text stays upright */
+.planet-label{
+  position:absolute; top:-34px; left:50%;
+  transform: translateX(-50%);
+  transform-origin:50% 50%;
+  animation: label-counter var(--dur,44s) linear infinite;
   white-space:nowrap; font-size:12px; color:rgba(215,217,211,.9);
   background:rgba(6,43,70,.6); border:1px solid rgba(110,146,182,.3);
-  padding:2px 8px; border-radius:9999px; display:block;
+  padding:2px 8px; border-radius:9999px;
+  z-index:4; pointer-events:none;    /* label never blocks click */
 }
+@keyframes label-counter { to { transform: translateX(-50%) rotate(-360deg); } }
 
-/* (you asked to remove descriptions) — keep tooltips off */
-.planet .tooltip-bubble{ display:none !important; }
-
-/* hover/focus: glow + slight scale; pause its own orbit for clicking */
+/* Hover/focus: glow + tiny scale (doesn't affect orbit radius) */
 .planet:hover,
 .planet:focus-visible{
-  transform:translate(-50%,-50%) scale(1.28);
-  filter:brightness(1.12);
+  filter: brightness(1.12);
+  transform:
+    translate(-50%,-50%)
+    translateX(calc(var(--R) * var(--x)))
+    scale(1.28);
   box-shadow:0 0 0 3px rgba(110,146,182,.55),
              0 10px 24px rgba(110,146,182,.28),
              0 0 24px 6px rgba(110,146,182,.18);
-  animation-play-state:paused;
 }
+
+/* Decorative pulse ring */
 .planet::after{
   content:""; position:absolute; inset:-6px; border-radius:9999px;
   box-shadow:0 0 0 2px rgba(110,146,182,.35);
@@ -232,31 +237,27 @@
   100%{ transform:scale(1.25); opacity:0; }
 }
 
-/* reduced motion */
-@media (prefers-reduced-motion:reduce){ .planet{ animation:none !important; } }
-@media (min-width:1024px){ .planet{ --size:22px; } }
-@media (max-width:480px){ .solar{ --S:min(420px,92vw); } .planet{ --size:18px; } }
-/* wrappers never intercept or animate */
-.orbit-wrapper{ pointer-events:none !important; animation:none !important; }
+/* Per-lane speeds (slower, tweak freely) */
+.orbit-wrapper.dur-22{ --dur: 40s; }
+.orbit-wrapper.dur-28{ --dur: 48s; }
+.orbit-wrapper.dur-34{ --dur: 56s; }
+.orbit-wrapper.dur-40{ --dur: 64s; }
+.orbit-wrapper.dur-46{ --dur: 72s; }
 
-/* planets are the only interactive pieces, above rings/core */
-.planet{ pointer-events:auto; z-index:50; }
+/* Core sits under planets */
+#solar-core{ position:relative; z-index:1; pointer-events:none; }
 
-/* labels don’t block clicks and stay upright */
-.planet .planet-label{
-  pointer-events:none;          /* clicks go to the <a class="planet"> */
-  /* already upright: offset-rotate:0deg lives on .planet */
+/* Motion prefs */
+@media (prefers-reduced-motion:reduce){
+  .orbit-wrapper{ animation: none !important; }
+  .planet-label{ animation: none !important; }
 }
 
-/* just in case any old rule was reintroduced */
-.planet .tooltip-bubble{ display:none !important; }
-/* stacking inside .solar */
-.orbit-ring { z-index: 0; }
-#solar-core { z-index: 1; pointer-events: none; }
-.orbit-wrapper { z-index: 2; pointer-events: none; }
-.orbit-wrapper .planet { z-index: 3; pointer-events: auto; }
-.orbit-wrapper .planet .planet-label { z-index: 4; pointer-events: none; }
-
+@media (min-width:1024px){ .planet{ --size:22px; } }
+@media (max-width:480px){
+  .solar{ --S:min(420px,92vw); }
+  .planet{ --size:18px; }
+}
 
 /* =========================
    MOBILE JOIN CARDS + ICONS
