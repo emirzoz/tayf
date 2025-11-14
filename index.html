@@ -117,6 +117,24 @@
       }
     }
   </script>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.orbit-lane').forEach((lane) => {
+    const wrapper = lane.querySelector('.orbit-wrapper');
+    const planet  = lane.querySelector('.planet');
+    if (!wrapper || !planet) return;
+
+    planet.addEventListener('mouseenter', () => {
+      wrapper.classList.add('is-paused');   // stop THIS orbit
+    });
+
+    planet.addEventListener('mouseleave', () => {
+      wrapper.classList.remove('is-paused'); // resume THIS orbit
+    });
+  });
+});
+</script>
+
   <style>
     .ratio-video { position: relative; padding-top: 56.25%; } /* 16:9 */
     .ratio-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
