@@ -359,6 +359,57 @@ document.addEventListener('DOMContentLoaded', () => {
 <body class="bg-prussian_blue text-timberwolf">
 <!-- Header -->
 <header class="fixed w-full top-0 z-50">
+  <!-- Mobile menu backdrop -->
+<div id="mobile-menu-backdrop"
+     class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none
+            transition-opacity duration-300 md:hidden z-[55]"></div>
+
+<!-- Mobile slide-in menu -->
+<div id="mobile-menu"
+     class="fixed inset-y-0 left-0 w-64 max-w-[80vw] bg-prussian_blue
+            border-r border-[#6E92B6]/60 transform -translate-x-full
+            transition-transform duration-300 ease-out md:hidden z-[60]
+            flex flex-col">
+  <!-- Top bar -->
+  <div class="h-16 flex items-center px-6 border-b border-[#6E92B6]/40">
+    <span class="text-xl font-heading font-bold">İTÜ TAYF</span>
+  </div>
+
+  <!-- Nav links -->
+  <nav class="px-6 pt-6 space-y-4">
+    <a href="#project"
+       class="block text-timberwolf hover:text-[#6E92B6] transition"
+       data-key="navProject">Proje</a>
+    <a href="#team"
+       class="block text-timberwolf hover:text-[#6E92B6] transition"
+       data-key="navTeam">Ekip</a>
+    <a href="#sponsor"
+       class="block text-timberwolf hover:text-[#6E92B6] transition"
+       data-key="navSponsor">Sponsorluk</a>
+    <a href="#join"
+       class="block text-timberwolf hover:text-[#6E92B6] transition"
+       data-key="navJoin">Takıma Katıl</a>
+    <a href="#contact"
+       class="block text-timberwolf hover:text-[#6E92B6] transition"
+       data-key="navContact">İletişim</a>
+  </nav>
+
+  <!-- Language switcher at bottom -->
+  <div class="mt-auto px-6 pb-6 border-t border-[#6E92B6]/40 flex items-center gap-2">
+    <button id="lang-tr-mobile" onclick="setLanguage('tr')"
+            class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20
+                   focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">
+      TR
+    </button>
+    <span class="text-yinmn_blue">|</span>
+    <button id="lang-en-mobile" onclick="setLanguage('en')"
+            class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20
+                   focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">
+      EN
+    </button>
+  </div>
+</div>
+
   <nav class="relative bg-[#6E92B6]/15 backdrop-blur border-b-2 border-[#6E92B6]">
     <!-- accent gradient line -->
     <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#6E92B6] to-transparent opacity-60"></div>
@@ -400,16 +451,19 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
 
-      <!-- mobile language switcher (shows only < md) -->
-      <div class="md:hidden ml-auto flex items-center gap-2">
-        <button id="lang-tr-mobile" onclick="setLanguage('tr')"
-                class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20
-                       focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">TR</button>
-        <span class="text-yinmn_blue">|</span>
-        <button id="lang-en-mobile" onclick="setLanguage('en')"
-                class="font-semibold px-2 py-1 rounded-md hover:bg-[#6E92B6]/20
-                       focus:outline-none focus:ring-2 focus:ring-[#6E92B6]">EN</button>
-      </div>
+      <!-- mobile menu button -->
+      <button id="mobile-menu-toggle"
+              class="md:hidden ml-auto inline-flex items-center justify-center p-2 rounded-md
+                     text-timberwolf hover:bg-[#6E92B6]/20
+                     focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
+              aria-label="Menü"
+              aria-expanded="false"
+              aria-controls="mobile-menu">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
     </div> <!-- /container -->
   </nav>
 </header>
@@ -1102,6 +1156,53 @@ const langData = {
     document.addEventListener('DOMContentLoaded', updateAriaCurrent);
   </script>
 <script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle   = document.getElementById('mobile-menu-toggle');
+    const menu     = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
+    if (!toggle || !menu || !backdrop) return;
+
+    let isOpen = false;
+
+    function openMenu() {
+      menu.classList.remove('-translate-x-full');
+      menu.classList.add('translate-x-0');
+      backdrop.classList.remove('opacity-0', 'pointer-events-none');
+      backdrop.classList.add('opacity-100', 'pointer-events-auto');
+      toggle.setAttribute('aria-expanded', 'true');
+      isOpen = true;
+    }
+
+    function closeMenu() {
+      menu.classList.add('-translate-x-full');
+      menu.classList.remove('translate-x-0');
+      backdrop.classList.add('opacity-0', 'pointer-events-none');
+      backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+      toggle.setAttribute('aria-expanded', 'false');
+      isOpen = false;
+    }
+
+    toggle.addEventListener('click', () => {
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    backdrop.addEventListener('click', closeMenu);
+
+    // Close when clicking a link inside the menu
+    menu.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on Esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        closeMenu();
+      }
+    });
+  });
+</script>
+
   // Count-up animation with IntersectionObserver
   (function() {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1203,7 +1304,3 @@ const langData = {
 </body>
 </html>
 
-
-
-</body>
-</html>
