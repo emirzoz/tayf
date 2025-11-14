@@ -1157,45 +1157,7 @@ const langData = {
   </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggle   = document.getElementById('mobile-menu-toggle');
-    const menu     = document.getElementById('mobile-menu');
-    const backdrop = document.getElementById('mobile-menu-backdrop');
-    if (!toggle || !menu || !backdrop) return;
-
-    let isOpen = false;
-
-    function openMenu() {
-      menu.classList.remove('-translate-x-full');
-      menu.classList.add('translate-x-0');
-      backdrop.classList.remove('opacity-0', 'pointer-events-none');
-      backdrop.classList.add('opacity-100', 'pointer-events-auto');
-      toggle.setAttribute('aria-expanded', 'true');
-      isOpen = true;
-    }
-
-    function closeMenu() {
-      menu.classList.add('-translate-x-full');
-      menu.classList.remove('translate-x-0');
-      backdrop.classList.add('opacity-0', 'pointer-events-none');
-      backdrop.classList.remove('opacity-100', 'pointer-events-auto');
-      toggle.setAttribute('aria-expanded', 'false');
-      isOpen = false;
-    }
-
-    toggle.addEventListener('click', () => {
-      isOpen ? closeMenu() : openMenu();
-    });
-
-    backdrop.addEventListener('click', closeMenu);
-
-    // Close when clicking a link inside the menu
-    menu.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
-
-    // Close on Esc
-    <script>
+  // Mobile menu (slide from left) + backdrop
   document.addEventListener('DOMContentLoaded', () => {
     const toggle   = document.getElementById('mobile-menu-toggle');
     const menu     = document.getElementById('mobile-menu');
@@ -1248,7 +1210,6 @@ const langData = {
     if (!els.length) return;
 
     const formatCompact = n => {
-      // simple compact formatter (e.g., 1.8M)
       const f = new Intl.NumberFormat('tr-TR', { notation: 'compact', maximumFractionDigits: 1 });
       return f.format(n);
     };
@@ -1268,8 +1229,7 @@ const langData = {
 
       const tick = (now) => {
         const t = Math.min(1, (now - start) / duration);
-        // easeOutCubic
-        const eased = 1 - Math.pow(1 - t, 3);
+        const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
         const value = startVal + (target - startVal) * eased;
         el.textContent = (compact ? formatCompact(value) : Math.round(value)).toString() + suffix;
         if (t < 1) requestAnimationFrame(tick);
@@ -1277,7 +1237,6 @@ const langData = {
       requestAnimationFrame(tick);
     };
 
-    // Trigger once when visible
     const seen = new WeakSet();
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1291,6 +1250,7 @@ const langData = {
     els.forEach(el => obs.observe(el));
   })();
 </script>
+
 
 <!-- Tabs: Sketchfab lazy loader -->
 <script>
