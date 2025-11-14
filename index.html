@@ -136,6 +136,13 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
   <style>
+        /* Icon inside orbit planet */
+    .planet-icon{
+      width: 60%;
+      height: 60%;
+      color: #d7d9d3;           /* icon stroke */
+    }
+
     .ratio-video { position: relative; padding-top: 56.25%; } /* 16:9 */
     .ratio-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
@@ -677,66 +684,109 @@ document.addEventListener('DOMContentLoaded', () => {
       <span class="orbit-ring" style="--orbit-scale:.78;"></span>
       <span class="orbit-ring" style="--orbit-scale:.94;"></span>
 
-      <!-- Lane 1: Mekanik -->
-      <div class="orbit-lane" style="--orbit-scale:.30; --dur:22s;">
-        <div class="orbit-wrapper">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
-             target="_blank" rel="noopener"
-             class="planet"
-             aria-label="Mekanik Ekibi">
-            <span class="planet-label-inner" data-key="teamCard1Title">Mekanik</span>
-          </a>
-        </div>
-      </div>
+<!-- Lane 1: Mekanik -->
+<div class="orbit-lane" style="--orbit-scale:.30; --dur:22s;">
+  <div class="orbit-wrapper">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
+       target="_blank" rel="noopener"
+       class="planet"
+       aria-label="Mekanik Ekibi">
+      <svg class="planet-icon" aria-hidden="true">
+        <use href="#icon-mekanik"></use>
+      </svg>
+    </a>
+  </div>
+</div>
 
-      <!-- Lane 2: Elektronik -->
-      <div class="orbit-lane" style="--orbit-scale:.46; --dur:28s;">
-        <div class="orbit-wrapper">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
-             target="_blank" rel="noopener"
-             class="planet"
-             aria-label="Elektronik Ekibi">
-            <span class="planet-label-inner" data-key="teamCard2Title">Elektronik</span>
-          </a>
-        </div>
-      </div>
+<!-- Lane 2: Elektronik -->
+<div class="orbit-lane" style="--orbit-scale:.46; --dur:28s;">
+  <div class="orbit-wrapper">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
+       target="_blank" rel="noopener"
+       class="planet"
+       aria-label="Elektronik Ekibi">
+      <svg class="planet-icon" aria-hidden="true">
+        <use href="#icon-elektronik"></use>
+      </svg>
+    </a>
+  </div>
+</div>
 
-      <!-- Lane 3: Uçuş Yazılımı -->
-      <div class="orbit-lane" style="--orbit-scale:.62; --dur:34s;">
-        <div class="orbit-wrapper">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-             target="_blank" rel="noopener"
-             class="planet"
-             aria-label="Uçuş Yazılımı Ekibi">
-            <span class="planet-label-inner" data-key="teamCard3Title">Uçuş Yazılımı</span>
-          </a>
-        </div>
-      </div>
+<!-- Lane 3: Uçuş Yazılımı -->
+<div class="orbit-lane" style="--orbit-scale:.62; --dur:34s;">
+  <div class="orbit-wrapper">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+       target="_blank" rel="noopener"
+       class="planet"
+       aria-label="Uçuş Yazılımı Ekibi">
+      <svg class="planet-icon" aria-hidden="true">
+        <use href="#icon-ucus"></use>
+      </svg>
+    </a>
+  </div>
+</div>
 
-      <!-- Lane 4: Yer İstasyonu -->
-      <div class="orbit-lane" style="--orbit-scale:.78; --dur:40s;">
-        <div class="orbit-wrapper">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-             target="_blank" rel="noopener"
-             class="planet"
-             aria-label="Yer İstasyonu Ekibi">
-            <span class="planet-label-inner" data-key="teamCard4Title">Yer İstasyonu</span>
-          </a>
-        </div>
-      </div>
+<!-- Lane 4: Yer İstasyonu -->
+<div class="orbit-lane" style="--orbit-scale:.78; --dur:40s;">
+  <div class="orbit-wrapper">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+       target="_blank" rel="noopener"
+       class="planet"
+       aria-label="Yer İstasyonu Ekibi">
+      <svg class="planet-icon" aria-hidden="true">
+        <use href="#icon-yer"></use>
+      </svg>
+    </a>
+  </div>
+</div>
 
-      <!-- Lane 5: Organizasyon & Tasarım (outer) -->
-      <div class="orbit-lane" style="--orbit-scale:.94; --dur:46s;">
-        <div class="orbit-wrapper">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
-             target="_blank" rel="noopener"
-             class="planet"
-             aria-label="Organizasyon & Tasarım Ekibi">
-            <span class="planet-label-inner" data-key="teamCard5Title">Org & Tasarım</span>
-          </a>
-        </div>
+<!-- Lane 5: Organizasyon & Tasarım -->
+<div class="orbit-lane" style="--orbit-scale:.94; --dur:46s;">
+  <div class="orbit-wrapper">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
+       target="_blank" rel="noopener"
+       class="planet"
+       aria-label="Organizasyon & Tasarım Ekibi">
+      <svg class="planet-icon" aria-hidden="true">
+        <use href="#icon-org"></use>
+      </svg>
+    </a>
+  </div>
+</div>
+    <!-- ICON LEGEND (desktop) -->
+    <div class="mt-8 hidden lg:flex flex-wrap justify-center gap-6 text-sm text-timberwolf/80">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue_gray" aria-hidden="true">
+          <use href="#icon-mekanik"></use>
+        </svg>
+        <span data-key="teamCard1Title">Mekanik Ekibi</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue_gray" aria-hidden="true">
+          <use href="#icon-elektronik"></use>
+        </svg>
+        <span data-key="teamCard2Title">Elektronik Ekibi</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue_gray" aria-hidden="true">
+          <use href="#icon-ucus"></use>
+        </svg>
+        <span data-key="teamCard3Title">Uçuş Yazılımı Ekibi</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue_gray" aria-hidden="true">
+          <use href="#icon-yer"></use>
+        </svg>
+        <span data-key="teamCard4Title">Yer İstasyonu Ekibi</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-blue_gray" aria-hidden="true">
+          <use href="#icon-org"></use>
+        </svg>
+        <span data-key="teamCard5Title">Organizasyon &amp; Tasarım Ekibi</span>
       </div>
     </div>
+
 
     <!-- MOBILE CARDS -->
     <div class="grid sm:grid-cols-2 gap-4 mt-10 lg:hidden">
