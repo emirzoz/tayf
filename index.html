@@ -137,11 +137,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   <style>
         /* Icon inside orbit planet */
-    .planet-icon{
-      width: 60%;
-      height: 60%;
-      color: #d7d9d3;           /* icon stroke */
-    }
+/* Planet (clickable) */
+.planet{
+  --size: 20px;
+  /* default colors (fallback) */
+  --c1: #6E92B6;
+  --c2: #3b5b82;
+  --c3: #2a3f5b;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+             translateX(calc(var(--R) * var(--orbit-scale)));
+  border-radius: 9999px;
+  width: var(--size);
+  height: var(--size);
+  background: radial-gradient(circle at 30% 30%, var(--c1) 0%, var(--c2) 60%, var(--c3) 100%);
+  box-shadow:
+    0 0 0 2px rgba(110,146,182,.5),
+    0 8px 18px rgba(110,146,182,.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: auto;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    filter .25s ease;
+}
+
+/* Icon inside orbit planet */
+.planet-icon{
+  width: 60%;
+  height: 60%;
+  color: #d7d9d3; /* always light, so it pops on colored planet */
+}
+
 
     .ratio-video { position: relative; padding-top: 56.25%; } /* 16:9 */
     .ratio-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
@@ -663,6 +696,39 @@ document.addEventListener('DOMContentLoaded', () => {
     <p class="text-lg opacity-90 max-w-3xl" data-key="joinLead">
       Her gezegen bir ekip: rolünü seç, yörüngeye katıl.
     </p>
+  <!-- ICON LEGEND (desktop, TOP) -->
+<div class="mt-6 hidden lg:flex flex-wrap justify-center gap-6 text-sm text-timberwolf/80">
+  <div class="flex items-center gap-2">
+    <svg class="w-5 h-5" aria-hidden="true" style="color:#60a5fa;">
+      <use href="#icon-mekanik"></use>
+    </svg>
+    <span data-key="teamCard1Title">Mekanik Ekibi</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <svg class="w-5 h-5" aria-hidden="true" style="color:#34d399;">
+      <use href="#icon-elektronik"></use>
+    </svg>
+    <span data-key="teamCard2Title">Elektronik Ekibi</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <svg class="w-5 h-5" aria-hidden="true" style="color:#a855f7;">
+      <use href="#icon-ucus"></use>
+    </svg>
+    <span data-key="teamCard3Title">Uçuş Yazılımı Ekibi</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <svg class="w-5 h-5" aria-hidden="true" style="color:#fbbf24;">
+      <use href="#icon-yer"></use>
+    </svg>
+    <span data-key="teamCard4Title">Yer İstasyonu Ekibi</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <svg class="w-5 h-5" aria-hidden="true" style="color:#f472b6;">
+      <use href="#icon-org"></use>
+    </svg>
+    <span data-key="teamCard5Title">Organizasyon &amp; Tasarım Ekibi</span>
+  </div>
+</div>
 
     <!-- DESKTOP: SOLAR SYSTEM -->
     <div class="solar hidden lg:block">
@@ -684,13 +750,14 @@ document.addEventListener('DOMContentLoaded', () => {
       <span class="orbit-ring" style="--orbit-scale:.78;"></span>
       <span class="orbit-ring" style="--orbit-scale:.94;"></span>
 
-<!-- Lane 1: Mekanik -->
+<!-- Lane 1: Mekanik (blue) -->
 <div class="orbit-lane" style="--orbit-scale:.30; --dur:22s;">
   <div class="orbit-wrapper">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
        target="_blank" rel="noopener"
        class="planet"
-       aria-label="Mekanik Ekibi">
+       aria-label="Mekanik Ekibi"
+       style="--c1:#bfdbfe; --c2:#60a5fa; --c3:#1d4ed8;">
       <svg class="planet-icon" aria-hidden="true">
         <use href="#icon-mekanik"></use>
       </svg>
@@ -698,13 +765,14 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
-<!-- Lane 2: Elektronik -->
+<!-- Lane 2: Elektronik (teal) -->
 <div class="orbit-lane" style="--orbit-scale:.46; --dur:28s;">
   <div class="orbit-wrapper">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
        target="_blank" rel="noopener"
        class="planet"
-       aria-label="Elektronik Ekibi">
+       aria-label="Elektronik Ekibi"
+       style="--c1:#a7f3d0; --c2:#34d399; --c3:#047857;">
       <svg class="planet-icon" aria-hidden="true">
         <use href="#icon-elektronik"></use>
       </svg>
@@ -712,13 +780,14 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
-<!-- Lane 3: Uçuş Yazılımı -->
+<!-- Lane 3: Uçuş Yazılımı (purple) -->
 <div class="orbit-lane" style="--orbit-scale:.62; --dur:34s;">
   <div class="orbit-wrapper">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
        target="_blank" rel="noopener"
        class="planet"
-       aria-label="Uçuş Yazılımı Ekibi">
+       aria-label="Uçuş Yazılımı Ekibi"
+       style="--c1:#e9d5ff; --c2:#a855f7; --c3:#6b21a8;">
       <svg class="planet-icon" aria-hidden="true">
         <use href="#icon-ucus"></use>
       </svg>
@@ -726,13 +795,14 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
-<!-- Lane 4: Yer İstasyonu -->
+<!-- Lane 4: Yer İstasyonu (amber) -->
 <div class="orbit-lane" style="--orbit-scale:.78; --dur:40s;">
   <div class="orbit-wrapper">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
        target="_blank" rel="noopener"
        class="planet"
-       aria-label="Yer İstasyonu Ekibi">
+       aria-label="Yer İstasyonu Ekibi"
+       style="--c1:#fef3c7; --c2:#fbbf24; --c3:#b45309;">
       <svg class="planet-icon" aria-hidden="true">
         <use href="#icon-yer"></use>
       </svg>
@@ -740,52 +810,21 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
-<!-- Lane 5: Organizasyon & Tasarım -->
+<!-- Lane 5: Organizasyon & Tasarım (pink) -->
 <div class="orbit-lane" style="--orbit-scale:.94; --dur:46s;">
   <div class="orbit-wrapper">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
        target="_blank" rel="noopener"
        class="planet"
-       aria-label="Organizasyon & Tasarım Ekibi">
+       aria-label="Organizasyon & Tasarım Ekibi"
+       style="--c1:#fce7f3; --c2:#f472b6; --c3:#9d174d;">
       <svg class="planet-icon" aria-hidden="true">
         <use href="#icon-org"></use>
       </svg>
     </a>
   </div>
 </div>
-    <!-- ICON LEGEND (desktop) -->
-    <div class="mt-8 hidden lg:flex flex-wrap justify-center gap-6 text-sm text-timberwolf/80">
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-blue_gray" aria-hidden="true">
-          <use href="#icon-mekanik"></use>
-        </svg>
-        <span data-key="teamCard1Title">Mekanik Ekibi</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-blue_gray" aria-hidden="true">
-          <use href="#icon-elektronik"></use>
-        </svg>
-        <span data-key="teamCard2Title">Elektronik Ekibi</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-blue_gray" aria-hidden="true">
-          <use href="#icon-ucus"></use>
-        </svg>
-        <span data-key="teamCard3Title">Uçuş Yazılımı Ekibi</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-blue_gray" aria-hidden="true">
-          <use href="#icon-yer"></use>
-        </svg>
-        <span data-key="teamCard4Title">Yer İstasyonu Ekibi</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-blue_gray" aria-hidden="true">
-          <use href="#icon-org"></use>
-        </svg>
-        <span data-key="teamCard5Title">Organizasyon &amp; Tasarım Ekibi</span>
-      </div>
-    </div>
+
 
 
     <!-- MOBILE CARDS -->
