@@ -279,54 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
   to { transform: rotate(360deg); }
 }
 
-/* Planet (clickable) */
-.planet{
-  --size: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  /* follow orbit at radius R * orbit-scale */
-  transform: translate(-50%, -50%)
-             translateX(calc(var(--R) * var(--orbit-scale)));
-  border-radius: 9999px;
-  width: var(--size);
-  height: var(--size);
-  background: radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
-  box-shadow:
-    0 0 0 2px rgba(110,146,182,.5),
-    0 8px 18px rgba(110,146,182,.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  pointer-events: auto;
-  transition:
-    transform .25s ease,
-    box-shadow .25s ease,
-    filter .25s ease;
-}
-
-/* Label text centered inside planet */
-.planet-label-inner{
-  font-size: 9px;
-  line-height: 1.15;
-  color: #d7d9d3;
-  padding: 0 3px;
-  white-space: normal;
-}
-
-/* Planet hover: visual highlight only (pause handled in JS) */
-.planet:hover{
-  transform:
-    translate(-50%, -50%)
-    translateX(calc(var(--R) * var(--orbit-scale)))
-    scale(1.18);
-  box-shadow:
-    0 0 0 3px rgba(191,219,254,.9),
-    0 12px 24px rgba(110,146,182,.35);
-  filter: brightness(1.1);
-}
-
 /* ---------- MOBILE JOIN CARDS + ICONS ---------- */
 
 .join-card {
