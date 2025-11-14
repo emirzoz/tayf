@@ -168,44 +168,54 @@
 }
 
 /* Rotating lane wrapper (drives the orbit) */
+/* Wrapper still drives the orbit */
 .orbit-wrapper{
   position:absolute; inset:0;
   animation: orbit-spin var(--dur, 44s) linear infinite;
   transform-origin:50% 50%;
-  pointer-events:none;               /* never intercept clicks */
-  z-index:2;
+  pointer-events:none; z-index:2;
 }
 @keyframes orbit-spin { to { transform: rotate(360deg); } }
 
-/* Planet sits on the rim; wrapper rotation moves it in a circle */
+/* Planet stays the same (no label animation here) */
 .planet{
   --size:20px;
   position:absolute; top:50%; left:50%;
   width:var(--size); height:var(--size);
-  transform:
-    translate(-50%,-50%)
-    translateX(calc(var(--R) * var(--x)));  /* <- matches ring radius */
+  transform: translate(-50%,-50%) translateX(calc(var(--R) * var(--x)));
   border-radius:9999px;
   background: radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
   box-shadow: 0 0 0 2px rgba(110,146,182,.5), 0 8px 18px rgba(110,146,182,.15);
   display:grid; place-items:center;
-  z-index:3;
-  pointer-events:auto;               /* clickable */
+  z-index:3; pointer-events:auto;
   transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
 }
 
-/* Labels: counter-rotate so text stays upright */
-.planet-label{
-  position:absolute; top:-34px; left:50%;
-  transform: translateX(-50%);
+/* NEW: a reverse-spinning carrier that keeps labels upright */
+.label-carrier{
+  position:absolute; inset:0;
+  animation: orbit-spin var(--dur, 44s) linear infinite reverse; /* exact inverse of wrapper */
   transform-origin:50% 50%;
-  animation: label-counter var(--dur,44s) linear infinite;
-  white-space:nowrap; font-size:12px; color:rgba(215,217,211,.9);
-  background:rgba(6,43,70,.6); border:1px solid rgba(110,146,182,.3);
-  padding:2px 8px; border-radius:9999px;
-  z-index:4; pointer-events:none;    /* label never blocks click */
+  pointer-events:none; z-index:4;      /* above planets, never blocks clicks */
+  will-change: transform;
 }
-@keyframes label-counter { to { transform: translateX(-50%) rotate(-360deg); } }
+
+/* Place label at the same radius; then lift it above the planet */
+.planet-label{
+  --lift: 30px;                        /* vertical gap above planet */
+  position:absolute; top:50%; left:50%;
+  transform:
+    translate(-50%,-50%)
+    translateX(calc(var(--R) * var(--x)))
+    translateY(calc(-1 * var(--lift)));
+  white-space:nowrap; font-size:12px; color:rgba(215,217,211,.95);
+  background:rgba(6,43,70,.7); border:1px solid rgba(110,146,182,.35);
+  padding:2px 8px; border-radius:9999px;
+  pointer-events:none;
+  will-change: transform;
+}
+
+/* (keep the rest of your hover glow / pulse etc.) */
 
 /* Hover/focus: glow + tiny scale (doesn't affect orbit radius) */
 .planet:hover,
@@ -660,7 +670,7 @@
       <span class="orbit-ring" style="--x:.94"></span>
 
     <!-- Orbits with planets -->
-    <div class="orbit-wrapper dur-22">
+    <div class="orbit-wrapper dur-22" style="--x:.30">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
          target="_blank" rel="noopener"
          class="planet"
@@ -670,7 +680,7 @@
       </a>
     </div>
 
-    <div class="orbit-wrapper dur-28">
+    <div class="orbit-wrapper dur-28" style="--x:.46">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
          target="_blank" rel="noopener"
          class="planet"
@@ -680,7 +690,7 @@
       </a>
     </div>
 
-    <div class="orbit-wrapper dur-34">
+    <div class="orbit-wrapper dur-34" style="--x:.62">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
          target="_blank" rel="noopener"
          class="planet"
@@ -690,7 +700,7 @@
       </a>
     </div>
 
-    <div class="orbit-wrapper dur-40">
+    <div class="orbit-wrapper dur-40" style="--x:.78">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQ8ETfVpVIzsVVHnglyiGMkC17nQqG-azaMKnf3Shv3RRRRQ/viewform"
          target="_blank" rel="noopener"
          class="planet"
@@ -700,7 +710,7 @@
       </a>
     </div>
 
-    <div class="orbit-wrapper dur-46">
+    <div class="orbit-wrapper dur-46" style="--x:.94">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
          target="_blank" rel="noopener"
          class="planet"
