@@ -138,9 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
   <style>
         /* Icon inside orbit planet */
 /* Planet (clickable) */
+/* Planet (clickable) */
 .planet{
   --size: 20px;
-  /* default colors (fallback) */
+
+  /* per-planet colors (can be overridden inline) */
   --c1: #6E92B6;
   --c2: #3b5b82;
   --c3: #2a3f5b;
@@ -153,10 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
   border-radius: 9999px;
   width: var(--size);
   height: var(--size);
+
+  /* use the custom vars here */
   background: radial-gradient(circle at 30% 30%, var(--c1) 0%, var(--c2) 60%, var(--c3) 100%);
   box-shadow:
     0 0 0 2px rgba(110,146,182,.5),
     0 8px 18px rgba(110,146,182,.15);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,8 +177,21 @@ document.addEventListener('DOMContentLoaded', () => {
 .planet-icon{
   width: 60%;
   height: 60%;
-  color: #d7d9d3; /* always light, so it pops on colored planet */
+  color: #d7d9d3; /* stays light so it's visible on any planet color */
 }
+
+/* Hover (keep same radius, just scale + glow) */
+.planet:hover{
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--R) * var(--orbit-scale)))
+    scale(1.18);
+  box-shadow:
+    0 0 0 3px rgba(191,219,254,.9),
+    0 12px 24px rgba(110,146,182,.35);
+  filter: brightness(1.1);
+}
+
 
 
     .ratio-video { position: relative; padding-top: 56.25%; } /* 16:9 */
@@ -823,6 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
     </a>
   </div>
+</div>
 </div>
 
 
