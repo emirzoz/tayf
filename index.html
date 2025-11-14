@@ -366,8 +366,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Mobile slide-in menu -->
 <div id="mobile-menu"
-     class="fixed inset-y-0 left-0 w-64 max-w-[80vw] bg-prussian_blue
-            border-r border-[#6E92B6]/60 transform -translate-x-full
+     class="fixed inset-y-0 right-0 w-64 max-w-[80vw] bg-prussian_blue
+            border-l border-[#6E92B6]/60 transform translate-x-full
             transition-transform duration-300 ease-out md:hidden z-[60]
             flex flex-col">
   <!-- Top bar -->
@@ -1167,7 +1167,7 @@ const langData = {
     let isOpen = false;
 
     function openMenu() {
-      menu.classList.remove('-translate-x-full');
+      menu.classList.remove('translate-x-full');
       menu.classList.add('translate-x-0');
       backdrop.classList.remove('opacity-0', 'pointer-events-none');
       backdrop.classList.add('opacity-100', 'pointer-events-auto');
@@ -1176,13 +1176,14 @@ const langData = {
     }
 
     function closeMenu() {
-      menu.classList.add('-translate-x-full');
+      menu.classList.add('translate-x-full');
       menu.classList.remove('translate-x-0');
       backdrop.classList.add('opacity-0', 'pointer-events-none');
       backdrop.classList.remove('opacity-100', 'pointer-events-auto');
       toggle.setAttribute('aria-expanded', 'false');
       isOpen = false;
     }
+
 
     toggle.addEventListener('click', () => {
       isOpen ? closeMenu() : openMenu();
