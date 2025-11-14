@@ -323,12 +323,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* Make planets bigger everywhere */
 .solar .planet{
-  --size: 30px;
+  --size: 40px;
 }
 
 @media (min-width: 1024px){
   .solar .planet{
-    --size: 38px;
+    --size: 48px;
   }
 }
 
@@ -710,18 +710,18 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
-    <!-- DESKTOP: SOLAR SYSTEM -->
-    <div class="solar hidden lg:block">
-      <!-- SUN / CORE -->
-      <div class="absolute inset-0 grid place-items-center" style="z-index:2; pointer-events:none;">
-        <div id="solar-core"
-             class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]
-                    shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50 grid place-items-center">
-          <span class="text-prussian_blue font-heading text-sm px-2 text-center">
-            İTÜ TAYF<br><span class="text-xs opacity-80"></span>
-          </span>
-        </div>
-      </div>
+<!-- SUN / CORE = LOGO -->
+<div class="absolute inset-0 grid place-items-center" style="z-index:2; pointer-events:none;">
+  <div id="solar-core"
+       class="w-28 h-28 rounded-full bg-prussian_blue/40
+              shadow-2xl shadow-[#6E92B6]/30 border border-[#6E92B6]/60
+              flex items-center justify-center overflow-hidden">
+    <img src="LogoWhite.png"
+         alt="İTÜ TAYF Logo"
+         class="w-20 h-20 object-contain">
+  </div>
+</div>
+
 
       <!-- Orbit rings -->
       <span class="orbit-ring" style="--orbit-scale:.30;"></span>
