@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* Planet (clickable) */
 /* Planet (clickable) */
 .planet{
-  --size: 20px;
+  --size: 40px;
 
   /* per-planet colors (can be overridden inline) */
   --c1: #6E92B6;
@@ -312,25 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
   flex-shrink: 0;
 }
 
-/* Size tweaks by breakpoint */
-@media (min-width: 1024px) {
-  .planet { --size: 22px; }
-}
-@media (max-width: 480px) {
-  .solar { --S: min(420px, 92vw); }
-  .planet { --size: 18px; }
-}
 
-/* Make planets bigger everywhere */
-.solar .planet{
-  --size: 40px;
-}
-
-@media (min-width: 1024px){
-  .solar .planet{
-    --size: 48px;
-  }
-}
 
   </style>
 </head>
@@ -710,18 +692,19 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
-<!-- SUN / CORE = LOGO -->
-<div class="absolute inset-0 grid place-items-center" style="z-index:2; pointer-events:none;">
-  <div id="solar-core"
-       class="w-28 h-28 rounded-full bg-prussian_blue/40
-              shadow-2xl shadow-[#6E92B6]/30 border border-[#6E92B6]/60
-              flex items-center justify-center overflow-hidden">
-    <img src="LogoWhite.png"
-         alt="İTÜ TAYF Logo"
-         class="w-20 h-20 object-contain">
-  </div>
-</div>
-
+    <!-- DESKTOP: SOLAR SYSTEM -->
+    <div class="solar hidden lg:block">
+      <!-- SUN / CORE = LOGO -->
+      <div class="absolute inset-0 grid place-items-center" style="z-index:2; pointer-events:none;">
+        <div id="solar-core"
+             class="w-28 h-28 rounded-full bg-prussian_blue/40
+                    shadow-2xl shadow-[#6E92B6]/30 border border-[#6E92B6]/60
+                    flex items-center justify-center overflow-hidden">
+          <img src="LogoWhite.png"
+               alt="İTÜ TAYF Logo"
+               class="w-20 h-20 object-contain">
+        </div>
+      </div>
 
       <!-- Orbit rings -->
       <span class="orbit-ring" style="--orbit-scale:.30;"></span>
@@ -730,81 +713,82 @@ document.addEventListener('DOMContentLoaded', () => {
       <span class="orbit-ring" style="--orbit-scale:.78;"></span>
       <span class="orbit-ring" style="--orbit-scale:.94;"></span>
 
-<!-- Lane 1: Mekanik (blue) -->
-<div class="orbit-lane" style="--orbit-scale:.30; --dur:22s;">
-  <div class="orbit-wrapper">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
-       target="_blank" rel="noopener"
-       class="planet"
-       aria-label="Mekanik Ekibi"
-       style="--c1:#bfdbfe; --c2:#60a5fa; --c3:#1d4ed8;">
-      <svg class="planet-icon" aria-hidden="true">
-        <use href="#icon-mekanik"></use>
-      </svg>
-    </a>
-  </div>
-</div>
+      <!-- Lane 1: Mekanik (blue) -->
+      <div class="orbit-lane" style="--orbit-scale:.30; --dur:22s;">
+        <div class="orbit-wrapper">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
+             target="_blank" rel="noopener"
+             class="planet"
+             aria-label="Mekanik Ekibi"
+             style="--c1:#bfdbfe; --c2:#60a5fa; --c3:#1d4ed8;">
+            <svg class="planet-icon" aria-hidden="true">
+              <use href="#icon-mekanik"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
 
-<!-- Lane 2: Elektronik (teal) -->
-<div class="orbit-lane" style="--orbit-scale:.46; --dur:28s;">
-  <div class="orbit-wrapper">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
-       target="_blank" rel="noopener"
-       class="planet"
-       aria-label="Elektronik Ekibi"
-       style="--c1:#a7f3d0; --c2:#34d399; --c3:#047857;">
-      <svg class="planet-icon" aria-hidden="true">
-        <use href="#icon-elektronik"></use>
-      </svg>
-    </a>
-  </div>
-</div>
+      <!-- Lane 2: Elektronik (teal) -->
+      <div class="orbit-lane" style="--orbit-scale:.46; --dur:28s;">
+        <div class="orbit-wrapper">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
+             target="_blank" rel="noopener"
+             class="planet"
+             aria-label="Elektronik Ekibi"
+             style="--c1:#a7f3d0; --c2:#34d399; --c3:#047857;">
+            <svg class="planet-icon" aria-hidden="true">
+              <use href="#icon-elektronik"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
 
-<!-- Lane 3: Uçuş Yazılımı (purple) -->
-<div class="orbit-lane" style="--orbit-scale:.62; --dur:34s;">
-  <div class="orbit-wrapper">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-       target="_blank" rel="noopener"
-       class="planet"
-       aria-label="Uçuş Yazılımı Ekibi"
-       style="--c1:#e9d5ff; --c2:#a855f7; --c3:#6b21a8;">
-      <svg class="planet-icon" aria-hidden="true">
-        <use href="#icon-ucus"></use>
-      </svg>
-    </a>
-  </div>
-</div>
+      <!-- Lane 3: Uçuş Yazılımı (purple) -->
+      <div class="orbit-lane" style="--orbit-scale:.62; --dur:34s;">
+        <div class="orbit-wrapper">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+             target="_blank" rel="noopener"
+             class="planet"
+             aria-label="Uçuş Yazılımı Ekibi"
+             style="--c1:#e9d5ff; --c2:#a855f7; --c3:#6b21a8;">
+            <svg class="planet-icon" aria-hidden="true">
+              <use href="#icon-ucus"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
 
-<!-- Lane 4: Yer İstasyonu (amber) -->
-<div class="orbit-lane" style="--orbit-scale:.78; --dur:40s;">
-  <div class="orbit-wrapper">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-       target="_blank" rel="noopener"
-       class="planet"
-       aria-label="Yer İstasyonu Ekibi"
-       style="--c1:#fef3c7; --c2:#fbbf24; --c3:#b45309;">
-      <svg class="planet-icon" aria-hidden="true">
-        <use href="#icon-yer"></use>
-      </svg>
-    </a>
-  </div>
-</div>
+      <!-- Lane 4: Yer İstasyonu (amber) -->
+      <div class="orbit-lane" style="--orbit-scale:.78; --dur:40s;">
+        <div class="orbit-wrapper">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+             target="_blank" rel="noopener"
+             class="planet"
+             aria-label="Yer İstasyonu Ekibi"
+             style="--c1:#fef3c7; --c2:#fbbf24; --c3:#b45309;">
+            <svg class="planet-icon" aria-hidden="true">
+              <use href="#icon-yer"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
 
-<!-- Lane 5: Organizasyon & Tasarım (pink) -->
-<div class="orbit-lane" style="--orbit-scale:.94; --dur:46s;">
-  <div class="orbit-wrapper">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
-       target="_blank" rel="noopener"
-       class="planet"
-       aria-label="Organizasyon & Tasarım Ekibi"
-       style="--c1:#fce7f3; --c2:#f472b6; --c3:#9d174d;">
-      <svg class="planet-icon" aria-hidden="true">
-        <use href="#icon-org"></use>
-      </svg>
-    </a>
-  </div>
-</div>
-</div>
+      <!-- Lane 5: Organizasyon & Tasarım (pink) -->
+      <div class="orbit-lane" style="--orbit-scale:.94; --dur:46s;">
+        <div class="orbit-wrapper">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
+             target="_blank" rel="noopener"
+             class="planet"
+             aria-label="Organizasyon & Tasarım Ekibi"
+             style="--c1:#fce7f3; --c2:#f472b6; --c3:#9d174d;">
+            <svg class="planet-icon" aria-hidden="true">
+              <use href="#icon-org"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
 
 
 
