@@ -150,74 +150,135 @@
 }
 /* ===== SOLAR (stable circular orbits, upright labels) ===== */
 .solar{
-position:relative;
---S:min(560px,90vw);
---R: calc(var(--S) * .5); /* base radius = half the stage */
-width:var(--S); height:var(--S);
-margin-inline:auto; isolation:isolate;
+  position:relative;
+  --S:min(560px,90vw);
+  --R:calc(var(--S) * .5);          /* base radius = half the stage */
+  width:var(--S);
+  height:var(--S);
+  margin-inline:auto;
+  isolation:isolate;
 }
 
+/* Smaller screens */
+@media (max-width:480px){
+  .solar{ --S:min(420px,92vw); }
+  .planet{ --size:18px; }
+}
 
-/* Rings use the SAME lane factor as planets */
+/* Orbit rings (visual guides) */
 .orbit-ring{
-position:absolute; inset:0;
-border:1px dashed rgba(110,146,182,.35);
-border-radius:9999px;
-transform: scale(var(--x,.30)); /* .30, .46, .62, .78, .94 */
-transform-origin: 50% 50%;
-pointer-events:none;
-z-index:0;
+  position:absolute;
+  inset:0;
+  border:1px dashed rgba(110,146,182,.35);
+  border-radius:9999px;
+  transform: scale(var(--x));       /* .30, .46, .62, .78, .94 */
+  transform-origin:50% 50%;
+  pointer-events:none;
+  z-index:1;
 }
 
+/* One lane = one planet + its label */
+.orbit-lane{
+  position:absolute;
+  inset:0;
+  --lift:22px;                      /* vertical gap above the planet for label */
+}
 
-/* Wrapper drives the orbit path (planets inside it) */
+/* Planet orbit driver */
 .orbit-wrapper{
-position:absolute; inset:0;
-animation: orbit-spin var(--dur, 44s) linear infinite;
-transform-origin:50% 50%;
-pointer-events:none; z-index:2;
+  position:absolute;
+  inset:0;
+  transform-origin:50% 50%;
+  animation: orbit-spin var(--dur, 44s) linear infinite;
+  pointer-events:none;
+  z-index:3;
 }
-@keyframes orbit-spin { to { transform: rotate(360deg); } }
 
+/* Label orbit driver (moves along the ring with the planet) */
+.label-orbit{
+  position:absolute;
+  inset:0;
+  transform-origin:50% 50%;
+  animation: orbit-spin var(--dur, 44s) linear infinite;
+  pointer-events:none;
+  z-index:4;
+}
 
-/* Planet sits at lane radius; no self-rotation */
+/* Shared orbit keyframes */
+@keyframes orbit-spin{
+  to{ transform:rotate(360deg); }
+}
+
+/* Planet (clickable) */
 .planet{
---size:20px;
-position:absolute; top:50%; left:50%;
-width:var(--size); height:var(--size);
-transform: translate(-50%,-50%) translateX(calc(var(--R) * var(--x)));
-border-radius:9999px;
-background: radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
-box-shadow: 0 0 0 2px rgba(110,146,182,.5), 0 8px 18px rgba(110,146,182,.15);
-display:grid; place-items:center;
-z-index:3; pointer-events:auto;
-transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+  --size:20px;
+  --tx: calc(var(--R) * var(--x));  /* horizontal offset radius */
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:var(--size);
+  height:var(--size);
+  transform:translate(-50%,-50%) translateX(var(--tx));
+  border-radius:9999px;
+  background:radial-gradient(circle at 30% 30%, #6E92B6 0%, #3b5b82 60%, #2a3f5b 100%);
+  box-shadow:
+    0 0 0 2px rgba(110,146,182,.5),
+    0 8px 18px rgba(110,146,182,.15);
+  display:grid;
+  place-items:center;
+  pointer-events:auto;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    filter .25s ease;
 }
 
-
-/* A sibling reverse-spinner that keeps labels perfectly upright. */
-.label-carrier{
-position:absolute; inset:0;
-animation: orbit-spin var(--dur, 44s) linear infinite reverse; /* exact inverse of wrapper */
-transform-origin:50% 50%;
-pointer-events:none; z-index:4; /* above planets; never blocks clicks */
-will-change: transform;
+/* Label position: same radius as planet, lifted above it */
+.label-pos{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:
+    translate(-50%,-50%)
+    translateX(var(--tx))
+    translateY(calc(-1 * var(--lift)));
+  transform-origin:center center;
 }
 
-
-/* Place label at the same radius; then lift it above the planet. */
+/* Label pill */
 .planet-label{
---lift: 22px; /* vertical gap above planet */
-position:absolute; top:50%; left:50%;
-transform:
-translate(-50%,-50%)
-translateX(calc(var(--R) * var(--x)))
-translateY(calc(-1 * var(--lift)));
-white-space:nowrap; font-size:12px; color:rgba(215,217,211,.95);
-background:rgba(6,43,70,.72); border:1px solid rgba(110,146,182,.35);
-padding:2px 8px; border-radius:9999px;
-pointer-events:none; /* clicks go to the planet */
-@media (max-width:480px){ .solar{ --S:min(420px,92vw); } .planet{ --size:18px;
+  display:inline-block;
+  white-space:nowrap;
+  font-size:12px;
+  color:rgba(215,217,211,.95);
+  background:rgba(6,43,70,.72);
+  border:1px solid rgba(110,146,182,.35);
+  padding:2px 8px;
+  border-radius:9999px;
+  pointer-events:none;              /* clicks pass through to planet */
+}
+
+/* Inner span counter-rotates to keep text upright */
+.planet-label-inner{
+  display:inline-block;
+  animation: orbit-spin var(--dur, 44s) linear infinite reverse;
+  transform-origin:center center;
+}
+
+/* Hover: stop that lane + highlight the planet */
+.orbit-lane:hover .orbit-wrapper,
+.orbit-lane:hover .label-orbit,
+.orbit-lane:hover .planet-label-inner{
+  animation-play-state:paused;
+}
+
+.orbit-lane:hover .planet{
+  transform:translate(-50%,-50%) translateX(var(--tx)) scale(1.18);
+  box-shadow:
+    0 0 0 3px rgba(191,219,254,.9),
+    0 12px 24px rgba(110,146,182,.35);
+  filter:brightness(1.1);
+}
 
 /* =========================
    MOBILE JOIN CARDS + ICONS
@@ -597,83 +658,118 @@ pointer-events:none; /* clicks go to the planet */
     </p>
 
 <div class="hidden lg:grid place-items-center mt-10">
-  <!-- Stage -->
-  <div class="solar" style="--S:min(560px,90vw); --R:min(38vmin,320px);">
+<!-- Stage -->
+<div class="solar">
 
-        <!-- SUN / CORE (center, under planets) -->
-        <div class="absolute inset-0 grid place-items-center" style="z-index:1; pointer-events:none;">
-        <div id="solar-core"
-        class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]
-        shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50 grid place-items-center">
-        <span class="text-prussian_blue font-heading text-sm px-2 text-center">
+  <!-- SUN / CORE (center, under planets) -->
+  <div class="absolute inset-0 grid place-items-center" style="z-index:2; pointer-events:none;">
+    <div id="solar-core"
+         class="w-28 h-28 rounded-full bg-gradient-to-br from-[#6E92B6] to-[#3b5b82]
+                shadow-2xl shadow-[#6E92B6]/20 border border-[#6E92B6]/50 grid place-items-center">
+      <span class="text-prussian_blue font-heading text-sm px-2 text-center">
         İTÜ TAYF<br><span class="text-xs opacity-80"></span>
-        </span>
-        </div>
-        </div>
-                <!-- Orbit rings -->
-        <span class="orbit-ring" style="--x:.30"></span>
-        <span class="orbit-ring" style="--x:.46"></span>
-        <span class="orbit-ring" style="--x:.62"></span>
-        <span class="orbit-ring" style="--x:.78"></span>
-        <span class="orbit-ring" style="--x:.94"></span>  
-        
-        <!-- Lane 1: Mekanik -->
-        <div class="orbit-wrapper dur-22" style="--x:.30">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
-        target="_blank" rel="noopener"
-        class="planet" style="--x:.30; --size:22px;" aria-label="Mekanik Ekibi"></a>
-        </div>
-        <div class="label-carrier dur-22" style="--x:.30">
-        <span class="planet-label" data-key="teamCard1Title"></span>
-        </div>
-              
-        
-        <!-- Lane 2: Elektronik -->
-        <div class="orbit-wrapper dur-28" style="--x:.46">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
-        target="_blank" rel="noopener"
-        class="planet" style="--x:.46; --size:20px;" aria-label="Elektronik Ekibi"></a>
-        </div>
-        <div class="label-carrier dur-28" style="--x:.46">
-        <span class="planet-label" data-key="teamCard2Title"></span>
-        </div>
-        
-        
-        <!-- Lane 3: Uçuş Yazılımı -->
-        <div class="orbit-wrapper dur-34" style="--x:.62">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-        target="_blank" rel="noopener"
-        class="planet" style="--x:.62; --size:18px;" aria-label="Uçuş Yazılımı Ekibi"></a>
-        </div>
-        <div class="label-carrier dur-34" style="--x:.62">
-        <span class="planet-label" data-key="teamCard3Title"></span>
-        </div>
-        
-        
-        <!-- Lane 4: Yer İstasyonu -->
-        <div class="orbit-wrapper dur-40" style="--x:.78">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
-        target="_blank" rel="noopener"
-        class="planet" style="--x:.78; --size:22px;" aria-label="Yer İstasyonu Ekibi"></a>
-        </div>
-        <div class="label-carrier dur-40" style="--x:.78">
-        <span class="planet-label" data-key="teamCard4Title"></span>
-        </div>
-        
-        
-        <!-- Lane 5: Organizasyon & Tasarım -->
-        <div class="orbit-wrapper dur-46" style="--x:.94">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
-        target="_blank" rel="noopener"
-        class="planet" style="--x:.94; --size:24px;" aria-label="Organizasyon & Tasarım Ekibi"></a>
-        </div>
-        <div class="label-carrier dur-46" style="--x:.94">
-        <span class="planet-label" data-key="teamCard5Title"></span>
-        </div>
-
+      </span>
+    </div>
   </div>
-</div>
 
+  <!-- Orbit rings -->
+  <span class="orbit-ring" style="--x:.30;"></span>
+  <span class="orbit-ring" style="--x:.46;"></span>
+  <span class="orbit-ring" style="--x:.62;"></span>
+  <span class="orbit-ring" style="--x:.78;"></span>
+  <span class="orbit-ring" style="--x:.94;"></span>
+
+  <!-- Lane 1: Mekanik (fastest) -->
+  <div class="orbit-lane" style="--x:.30; --dur:22s;">
+    <div class="orbit-wrapper">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSclVLDlyJaNslauTaTi_y40Z-7teateLN4u0U7B6tnM5Z-ZeQ/viewform"
+         target="_blank" rel="noopener"
+         class="planet"
+         style="--size:22px;"
+         aria-label="Mekanik Ekibi"></a>
+    </div>
+    <div class="label-orbit">
+      <div class="label-pos">
+        <span class="planet-label">
+          <span class="planet-label-inner" data-key="teamCard1Title"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lane 2: Elektronik -->
+  <div class="orbit-lane" style="--x:.46; --dur:28s;">
+    <div class="orbit-wrapper">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfn6BmYY-4C9Fh-5Ne3KXG68L45tbCRPZ7dcArHtspgVf_20g/viewform"
+         target="_blank" rel="noopener"
+         class="planet"
+         style="--size:20px;"
+         aria-label="Elektronik Ekibi"></a>
+    </div>
+    <div class="label-orbit">
+      <div class="label-pos">
+        <span class="planet-label">
+          <span class="planet-label-inner" data-key="teamCard2Title"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lane 3: Uçuş Yazılımı -->
+  <div class="orbit-lane" style="--x:.62; --dur:34s;">
+    <div class="orbit-wrapper">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+         target="_blank" rel="noopener"
+         class="planet"
+         style="--size:18px;"
+         aria-label="Uçuş Yazılımı Ekibi"></a>
+    </div>
+    <div class="label-orbit">
+      <div class="label-pos">
+        <span class="planet-label">
+          <span class="planet-label-inner" data-key="teamCard3Title"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lane 4: Yer İstasyonu -->
+  <div class="orbit-lane" style="--x:.78; --dur:40s;">
+    <div class="orbit-wrapper">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBIlWWReLruuUEczAag_HHtsQ4x4pb6e0trzZZC6DJ6KgH2w/viewform"
+         target="_blank" rel="noopener"
+         class="planet"
+         style="--size:22px;"
+         aria-label="Yer İstasyonu Ekibi"></a>
+    </div>
+    <div class="label-orbit">
+      <div class="label-pos">
+        <span class="planet-label">
+          <span class="planet-label-inner" data-key="teamCard4Title"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lane 5: Organizasyon & Tasarım (slowest) -->
+  <div class="orbit-lane" style="--x:.94; --dur:46s;">
+    <div class="orbit-wrapper">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScmo-XJhrZkSSB6i9hvrA-KNzYjsvkd6rnHUMzDbaIeUGScYg/viewform"
+         target="_blank" rel="noopener"
+         class="planet"
+         style="--size:24px;"
+         aria-label="Organizasyon & Tasarım Ekibi"></a>
+    </div>
+    <div class="label-orbit">
+      <div class="label-pos">
+        <span class="planet-label">
+          <span class="planet-label-inner" data-key="teamCard5Title"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 
 
