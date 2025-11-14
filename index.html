@@ -125,11 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!wrapper || !planet) return;
 
     planet.addEventListener('mouseenter', () => {
-      wrapper.classList.add('is-paused');   // stop THIS orbit
+      wrapper.classList.add('paused');      // stop THIS orbit
     });
 
     planet.addEventListener('mouseleave', () => {
-      wrapper.classList.remove('is-paused'); // resume THIS orbit
+      wrapper.classList.remove('paused');   // resume THIS orbit
     });
   });
 });
