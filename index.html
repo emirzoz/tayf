@@ -532,24 +532,6 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </section>
 
-<section id="apod-test" class="py-12 bg-prussian_blue text-timberwolf">
-  <div class="container mx-auto px-6">
-    <h2 class="text-2xl font-heading mb-4">NASA - Astronomy Picture of the Day (Test)</h2>
-    <p id="apod-status" class="text-sm text-timberwolf/70 mb-4">
-      Loading NASA image...
-    </p>
-    <div id="apod-wrapper" class="hidden">
-      <h3 id="apod-title" class="text-xl font-heading mb-2"></h3>
-      <p id="apod-date" class="text-sm text-timberwolf/70 mb-4"></p>
-      <img id="apod-image"
-           alt="NASA APOD"
-           class="w-full max-h-[480px] object-contain rounded-lg border border-[#6E92B6]/50 mb-3" />
-      <p id="apod-explanation" class="text-sm text-timberwolf/80"></p>
-    </div>
-  </div>
-</section>
-
-
 <!-- Project Section -->
 <section id="project" class="py-20 bg-prussian_blue">
   <div class="container mx-auto px-6">
@@ -714,16 +696,62 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </section>
 
-  <!-- Sponsor CTA Section -->
-  <section id="sponsor" class="py-20 bg-prussian_blue">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-4xl font-heading mb-6" data-key="sponsorTitle"></h2>
-      <p class="text-xl mb-12 max-w-3xl mx-auto opacity-90" data-key="sponsorText"></p>
-      <a href="ITU_Tayf_Tanitim_Dosyasi.pdf" download class="inline-block bg-blue_gray text-prussian_blue px-10 py-4 rounded-lg font-bold transition shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]" data-key="sponsorBtn"></a>
+<!-- Sponsor CTA Section -->
+<section id="sponsor" class="py-20 bg-prussian_blue">
+  <div class="container mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-10 items-stretch">
+      <!-- Sol: PDF / genel metin -->
+      <div class="text-center md:text-left flex flex-col justify-center">
+        <h2 class="text-4xl font-heading mb-6" data-key="sponsorTitle"></h2>
+        <p class="text-xl mb-8 max-w-3xl mx-auto md:mx-0 opacity-90" data-key="sponsorText"></p>
+        <a href="ITU_Tayf_Tanitim_Dosyasi.pdf"
+           download
+           class="inline-block bg-blue_gray text-prussian_blue px-10 py-4 rounded-lg font-bold transition shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]"
+           data-key="sponsorBtn"></a>
+      </div>
+
+      <!-- Sağ: İletişim kutusu -->
+      <div class="mt-10 md:mt-0">
+        <div class="bg-yinmn_blue/30 border border-[#6E92B6]/60 rounded-xl p-6 md:p-8 h-full flex flex-col justify-center">
+          <h3 class="text-2xl font-heading mb-4" data-key="sponsorContactTitle"></h3>
+          <p class="mb-6 text-timberwolf/90" data-key="sponsorContactText"></p>
+
+          <div class="space-y-2 text-sm md:text-base">
+            <p>
+              <span class="font-semibold" data-key="sponsorEmailLabel"></span>:
+              <a href="mailto:tayf.takimi@itu.edu.tr"
+                 class="text-blue_gray hover:text-timberwolf underline underline-offset-4">
+                tayf.takimi@itu.edu.tr
+              </a>
+            </p>
+            <p>
+              <span class="font-semibold" data-key="sponsorLinkedInLabel"></span>:
+              <a href="https://www.linkedin.com/company/i%CC%87t%C3%BC-tayf/"
+                 target="_blank" rel="noopener noreferrer"
+                 class="text-blue_gray hover:text-timberwolf underline underline-offset-4">
+                İTÜ TAYF LinkedIn
+              </a>
+            </p>
+            <p>
+              <span class="font-semibold" data-key="sponsorInstagramLabel"></span>:
+              <a href="https://www.instagram.com/itu.tayf/"
+                 target="_blank" rel="noopener noreferrer"
+                 class="text-blue_gray hover:text-timberwolf underline underline-offset-4">
+                @itu.tayf
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
+
+
 <section id="launches" class="py-20 bg-yinmn_blue border-t border-[#6E92B6]/40">
   <div class="container mx-auto px-6">
+    <!-- Genel başlık -->
     <h2 class="text-3xl md:text-4xl font-heading mb-4" data-key="launchesTitle">
       Yaklaşan Uzay Fırlatmaları
     </h2>
@@ -731,12 +759,44 @@ document.addEventListener('DOMContentLoaded', () => {
       Dünya genelindeki bazı planlı fırlatmalar (UTC saatine göre).
     </p>
 
-    <!-- Durum / hata mesajları -->
+    <!-- NASA APOD BLOKU -->
+    <div id="apod-section" class="mb-10">
+      <div class="rounded-xl bg-prussian_blue/60 border border-[#6E92B6]/60 p-4 md:p-6 flex flex-col md:flex-row gap-4">
+        <!-- Görsel -->
+        <div class="md:w-1/2">
+          <div class="aspect-video rounded-lg bg-prussian_blue/80 overflow-hidden flex items-center justify-center">
+            <img id="apod-image"
+                 src=""
+                 alt=""
+                 class="w-full h-full object-cover hidden">
+            <div id="apod-image-fallback" class="text-timberwolf/70 text-sm px-3 text-center">
+              <!-- NASA’dan veri gelmezse burası kalır -->
+              <span data-key="apodFallbackText">NASA'dan görsel yüklenemedi.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metin -->
+        <div class="md:w-1/2 flex flex-col">
+          <h3 class="text-2xl font-heading mb-2" data-key="apodTitle">
+            NASA Günün Uzay Fotoğrafı
+          </h3>
+          <p class="text-xs text-timberwolf/60 mb-2" data-key="apodSource">
+            Kaynak: NASA Astronomy Picture of the Day (APOD)
+          </p>
+          <p id="apod-date" class="text-sm text-timberwolf/80 mb-3"></p>
+          <p id="apod-desc" class="text-sm text-timberwolf/90 leading-relaxed max-h-40 overflow-y-auto"></p>
+          <p id="apod-status" class="text-xs text-timberwolf/60 mt-2"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fırlatma listesi durumu / hata mesajları -->
     <p id="launches-status" class="text-timberwolf/70 text-sm mb-4">
       <!-- JS burayı dolduracak -->
     </p>
 
-    <!-- Kartların geleceği grid -->
+    <!-- Fırlatma kartları -->
     <div id="launches-list"
          class="grid gap-4 md:grid-cols-3">
     </div>
@@ -752,6 +812,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
 </section>
+
 
   
 <section id="join" class="relative py-20 bg-prussian_blue text-timberwolf border-t border-[#6E92B6]/30 overflow-hidden">
@@ -1078,6 +1139,19 @@ const langData = {
     launchesUnknownOperator: "Bilinmeyen operatör",
     launchesUnknownLocation: "Bilinmeyen konum",
     launchesNoDate: "Tarih açıklanmadı",
+    sponsorContactTitle: "Sponsor İletişimi",
+    sponsorContactText: "Detaylı sponsorluk görüşmesi, özel paketler veya sorularınız için doğrudan bizimle iletişime geçebilirsiniz.",
+    sponsorEmailLabel: "E-posta",
+    sponsorLinkedInLabel: "LinkedIn",
+    sponsorInstagramLabel: "Instagram",
+    apodTitle: "NASA Günün Uzay Fotoğrafı",
+    apodSource: "Kaynak: NASA Astronomy Picture of the Day (APOD)",
+    apodDateLabel: "Tarih",
+    apodLoading: "NASA'dan günün uzay fotoğrafı yükleniyor...",
+    apodError: "NASA'dan fotoğraf alınırken bir hata oluştu.",
+    apodNoImage: "Bugünkü APOD bir görüntü değil (video veya başka bir medya türü).",
+    apodFallbackText: "NASA'dan görsel yüklenemedi.",
+
 
   },
 
@@ -1175,11 +1249,102 @@ const langData = {
     launchesUnknownOperator: "Unknown operator",
     launchesUnknownLocation: "Unknown location",
     launchesNoDate: "Date not announced",
-    
+    sponsorContactTitle: "Sponsorship Contact",
+    sponsorContactText: "For sponsorship discussions, custom packages or any questions, you can reach us directly.",
+    sponsorEmailLabel: "Email",
+    sponsorLinkedInLabel: "LinkedIn",
+    sponsorInstagramLabel: "Instagram",
+    apodTitle: "NASA Astronomy Picture of the Day",
+    apodSource: "Source: NASA Astronomy Picture of the Day (APOD)",
+    apodDateLabel: "Date",
+    apodLoading: "Loading NASA's Astronomy Picture of the Day...",
+    apodError: "An error occurred while fetching the NASA picture.",
+    apodNoImage: "Today's APOD is not an image (it may be a video or another media type).",
+    apodFallbackText: "Could not load the image from NASA.",
+
 
   }
 };
 </script> 
+  <script>
+  // NASA APOD (Astronomy Picture of the Day) – bilingual
+  (function () {
+    const NASA_API_KEY = "EJbHG3NHr8CJWHTCAieoCjd2P2aqBXRG8GTRHbsR";
+    const APOD_URL = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}&thumbs=true`;
+
+    const imgEl       = document.getElementById('apod-image');
+    const fallbackEl  = document.getElementById('apod-image-fallback');
+    const dateEl      = document.getElementById('apod-date');
+    const descEl      = document.getElementById('apod-desc');
+    const statusEl    = document.getElementById('apod-status');
+
+    if (!dateEl || !descEl || !statusEl) return; // bölüm yoksa çık
+
+    function t() {
+      const lang = window.currentLang || 'tr';
+      return (window.langData && window.langData[lang]) || {};
+    }
+
+    function setStatus(keyName) {
+      const pack = t();
+      if (!statusEl) return;
+      const text = pack[keyName] || '';
+      statusEl.textContent = text;
+    }
+
+    async function loadApod() {
+      // Yükleniyor mesajı
+      setStatus('apodLoading');
+
+      try {
+        const res = await fetch(APOD_URL);
+        if (!res.ok) throw new Error('API error: ' + res.status);
+        const data = await res.json();
+
+        const pack = t();
+
+        // Tarih
+        if (data.date) {
+          const d = new Date(data.date + "T00:00:00Z");
+          const formatted = d.toLocaleDateString('tr-TR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          dateEl.textContent = (pack.apodDateLabel || 'Tarih') + ': ' + formatted;
+        }
+
+        // Açıklama (NASA İngilizce veriyor, direkt basıyoruz)
+        descEl.textContent = data.explanation || '';
+
+        // Görsel
+        if (data.media_type === 'image' && (data.url || data.hdurl)) {
+          const url = data.hdurl || data.url;
+          imgEl.src = url;
+          imgEl.alt = data.title || 'NASA Astronomy Picture of the Day';
+          imgEl.classList.remove('hidden');
+          if (fallbackEl) fallbackEl.classList.add('hidden');
+        } else {
+          // Görsel değilse info yaz
+          descEl.textContent = (pack.apodNoImage || 'Today\'s APOD is not an image.') +
+                               (data.explanation ? ' ' + data.explanation : '');
+        }
+
+        // Her şey yolunda, status boş olsun
+        statusEl.textContent = '';
+      } catch (err) {
+        console.error(err);
+        const pack = t();
+        statusEl.textContent =
+          pack.apodError || 'An error occurred while fetching the NASA picture.';
+      }
+    }
+
+    // İlk yüklemede çağır
+    document.addEventListener('DOMContentLoaded', loadApod);
+  })();
+</script>
+
 <script>
     
   // Aktif dil (launches script buradan okuyacak)
