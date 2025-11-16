@@ -1163,78 +1163,79 @@ const langData = {
 
   }
 };
+</script> 
 <script>
-  // Aktif dil (launches script buradan okuyacak)
-  window.currentLang = 'tr';
-
-  function setLanguage(lang) {
-    // 1) Global state
-    window.currentLang = lang;
-
-    // 2) data-key ile tüm metinleri güncelle
-    const elements = document.querySelectorAll('[data-key]');
-    elements.forEach(el => {
-      const key = el.getAttribute('data-key');
-      if (langData[lang] && langData[lang][key]) {
-        el.innerText = langData[lang][key];
+    // Aktif dil (launches script buradan okuyacak)
+    window.currentLang = 'tr';
+  
+    function setLanguage(lang) {
+      // 1) Global state
+      window.currentLang = lang;
+  
+      // 2) data-key ile tüm metinleri güncelle
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (langData[lang] && langData[lang][key]) {
+          el.innerText = langData[lang][key];
+        }
+      });
+  
+      // 3) Dil butonlarını (desktop + mobile) stil olarak güncelle
+      const btnTR  = document.getElementById('lang-tr');
+      const btnEN  = document.getElementById('lang-en');
+      const btnTRm = document.getElementById('lang-tr-mobile');
+      const btnENm = document.getElementById('lang-en-mobile');
+  
+      const baseClass   = 'font-semibold px-2 py-1 rounded-md ';
+      const activeClass   = baseClass + 'text-blue_gray';
+      const inactiveClass = baseClass + 'text-timberwolf opacity-70 hover:text-blue_gray';
+  
+      function applyState(activeBtn, inactiveBtn) {
+        if (!activeBtn || !inactiveBtn) return;
+        activeBtn.className   = activeClass;
+        inactiveBtn.className = inactiveClass;
+        activeBtn.innerText   = activeBtn.id.includes('tr') ? 'TR' : 'EN';
+        inactiveBtn.innerText = inactiveBtn.id.includes('tr') ? 'TR' : 'EN';
       }
-    });
-
-    // 3) Dil butonlarını (desktop + mobile) stil olarak güncelle
-    const btnTR  = document.getElementById('lang-tr');
-    const btnEN  = document.getElementById('lang-en');
-    const btnTRm = document.getElementById('lang-tr-mobile');
-    const btnENm = document.getElementById('lang-en-mobile');
-
-    const baseClass   = 'font-semibold px-2 py-1 rounded-md ';
-    const activeClass   = baseClass + 'text-blue_gray';
-    const inactiveClass = baseClass + 'text-timberwolf opacity-70 hover:text-blue_gray';
-
-    function applyState(activeBtn, inactiveBtn) {
-      if (!activeBtn || !inactiveBtn) return;
-      activeBtn.className   = activeClass;
-      inactiveBtn.className = inactiveClass;
-      activeBtn.innerText   = activeBtn.id.includes('tr') ? 'TR' : 'EN';
-      inactiveBtn.innerText = inactiveBtn.id.includes('tr') ? 'TR' : 'EN';
-    }
-
-    if (lang === 'tr') {
-      applyState(btnTR, btnEN);
-      applyState(btnTRm, btnENm);
-    } else {
-      applyState(btnEN, btnTR);
-      applyState(btnENm, btnTRm);
-    }
-
-    // 4) Fırlatma kartları metinlerini yeni dile göre tazele
-    if (window.syncLaunchesTexts) {
-      window.syncLaunchesTexts();
-    }
-  }
-
-  // Aktif nav link highlighting + aria-current
-  function updateAriaCurrent() {
-    const links = document.querySelectorAll('nav a[href^="#"]');
-    const hash = window.location.hash || '#hero';
-    links.forEach(a => {
-      a.classList.remove('underline','decoration-[#6E92B6]');
-      if (a.getAttribute('href') === hash) {
-        a.setAttribute('aria-current','page');
-        a.classList.add('underline','decoration-[#6E92B6]');
+  
+      if (lang === 'tr') {
+        applyState(btnTR, btnEN);
+        applyState(btnTRm, btnENm);
       } else {
-        a.removeAttribute('aria-current');
+        applyState(btnEN, btnTR);
+        applyState(btnENm, btnTRm);
       }
+  
+      // 4) Fırlatma kartları metinlerini yeni dile göre tazele
+      if (window.syncLaunchesTexts) {
+        window.syncLaunchesTexts();
+      }
+    }
+  
+    // Aktif nav link highlighting + aria-current
+    function updateAriaCurrent() {
+      const links = document.querySelectorAll('nav a[href^="#"]');
+      const hash = window.location.hash || '#hero';
+      links.forEach(a => {
+        a.classList.remove('underline','decoration-[#6E92B6]');
+        if (a.getAttribute('href') === hash) {
+          a.setAttribute('aria-current','page');
+          a.classList.add('underline','decoration-[#6E92B6]');
+        } else {
+          a.removeAttribute('aria-current');
+        }
+      });
+    }
+  
+    // Sayfa yüklenince varsayılan dili TR yap + nav'i güncelle
+    document.addEventListener('DOMContentLoaded', () => {
+      setLanguage('tr');
+      updateAriaCurrent();
     });
-  }
-
-  // Sayfa yüklenince varsayılan dili TR yap + nav'i güncelle
-  document.addEventListener('DOMContentLoaded', () => {
-    setLanguage('tr');
-    updateAriaCurrent();
-  });
-
-  // Hash değişince aktif linki güncelle
-  window.addEventListener('hashchange', updateAriaCurrent);
+  
+    // Hash değişince aktif linki güncelle
+    window.addEventListener('hashchange', updateAriaCurrent);
 </script>
 
 
