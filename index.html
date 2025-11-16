@@ -1159,6 +1159,7 @@ const langData = {
     launchesUnknownOperator: "Unknown operator",
     launchesUnknownLocation: "Unknown location",
     launchesNoDate: "Date not announced",
+    
 
   }
 };
@@ -1322,53 +1323,6 @@ const langData = {
 
 <!-- Tabs: Sketchfab lazy loader -->
 <script>
-(function () {
-  const tabG = document.getElementById('tab-gallery');
-  const tab3 = document.getElementById('tab-3d');
-  const panG = document.getElementById('panel-gallery');
-  const pan3 = document.getElementById('panel-3d');
-  if (!tabG || !tab3 || !panG || !pan3) return;
-
-  const iframe = pan3.querySelector('iframe.sketchfab-embed');
-  let iframeLoaded = false;
-
-  function loadIframeOnce() {
-    if (iframeLoaded || !iframe) return;
-    const src = iframe.getAttribute('data-src');
-    if (src) iframe.src = src;
-    iframeLoaded = true;
-  }
-
-  function activate(which) {
-    const is3D = which === '3d';
-
-    tabG.setAttribute('aria-selected', String(!is3D));
-    tab3.setAttribute('aria-selected', String(is3D));
-
-    tabG.classList.toggle('bg-[#6E92B6]/20', !is3D);
-    tabG.classList.toggle('border-[#6E92B6]/40', !is3D);
-    tab3.classList.toggle('bg-[#6E92B6]/20',  is3D);
-    tab3.classList.toggle('border-[#6E92B6]/40',  is3D);
-
-    panG.classList.toggle('hidden', is3D);
-    pan3.classList.toggle('hidden', !is3D);
-
-    if (is3D) loadIframeOnce();
-  }
-
-  tabG.addEventListener('click', () => activate('gallery'));
-  tab3.addEventListener('click', () => activate('3d'));
-
-  // keyboard nav
-  [tabG, tab3].forEach(b => b.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-      e.preventDefault();
-      (e.target === tabG ? tab3 : tabG).focus();
-    }
-  }));
-})();
-</script>
-<script>
   // Dynamic upcoming launches (Launch Library 2) – bilingual
   (function () {
     const API_URL =
@@ -1385,12 +1339,10 @@ const langData = {
 
     if (!statusEl || !listEl) return;
 
+    // 🔹 langData + currentLang global değişkenlerini kullan
     function getLangStrings() {
       const lang = window.currentLang || 'tr';
-      const fallback = lang === 'tr' ? 'en' : 'tr';
-      const pack = (window.langData && window.langData[lang]) ||
-                   (window.langData && window.langData[fallback]) ||
-                   {};
+      const pack = (langData && langData[lang]) || {};
       return pack;
     }
 
@@ -1529,6 +1481,7 @@ const langData = {
       }
     }
 
+    // Show more / less click
     if (toggleEl) {
       toggleEl.addEventListener('click', () => {
         showingAll = !showingAll;
@@ -1536,10 +1489,16 @@ const langData = {
       });
     }
 
+    // 🔹 Dışarıdan (setLanguage içinden) çağrılacak helper:
+    window.syncLaunchesTexts = function () {
+      if (!launchesData.length) return;
+      renderLaunches();  // currentLang'e göre her şeyi yeniden çizer
+    };
+
+    // İlk yüklemede veriyi çek
     document.addEventListener('DOMContentLoaded', loadLaunches);
   })();
 </script>
-
 
 </body>
 </html>
