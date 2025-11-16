@@ -749,66 +749,102 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 
-<section id="launches" class="py-20 bg-yinmn_blue border-t border-[#6E92B6]/40">
-  <div class="container mx-auto px-6">
-    <!-- Genel başlık -->
-    <h2 class="text-3xl md:text-4xl font-heading mb-4" data-key="launchesTitle">
-      Yaklaşan Uzay Fırlatmaları
-    </h2>
-    <p class="text-timberwolf/80 mb-6 text-sm md:text-base" data-key="launchesLead">
-      Dünya genelindeki bazı planlı fırlatmalar (UTC saatine göre).
-    </p>
+<section id="launches" class="py-20 bg-gradient-to-b from-yinmn_blue via-yinmn_blue/95 to-prussian_blue border-t border-[#6E92B6]/40">
+  <div class="container mx-auto px-6 space-y-8">
+    <!-- Başlık satırı -->
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+      <div>
+        <p class="text-[11px] uppercase tracking-[0.18em] text-blue_gray mb-1"
+           data-key="launchesKicker">
+          Uzayı anlık takip ediyoruz
+        </p>
+        <h2 class="text-3xl md:text-4xl font-heading" data-key="launchesTitle">
+          Yaklaşan Uzay Fırlatmaları
+        </h2>
+        <p class="text-timberwolf/80 mt-2 text-sm md:text-base" data-key="launchesLead">
+          Dünya genelindeki bazı planlı fırlatmalar (UTC+3, İstanbul saati).
+        </p>
+      </div>
 
-    <!-- NASA APOD BLOKU -->
-    <div id="apod-section" class="mb-10">
-      <div class="rounded-xl bg-prussian_blue/60 border border-[#6E92B6]/60 p-4 md:p-6 flex flex-col md:flex-row gap-4">
-        <!-- Görsel -->
-        <div class="md:w-1/2">
-          <div class="aspect-video rounded-lg bg-prussian_blue/80 overflow-hidden flex items-center justify-center">
-            <img id="apod-image"
-                 src=""
-                 alt=""
-                 class="w-full h-full object-cover hidden">
-            <div id="apod-image-fallback" class="text-timberwolf/70 text-sm px-3 text-center">
-              <!-- NASA’dan veri gelmezse burası kalır -->
-              <span data-key="apodFallbackText">NASA'dan görsel yüklenemedi.</span>
+      <!-- canlı veri rozeti -->
+      <span class="inline-flex items-center self-start md:self-end gap-2 px-3 py-1 rounded-full
+                   bg-prussian_blue/70 border border-[#6E92B6]/60 text-[11px] font-semibold
+                   text-timberwolf/80">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span data-key="launchesLiveTag">Gerçek zamanlı veri akışı</span>
+      </span>
+    </div>
+
+    <!-- NASA APOD + fırlatma listesi layout -->
+    <div class="grid lg:grid-cols-5 gap-6">
+      <!-- SOL: NASA APOD kartı -->
+      <div class="lg:col-span-2">
+        <div class="relative rounded-2xl p-[1px] bg-gradient-to-br from-[#6E92B6] via-transparent to-[#6E92B6]/80">
+          <div class="h-full rounded-2xl bg-prussian_blue/80 border border-[#6E92B6]/60 p-4 md:p-5 flex flex-col gap-4">
+            <!-- küçük etiket -->
+            <div class="flex items-center justify-between gap-2">
+              <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full
+                           bg-yinmn_blue/70 text-[11px] font-semibold text-timberwolf/90">
+                <span class="w-1.5 h-1.5 rounded-full bg-sky-300"></span>
+                <span data-key="apodTitle">NASA Günün Uzay Fotoğrafı</span>
+              </span>
+              <span class="text-[10px] text-timberwolf/60" data-key="apodSource">
+                Kaynak: NASA Astronomy Picture of the Day (APOD)
+              </span>
+            </div>
+
+            <!-- Görsel -->
+            <div class="rounded-xl bg-prussian_blue/90 overflow-hidden">
+              <div class="aspect-video relative flex items-center justify-center">
+                <img id="apod-image"
+                     src=""
+                     alt=""
+                     class="w-full h-full object-cover hidden">
+                <div id="apod-image-fallback"
+                     class="absolute inset-0 flex items-center justify-center px-3 text-center text-timberwolf/70 text-sm">
+                  <span data-key="apodFallbackText">NASA'dan görsel yüklenemedi.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Metin -->
+            <div class="space-y-2 text-sm">
+              <p id="apod-date" class="text-timberwolf/70"></p>
+              <p id="apod-desc"
+                 class="text-timberwolf/90 leading-relaxed max-h-32 overflow-y-auto text-sm"></p>
+              <p id="apod-status" class="text-[11px] text-timberwolf/60"></p>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Metin -->
-        <div class="md:w-1/2 flex flex-col">
-          <h3 class="text-2xl font-heading mb-2" data-key="apodTitle">
-            NASA Günün Uzay Fotoğrafı
+      <!-- SAĞ: fırlatma listesi -->
+      <div class="lg:col-span-3 flex flex-col gap-4">
+        <div class="flex items-center justify-between gap-2">
+          <h3 class="text-xl font-heading" data-key="launchesListTitle">
+            Yaklaşan fırlatmalar
           </h3>
-          <p class="text-xs text-timberwolf/60 mb-2" data-key="apodSource">
-            Kaynak: NASA Astronomy Picture of the Day (APOD)
+          <!-- durum / hata mesajı -->
+          <p id="launches-status" class="text-timberwolf/70 text-[11px] md:text-xs">
+            <!-- JS dolduracak -->
           </p>
-          <p id="apod-date" class="text-sm text-timberwolf/80 mb-3"></p>
-          <p id="apod-desc" class="text-sm text-timberwolf/90 leading-relaxed max-h-40 overflow-y-auto"></p>
-          <p id="apod-status" class="text-xs text-timberwolf/60 mt-2"></p>
+        </div>
+
+        <!-- Kartların geleceği grid -->
+        <div id="launches-list"
+             class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        </div>
+
+        <!-- Show more / show less -->
+        <div class="mt-1 text-center">
+          <button id="launches-toggle"
+                  class="hidden px-4 py-2 rounded-lg border border-[#6E92B6]/60
+                         bg-prussian_blue/70 text-timberwolf text-[12px] font-semibold
+                         hover:bg-prussian_blue/90 transition">
+            <!-- JS dolduracak -->
+          </button>
         </div>
       </div>
-    </div>
-
-    <!-- Fırlatma listesi durumu / hata mesajları -->
-    <p id="launches-status" class="text-timberwolf/70 text-sm mb-4">
-      <!-- JS burayı dolduracak -->
-    </p>
-
-    <!-- Fırlatma kartları -->
-    <div id="launches-list"
-         class="grid gap-4 md:grid-cols-3">
-    </div>
-
-    <!-- Show more / show less -->
-    <div class="mt-6 text-center">
-      <button id="launches-toggle"
-              class="hidden px-4 py-2 rounded-lg border border-[#6E92B6]/60
-                     bg-prussian_blue/60 text-timberwolf text-sm font-semibold
-                     hover:bg-prussian_blue/80 transition">
-        <!-- JS burayı dolduracak -->
-      </button>
     </div>
   </div>
 </section>
