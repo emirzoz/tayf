@@ -1163,20 +1163,27 @@ const langData = {
 
   }
 };
+function setLanguage(lang) {
+  // aktif dili globalde tut (launches script buradan okuyacak)
+  window.currentLang = lang;
 
+  // 1) Update text content
+  const elements = document.querySelectorAll('[data-key]');
+  elements.forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (langData[lang] && langData[lang][key]) {
+      el.innerText = langData[lang][key];
+    }
+  });
 
+  // 2) Eğer launches script'i yüklüyse kartları & butonu yeni dile göre yeniden çiz
+  if (window.syncLaunchesTexts) {
+    window.syncLaunchesTexts();
+  }
+}
 
+window.currentLang = 'tr';
 
-
-    function setLanguage(lang) {
-    // 1) Update text content
-    const elements = document.querySelectorAll('[data-key]');
-    elements.forEach(el => {
-      const key = el.getAttribute('data-key');
-      if (langData[lang] && langData[lang][key]) {
-        el.innerText = langData[lang][key];
-      }
-    });
 
     // 2) Style desktop + mobile language buttons consistently
     const btnTR  = document.getElementById('lang-tr');
