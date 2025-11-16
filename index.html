@@ -313,6 +313,15 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 
+/* Hide scrollbar but keep scroll functionality */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Edge (new) */
+}
 
   </style>
 </head>
@@ -810,8 +819,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <!-- Metin -->
             <div class="space-y-2 text-sm">
               <p id="apod-date" class="text-timberwolf/70"></p>
-              <p id="apod-desc"
-                 class="text-timberwolf/90 leading-relaxed max-h-32 overflow-hidden text-sm"></p>
+             <p id="apod-desc"
+   class="text-timberwolf/90 leading-relaxed text-sm max-h-32 overflow-y-auto no-scrollbar"></p>
               <p id="apod-status" class="text-[11px] text-timberwolf/60"></p>
             </div>
           </div>
