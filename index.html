@@ -1054,7 +1054,7 @@ const langData = {
     launchesError: "Fırlatma bilgileri yüklenirken bir hata oluştu. Daha sonra tekrar deneyin.",
     launchesShowMore: "Daha Fazla Göster",
     launchesShowLess: "Daha Az Göster",
-    launchesTimeLabel: "Fırlatma zamanı (UTC)",
+    launchesTimeLabel: "Fırlatma zamanı (İstanbul, UTC+3)",
     launchesOperatorLabel: "Operatör",
     launchesLocationLabel: "Konum",
     launchesMissionLabel: "Görev",
@@ -1151,7 +1151,7 @@ const langData = {
     launchesError: "An error occurred while loading launch data. Please try again later.",
     launchesShowMore: "Show More",
     launchesShowLess: "Show Less",
-    launchesTimeLabel: "Launch time (UTC)",
+    launchesTimeLabel: "Launch time (Istanbul, UTC+3)",
     launchesOperatorLabel: "Operator",
     launchesLocationLabel: "Location",
     launchesMissionLabel: "Mission",
@@ -1165,7 +1165,8 @@ const langData = {
 };
 </script> 
 <script>
-    // Aktif dil (launches script buradan okuyacak)
+    
+  // Aktif dil (launches script buradan okuyacak)
     window.currentLang = 'tr';
   
     function setLanguage(lang) {
@@ -1361,15 +1362,26 @@ const langData = {
       return pack;
     }
 
-    function formatDateUTC(iso) {
-      try {
-        const d = new Date(iso);
-        if (Number.isNaN(d.getTime())) return iso;
-        return d.toUTCString().replace(' GMT', '');
-      } catch {
-        return iso;
-      }
-    }
+   function formatDateIstanbul(iso) {
+  try {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso;
+
+    // site dili neyse ona göre formatla
+    const locale = (window.currentLang === 'en') ? 'en-GB' : 'tr-TR';
+
+    const fmt = new Intl.DateTimeFormat(locale, {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+      timeZone: 'Europe/Istanbul' // 🔹 sabit olarak İstanbul/UTC+3
+    });
+
+    return fmt.format(d);
+  } catch {
+    return iso;
+  }
+}
+
 
     function createCard(launch) {
       const t = getLangStrings();
@@ -1384,14 +1396,15 @@ const langData = {
 
       const windowStart = launch.window_start || launch.net || launch.last_updated;
       const timeStr     = windowStart
-        ? formatDateUTC(windowStart)
+        ? formatDateIstanbul(windowStart)
         : (t.launchesNoDate || 'Date not announced');
+
 
       const mission     = launch.mission?.name || '';
       const statusText  = launch.status?.name || '';
       const statusAbbr  = launch.status?.abbrev || '';
 
-      const timeLabel      = t.launchesTimeLabel      || 'Launch time (UTC)';
+      const timeLabel      = t.launchesTimeLabel      || 'Launch time (Istanbul, UTC+3)';
       const operatorLabel  = t.launchesOperatorLabel  || 'Operator';
       const locationLabel  = t.launchesLocationLabel  || 'Location';
       const missionLabel   = t.launchesMissionLabel   || 'Mission';
