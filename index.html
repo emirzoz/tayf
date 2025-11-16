@@ -811,7 +811,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="space-y-2 text-sm">
               <p id="apod-date" class="text-timberwolf/70"></p>
               <p id="apod-desc"
-                 class="text-timberwolf/90 leading-relaxed max-h-32 overflow-y-auto text-sm"></p>
+                 class="text-timberwolf/90 leading-relaxed max-h-32 overflow-hidden text-sm"></p>
               <p id="apod-status" class="text-[11px] text-timberwolf/60"></p>
             </div>
           </div>
@@ -1187,6 +1187,9 @@ const langData = {
     apodError: "NASA'dan fotoğraf alınırken bir hata oluştu.",
     apodNoImage: "Bugünkü APOD bir görüntü değil (video veya başka bir medya türü).",
     apodFallbackText: "NASA'dan görsel yüklenemedi.",
+    launchesKicker: "Uzayı anlık takip ediyoruz",
+    launchesLiveTag: "Gerçek zamanlı veri akışı",
+    launchesListTitle: "Yaklaşan fırlatmalar",
 
 
   },
@@ -1297,6 +1300,9 @@ const langData = {
     apodError: "An error occurred while fetching the NASA picture.",
     apodNoImage: "Today's APOD is not an image (it may be a video or another media type).",
     apodFallbackText: "Could not load the image from NASA.",
+    launchesKicker: "Uzayı anlık takip ediyoruz",
+    launchesLiveTag: "Gerçek zamanlı veri akışı",
+    launchesListTitle: "Yaklaşan fırlatmalar",
 
 
   }
@@ -1562,6 +1568,7 @@ const langData = {
       'https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=10&related=false';
 
     const INITIAL_COUNT = 3; // 🔹 ilk görünen kart sayısı
+    const MAX_COUNT     = 9;
 
     let launchesData = [];
     let showingAll   = false;
@@ -1674,29 +1681,33 @@ const langData = {
       return card;
     }
 
-    function renderLaunches() {
-      const t = getLangStrings();
-      listEl.innerHTML = '';
+function renderLaunches() {
+  const t = getLangStrings();
+  listEl.innerHTML = '';
 
-      const countToShow = showingAll
-        ? launchesData.length
-        : Math.min(INITIAL_COUNT, launchesData.length);
+  // en fazla MAX_COUNT kadar göster
+  const maxToShow = Math.min(MAX_COUNT, launchesData.length);
 
-      launchesData.slice(0, countToShow).forEach(launch => {
-        listEl.appendChild(createCard(launch));
-      });
+  const countToShow = showingAll
+    ? maxToShow
+    : Math.min(INITIAL_COUNT, maxToShow);
 
-      if (!toggleEl) return;
+  launchesData.slice(0, countToShow).forEach(launch => {
+    listEl.appendChild(createCard(launch));
+  });
 
-      if (launchesData.length <= INITIAL_COUNT) {
-        toggleEl.classList.add('hidden');
-      } else {
-        toggleEl.classList.remove('hidden');
-        toggleEl.textContent = showingAll
-          ? (t.launchesShowLess || 'Show Less')
-          : (t.launchesShowMore || 'Show More');
-      }
-    }
+  if (!toggleEl) return;
+
+  if (maxToShow <= INITIAL_COUNT) {
+    toggleEl.classList.add('hidden');
+  } else {
+    toggleEl.classList.remove('hidden');
+    toggleEl.textContent = showingAll
+      ? (t.launchesShowLess || 'Show Less')
+      : (t.launchesShowMore || 'Show More');
+  }
+}
+
 
     async function loadLaunches() {
       const t = getLangStrings();
