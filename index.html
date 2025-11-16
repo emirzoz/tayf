@@ -706,6 +706,36 @@ document.addEventListener('DOMContentLoaded', () => {
       <a href="ITU_Tayf_Tanitim_Dosyasi.pdf" download class="inline-block bg-blue_gray text-prussian_blue px-10 py-4 rounded-lg font-bold transition shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]" data-key="sponsorBtn"></a>
     </div>
   </section>
+<section id="launches" class="py-20 bg-yinmn_blue border-t border-[#6E92B6]/40">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-heading mb-4" data-key="launchesTitle">
+      Yaklaşan Uzay Fırlatmaları
+    </h2>
+    <p class="text-timberwolf/80 mb-6 text-sm md:text-base" data-key="launchesLead">
+      Dünya genelindeki bazı planlı fırlatmalar (UTC saatine göre).
+    </p>
+
+    <!-- Durum / hata mesajları -->
+    <p id="launches-status" class="text-timberwolf/70 text-sm mb-4">
+      <!-- JS burayı dolduracak -->
+    </p>
+
+    <!-- Kartların geleceği grid -->
+    <div id="launches-list"
+         class="grid gap-4 md:grid-cols-3">
+    </div>
+
+    <!-- Show more / show less -->
+    <div class="mt-6 text-center">
+      <button id="launches-toggle"
+              class="hidden px-4 py-2 rounded-lg border border-[#6E92B6]/60
+                     bg-prussian_blue/60 text-timberwolf text-sm font-semibold
+                     hover:bg-prussian_blue/80 transition">
+        <!-- JS burayı dolduracak -->
+      </button>
+    </div>
+  </div>
+</section>
 
   
 <section id="join" class="relative py-20 bg-prussian_blue text-timberwolf border-t border-[#6E92B6]/30 overflow-hidden">
@@ -714,27 +744,6 @@ document.addEventListener('DOMContentLoaded', () => {
     <p class="text-lg opacity-90 max-w-3xl" data-key="joinLead">
       Her gezegen bir ekip: rolünü seç, yörüngeye katıl.
     </p>
-    <section id="launches" class="bg-prussian_blue border-t border-[#6E92B6]/30 py-16">
-  <div class="container mx-auto px-6">
-    <h2 class="text-3xl md:text-4xl font-heading mb-6 text-timberwolf">
-      Yaklaşan Uzay Fırlatmaları
-    </h2>
-    <p class="text-timberwolf/80 mb-6 text-sm md:text-base">
-      Veriler üçüncü parti bir kaynaktan otomatik alınmaktadır. Fırlatma tarihleri UTC olarak listelenir.
-    </p>
-
-    <!-- Loading / error -->
-    <div id="launches-status" class="text-timberwolf/70 text-sm">
-      Son fırlatmalar yükleniyor...
-    </div>
-
-    <!-- Cards wrapper -->
-    <div id="launches-list"
-         class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      <!-- JS will inject cards here -->
-    </div>
-  </div>
-</section>
 
   <!-- ICON LEGEND (desktop, TOP) -->
 <div class="mt-6 hidden lg:flex flex-wrap justify-center gap-6 text-sm text-timberwolf/80">
@@ -1037,6 +1046,23 @@ const langData = {
     joinApplyBtn: "Başvuru Formu",
     joinEmailBtn: "E-posta ile Başvur",
     joinNote: "Not: Zaman ayırabileceğin bir rol seç; her rol için temel eğitim veriyoruz."
+
+    launchesTitle: "Yaklaşan Uzay Fırlatmaları",
+    launchesLead: "Dünya genelindeki bazı planlı fırlatmalar (UTC saatine göre).",
+    launchesLoading: "Fırlatma bilgileri yükleniyor...",
+    launchesEmpty: "Şu anda listelenecek planlı fırlatma bulunamadı.",
+    launchesError: "Fırlatma bilgileri yüklenirken bir hata oluştu. Daha sonra tekrar deneyin.",
+    launchesShowMore: "Daha Fazla Göster",
+    launchesShowLess: "Daha Az Göster",
+    launchesTimeLabel: "Fırlatma zamanı (UTC)",
+    launchesOperatorLabel: "Operatör",
+    launchesLocationLabel: "Konum",
+    launchesMissionLabel: "Görev",
+    launchesUnknownName: "Bilinmeyen Fırlatma",
+    launchesUnknownOperator: "Bilinmeyen operatör",
+    launchesUnknownLocation: "Bilinmeyen konum",
+    launchesNoDate: "Tarih açıklanmadı",
+
   },
 
   en: {
@@ -1117,6 +1143,23 @@ const langData = {
     joinApplyBtn: "Application Form",
     joinEmailBtn: "Apply by Email",
     joinNote: "Tip: Pick a role you can commit time to; we provide onboarding for each track."
+
+    launchesTitle: "Upcoming Space Launches",
+    launchesLead: "Some of the planned launches worldwide (in UTC time).",
+    launchesLoading: "Loading launch data...",
+    launchesEmpty: "No scheduled launches to display at the moment.",
+    launchesError: "An error occurred while loading launch data. Please try again later.",
+    launchesShowMore: "Show More",
+    launchesShowLess: "Show Less",
+    launchesTimeLabel: "Launch time (UTC)",
+    launchesOperatorLabel: "Operator",
+    launchesLocationLabel: "Location",
+    launchesMissionLabel: "Mission",
+    launchesUnknownName: "Unknown Launch",
+    launchesUnknownOperator: "Unknown operator",
+    launchesUnknownLocation: "Unknown location",
+    launchesNoDate: "Date not announced",
+
   }
 };
 
@@ -1326,20 +1369,35 @@ const langData = {
 })();
 </script>
 <script>
-  // Dynamic upcoming launches (Launch Library 2)
+  // Dynamic upcoming launches (Launch Library 2) – bilingual
   (function () {
+    const API_URL =
+      'https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=10&related=false';
+
+    const INITIAL_COUNT = 3; // 🔹 ilk görünen kart sayısı
+
+    let launchesData = [];
+    let showingAll   = false;
+
     const statusEl = document.getElementById('launches-status');
     const listEl   = document.getElementById('launches-list');
+    const toggleEl = document.getElementById('launches-toggle');
+
     if (!statusEl || !listEl) return;
 
-    const API_URL =
-      'https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=6&related=false';
+    function getLangStrings() {
+      const lang = window.currentLang || 'tr';
+      const fallback = lang === 'tr' ? 'en' : 'tr';
+      const pack = (window.langData && window.langData[lang]) ||
+                   (window.langData && window.langData[fallback]) ||
+                   {};
+      return pack;
+    }
 
     function formatDateUTC(iso) {
       try {
         const d = new Date(iso);
         if (Number.isNaN(d.getTime())) return iso;
-        // Show nice UTC date/time
         return d.toUTCString().replace(' GMT', '');
       } catch {
         return iso;
@@ -1347,40 +1405,71 @@ const langData = {
     }
 
     function createCard(launch) {
-      const name       = launch.name || 'Bilinmeyen Fırlatma';
-      const provider   = launch.launch_service_provider?.name || 'Bilinmeyen operatör';
-      const location   = launch.pad?.name || launch.pad?.location?.name || 'Bilinmeyen konum';
+      const t = getLangStrings();
+
+      const name        = launch.name || t.launchesUnknownName || 'Unknown Launch';
+      const provider    = launch.launch_service_provider?.name ||
+                          t.launchesUnknownOperator || 'Unknown operator';
+      const location    =
+        launch.pad?.name ||
+        launch.pad?.location?.name ||
+        t.launchesUnknownLocation || 'Unknown location';
+
       const windowStart = launch.window_start || launch.net || launch.last_updated;
-      const timeStr    = windowStart ? formatDateUTC(windowStart) : 'Tarih açıklanmadı';
-      const mission    = launch.mission?.name || '';
-      const statusText = launch.status?.name || '';
-      const statusAbbr = launch.status?.abbrev || '';
+      const timeStr     = windowStart
+        ? formatDateUTC(windowStart)
+        : (t.launchesNoDate || 'Date not announced');
+
+      const mission     = launch.mission?.name || '';
+      const statusText  = launch.status?.name || '';
+      const statusAbbr  = launch.status?.abbrev || '';
+
+      const timeLabel      = t.launchesTimeLabel      || 'Launch time (UTC)';
+      const operatorLabel  = t.launchesOperatorLabel  || 'Operator';
+      const locationLabel  = t.launchesLocationLabel  || 'Location';
+      const missionLabel   = t.launchesMissionLabel   || 'Mission';
+
+      // 🔹 Roket / launch görseli (varsa)
+      const imageUrl =
+        launch.image ||
+        launch.rocket?.configuration?.image_url ||
+        '';
 
       const card = document.createElement('article');
       card.className =
-        'rounded-xl border border-[#6E92B6]/40 bg-yinmn_blue/30 ' +
+        'rounded-xl border border-[#6E92B6]/40 bg-prussian_blue/60 ' +
         'p-4 flex flex-col gap-2 text-sm text-timberwolf';
 
       card.innerHTML = `
+        ${imageUrl ? `
+        <div class="mb-3 rounded-lg overflow-hidden bg-prussian_blue/80">
+          <img
+            src="${imageUrl}"
+            loading="lazy"
+            alt="Rocket photo"
+            class="w-full h-40 object-cover"
+          />
+        </div>` : ''}
+
         <h3 class="text-lg font-heading text-timberwolf">
           ${name}
         </h3>
         <p class="text-timberwolf/70">
-          <span class="font-semibold">Operatör:</span> ${provider}
+          <span class="font-semibold">${operatorLabel}:</span> ${provider}
         </p>
         <p class="text-timberwolf/70">
-          <span class="font-semibold">Konum:</span> ${location}
+          <span class="font-semibold">${locationLabel}:</span> ${location}
         </p>
         <p class="text-timberwolf/70">
-          <span class="font-semibold">Fırlatma zamanı (UTC):</span> ${timeStr}
+          <span class="font-semibold">${timeLabel}:</span> ${timeStr}
         </p>
         ${mission ? `
         <p class="text-timberwolf/70">
-          <span class="font-semibold">Görev:</span> ${mission}
+          <span class="font-semibold">${missionLabel}:</span> ${mission}
         </p>` : ''}
         ${statusText ? `
         <span class="inline-flex items-center self-start mt-1 px-2 py-0.5 rounded-full
-                       text-xs font-semibold bg-prussian_blue/70 border border-[#6E92B6]/60">
+                       text-xs font-semibold bg-yinmn_blue/70 border border-[#6E92B6]/60">
           ${statusAbbr ? statusAbbr + ' — ' : ''}${statusText}
         </span>` : ''}
       `;
@@ -1388,35 +1477,69 @@ const langData = {
       return card;
     }
 
+    function renderLaunches() {
+      const t = getLangStrings();
+      listEl.innerHTML = '';
+
+      const countToShow = showingAll
+        ? launchesData.length
+        : Math.min(INITIAL_COUNT, launchesData.length);
+
+      launchesData.slice(0, countToShow).forEach(launch => {
+        listEl.appendChild(createCard(launch));
+      });
+
+      if (!toggleEl) return;
+
+      if (launchesData.length <= INITIAL_COUNT) {
+        toggleEl.classList.add('hidden');
+      } else {
+        toggleEl.classList.remove('hidden');
+        toggleEl.textContent = showingAll
+          ? (t.launchesShowLess || 'Show Less')
+          : (t.launchesShowMore || 'Show More');
+      }
+    }
+
     async function loadLaunches() {
+      const t = getLangStrings();
+
+      statusEl.textContent = t.launchesLoading || 'Loading launch data...';
+
       try {
         const res = await fetch(API_URL);
         if (!res.ok) throw new Error('API error: ' + res.status);
         const data = await res.json();
 
-        const launches = data.results || [];
-        if (!launches.length) {
-          statusEl.textContent = 'Şu anda listelenecek planlı fırlatma bulunamadı.';
+        launchesData = data.results || [];
+
+        if (!launchesData.length) {
+          statusEl.textContent =
+            t.launchesEmpty || 'No scheduled launches to display at the moment.';
           return;
         }
 
-        statusEl.textContent = ''; // clear status
-        listEl.innerHTML = '';
-
-        launches.forEach(l => {
-          listEl.appendChild(createCard(l));
-        });
+        statusEl.textContent = '';
+        renderLaunches();
       } catch (err) {
         console.error(err);
         statusEl.textContent =
-          'Fırlatma bilgileri yüklenirken bir hata oluştu. Daha sonra tekrar deneyin.';
+          t.launchesError ||
+          'An error occurred while loading launch data. Please try again later.';
       }
     }
 
-    // Fire once when page loads
+    if (toggleEl) {
+      toggleEl.addEventListener('click', () => {
+        showingAll = !showingAll;
+        renderLaunches();
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', loadLaunches);
   })();
 </script>
+
 
 </body>
 </html>
