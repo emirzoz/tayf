@@ -532,6 +532,22 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </section>
 
+<section id="apod-test" class="py-12 bg-prussian_blue text-timberwolf">
+  <div class="container mx-auto px-6">
+    <h2 class="text-2xl font-heading mb-4">NASA - Astronomy Picture of the Day (Test)</h2>
+    <p id="apod-status" class="text-sm text-timberwolf/70 mb-4">
+      Loading NASA image...
+    </p>
+    <div id="apod-wrapper" class="hidden">
+      <h3 id="apod-title" class="text-xl font-heading mb-2"></h3>
+      <p id="apod-date" class="text-sm text-timberwolf/70 mb-4"></p>
+      <img id="apod-image"
+           alt="NASA APOD"
+           class="w-full max-h-[480px] object-contain rounded-lg border border-[#6E92B6]/50 mb-3" />
+      <p id="apod-explanation" class="text-sm text-timberwolf/80"></p>
+    </div>
+  </div>
+</section>
 
 
 <!-- Project Section -->
@@ -1527,6 +1543,52 @@ const langData = {
     document.addEventListener('DOMContentLoaded', loadLaunches);
   })();
 </script>
+  <script>
+  // Simple NASA APOD test
+  (function () {
+    const API_URL = 'https://api.nasa.gov/planetary/apod?api_key=EJbHG3NHr8CJWHTCAieoCjd2P2aqBXRG8GTRHbsR';
+
+    const statusEl = document.getElementById('apod-status');
+    const wrapEl   = document.getElementById('apod-wrapper');
+    const titleEl  = document.getElementById('apod-title');
+    const dateEl   = document.getElementById('apod-date');
+    const imgEl    = document.getElementById('apod-image');
+    const explEl   = document.getElementById('apod-explanation');
+
+    if (!statusEl || !wrapEl) return;
+
+    async function loadAPOD() {
+      try {
+        statusEl.textContent = 'Loading NASA image...';
+
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error('API error: ' + res.status);
+        const data = await res.json();
+
+        // Only handle image type for this simple test
+        if (data.media_type !== 'image') {
+          statusEl.textContent = 'Today\'s APOD is not an image (it might be a video).';
+          return;
+        }
+
+        titleEl.textContent = data.title || 'Astronomy Picture of the Day';
+        dateEl.textContent  = data.date ? `Date: ${data.date}` : '';
+        imgEl.src           = data.url;
+        imgEl.alt           = data.title || 'NASA APOD';
+        explEl.textContent  = data.explanation || '';
+
+        statusEl.textContent = '';
+        wrapEl.classList.remove('hidden');
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Failed to load NASA image. Check console for details.';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadAPOD);
+  })();
+</script>
+
 
 </body>
 </html>
