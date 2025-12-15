@@ -392,6 +392,12 @@ document.addEventListener('DOMContentLoaded', () => {
     <a href="#contact"
        class="block text-timberwolf hover:text-[#6E92B6] transition"
        data-key="navContact">İletişim</a>
+    <a href="/groundstationdemo" target="_blank"
+       class="block px-4 py-2 rounded bg-red-600/20 text-red-100 border border-red-500/50 
+              hover:bg-red-600 hover:text-white transition font-bold flex items-center gap-2">
+       <span class="w-2 h-2 rounded-full bg-red-500"></span>
+       <span data-key="navDemo">CANLI SİSTEM</span>
+    </a>
   </nav>
 
   <!-- Language switcher at bottom -->
@@ -439,6 +445,14 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="#contact" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8
            decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2
            focus:ring-[#6E92B6] rounded-sm" data-key="navContact">İletişim</a>
+
+        <!-- Live Demo Button -->
+        <a href="/groundstationdemo" target="_blank"
+           class="ml-2 px-4 py-1.5 rounded-full bg-red-600/20 text-red-100 border border-red-500/50 
+                  hover:bg-red-600 hover:text-white transition text-sm font-bold flex items-center gap-2 animate-pulse">
+           <span class="w-2 h-2 rounded-full bg-red-500"></span>
+           <span data-key="navDemo">CANLI SİSTEM</span>
+        </a>
 
         <div class="flex gap-2 ml-4 border-l border-yinmn_blue pl-4">
           <button id="lang-tr" onclick="setLanguage('tr')"
@@ -504,28 +518,28 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="text-4xl md:text-5xl font-heading text-timberwolf tabular-nums">
         <span class="countup" data-target="12" data-suffix="+">0</span>
       </div>
-      <p class="text-timberwolf/80">Uçuş/Yer testi</p>
+      <p class="text-timberwolf/80" data-key="statTests">Uçuş/Yer testi</p>
     </div>
 
     <div class="space-y-1">
       <div class="text-4xl md:text-5xl font-heading text-timberwolf tabular-nums">
         <span class="countup" data-target="15">0</span>
       </div>
-      <p class="text-timberwolf/80">Aktif üye</p>
+      <p class="text-timberwolf/80" data-key="statMembers">Aktif üye</p>
     </div>
 
     <div class="space-y-1">
       <div class="text-4xl md:text-5xl font-heading text-timberwolf tabular-nums">
         <span class="countup" data-target="4">0</span>
       </div>
-      <p class="text-timberwolf/80">Sanayi ortağı</p>
+      <p class="text-timberwolf/80" data-key="statPartners">Sanayi ortağı</p>
     </div>
 
     <div class="space-y-1">
       <div class="text-4xl md:text-5xl font-heading text-timberwolf tabular-nums">
         <span class="countup" data-target="120" data-suffix="+">0</span>
       </div>
-      <p class="text-timberwolf/80">Atölye saati / dönem</p>
+      <p class="text-timberwolf/80" data-key="statHours">Atölye saati / dönem</p>
     </div>
 
   </div>
@@ -581,62 +595,105 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
 
-      <!-- RIGHT: gallery (as before; replace with tabs/3D later if you like) -->
-<!-- RIGHT: media tabs (Gallery / 3D Model) -->
-<div>
-  <h3 class="text-2xl font-heading mb-4" data-key="galleryTitle"></h3>
+      <!-- RIGHT: media tabs (Gallery / 3D Model) -->
+      <div>
+        <h3 class="text-2xl font-heading mb-4" data-key="galleryTitle"></h3>
 
-  <!-- Tabs -->
-  <div class="flex gap-2 mb-4" role="tablist" aria-label="Project media">
-    <button id="tab-gallery" role="tab" aria-selected="true" aria-controls="panel-gallery"
-            class="px-3 py-1 rounded-md bg-[#6E92B6]/20 text-timberwolf border border-[#6E92B6]/40 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
-            data-key="tabGallery">Galeri</button>
-    <button id="tab-3d" role="tab" aria-selected="false" aria-controls="panel-3d"
-            class="px-3 py-1 rounded-md text-timberwolf/80 hover:text-timberwolf border border-transparent hover:border-[#6E92B6]/40 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
-            data-key="tab3D">3B Model</button>
-  </div>
+        <!-- Tabs -->
+        <div class="flex gap-2 mb-4" role="tablist" aria-label="Project media">
+          <button id="tab-gallery" role="tab" aria-selected="true" aria-controls="panel-gallery"
+                  class="px-3 py-1 rounded-md bg-[#6E92B6]/20 text-timberwolf border border-[#6E92B6]/40 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
+                  data-key="tabGallery">Galeri</button>
+          <button id="tab-3d" role="tab" aria-selected="false" aria-controls="panel-3d"
+                  class="px-3 py-1 rounded-md text-timberwolf/80 hover:text-timberwolf border border-transparent hover:border-[#6E92B6]/40 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
+                  data-key="tab3D">3B Model</button>
+        </div>
 
-  <!-- Panel: Gallery (default) -->
-  <div id="panel-gallery" role="tabpanel" aria-labelledby="tab-gallery">
-    <div class="grid grid-cols-2 gap-4">
-      <img src="images/1.jpg" alt="Uydu render – ön görünüm" loading="lazy" decoding="async"
-           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-      <img src="images/5.jpeg" alt="Uydu render – detay" loading="lazy" decoding="async"
-           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-      <img src="images/7.jpg" alt="Uydu render – yanal görünüm" loading="lazy" decoding="async"
-           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-      <img src="images/8.jpeg" alt="Uydu render – bileşen yakın plan" loading="lazy" decoding="async"
-           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+        <!-- Panel: Gallery (default) -->
+        <div id="panel-gallery" role="tabpanel" aria-labelledby="tab-gallery">
+          <div class="grid grid-cols-2 gap-4">
+            <img src="images/1.jpg" alt="Uydu render – ön görünüm" loading="lazy" decoding="async"
+                 width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+            <img src="images/5.jpeg" alt="Uydu render – detay" loading="lazy" decoding="async"
+                 width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+            <img src="images/7.jpg" alt="Uydu render – yanal görünüm" loading="lazy" decoding="async"
+                 width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+            <img src="images/8.jpeg" alt="Uydu render – bileşen yakın plan" loading="lazy" decoding="async"
+                 width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+          </div>
+          <!-- Ground Station UI (UPDATED) -->
+          <img src="images/ground-station-ui.jpg" alt="İTÜ TAYF Yer İstasyonu Yazılım Arayüzü" loading="lazy" decoding="async"
+               width="1200" height="800" class="w-full h-64 object-cover object-top rounded-lg shadow-lg bg-yinmn_blue mt-4 border border-[#6E92B6]/40">
+        </div>
+
+        <!-- Panel: 3D Model (lazy, hidden initially) -->
+        <div id="panel-3d" role="tabpanel" aria-labelledby="tab-3d" class="hidden">
+          <div class="rounded-xl overflow-hidden border border-[#6E92B6]/40 bg-white/5 ratio-video">
+            <iframe
+              title="Communication Satellite (Sketchfab)"
+              class="sketchfab-embed absolute inset-0 w-full h-full"
+              data-src="https://sketchfab.com/models/9a7ad3344edb4e598de848a5badb7416/embed?ui_theme=dark"
+              loading="lazy"
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+              allowfullscreen
+              mozallowfullscreen="true"
+              webkitallowfullscreen="true"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <p class="mt-3 text-timberwolf/70 text-sm" data-key="hintPan">
+            İpucu: Parmağınızla modeli çevirin, iki parmakla yakınlaştırın.
+          </p>
+        </div>
+      </div>
     </div>
-    <img src="images/6.png" alt="Uydu render – genel görünüm" loading="lazy" decoding="async"
-         width="1200" height="800" class="w-full h-64 object-contain rounded-lg shadow-lg bg-yinmn_blue mt-4">
-  </div>
 
-  <!-- Panel: 3D Model (lazy, hidden initially) -->
-<!-- Panel: 3D Model (lazy, hidden initially) -->
-<div id="panel-3d" role="tabpanel" aria-labelledby="tab-3d" class="hidden">
-  <div class="rounded-xl overflow-hidden border border-[#6E92B6]/40 bg-white/5 ratio-video">
-    <iframe
-      title="Communication Satellite (Sketchfab)"
-      class="sketchfab-embed absolute inset-0 w-full h-full"
-      data-src="https://sketchfab.com/models/9a7ad3344edb4e598de848a5badb7416/embed?ui_theme=dark"
-      loading="lazy"
-      allow="autoplay; fullscreen; xr-spatial-tracking"
-      allowfullscreen
-      mozallowfullscreen="true"
-      webkitallowfullscreen="true"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-  </div>
-  <p class="mt-3 text-timberwolf/70 text-sm" data-key="hintPan">
-    İpucu: Parmağınızla modeli çevirin, iki parmakla yakınlaştırın.
-  </p>
-</div>
+    <!-- Tech Spotlight: Ground Station (NEW SECTION) -->
+    <div class="mt-16 pt-12 border-t border-[#6E92B6]/30">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Visual Area -->
+        <div class="relative group rounded-xl overflow-hidden shadow-2xl border border-[#6E92B6]/40">
+          <img src="images/ground-station-ui.jpg" alt="İTÜ TAYF Yer İstasyonu Arayüzü" 
+               class="w-full h-auto transition duration-500 transform group-hover:scale-105">
+          
+          <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition duration-300">
+            <p class="text-timberwolf font-mono text-sm" data-key="gsLabel">Gelişmiş Telemetri Analiz Yazılımı v2.0</p>
+          </div>
+        </div>
 
-</div>
-
-
+        <!-- Description Area -->
+        <div>
+          <h3 class="text-2xl font-heading mb-4 text-[#6E92B6]" data-key="gsTitle">Yerli Yer İstasyonu Yazılımı</h3>
+          <p class="text-lg opacity-90 mb-6" data-key="gsDesc">
+            Model uydumuzun tüm verilerini anlık olarak işleyen, takımımız tarafından sıfırdan geliştirilen yer kontrol arayüzü.
+          </p>
+          <ul class="space-y-3 opacity-80">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <span data-key="gsFeat1"><strong>Anlık Telemetri:</strong> 20+ sensör verisinin milisaniyelik takibi.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <span data-key="gsFeat2"><strong>3B Görselleştirme:</strong> Uydunun oryantasyonunu (Pitch/Roll/Yaw) canlı simülasyonla izleme.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <span data-key="gsFeat3"><strong>IoT Entegrasyonu:</strong> Bulut tabanlı veri yedekleme ve harita üzerinde canlı GPS takibi.</span>
+            </li>
+          </ul>
+          
+          <!-- DEMO BUTTON -->
+          <div class="mt-8">
+            <a href="/groundstationdemo" target="_blank" 
+               class="inline-flex items-center gap-2 bg-[#6E92B6]/20 hover:bg-[#6E92B6]/40 text-timberwolf px-6 py-3 rounded-lg border border-[#6E92B6] transition group">
+              <span data-key="gsBtn">Canlı Demoyu İncele</span>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -906,7 +963,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="text-lg mb-8 opacity-90" data-key="contactText"></p>
         <p class="text-lg mb-8 opacity-90" data-key="contactLead"></p>
         <div class="flex gap-4 justify-center mb-8">
-          <a href="mailto:tayf_takimi@itu.edu.tr" class="bg-blue_gray text-prussian_blue px-8 py-3 rounded-lg font-bold transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]">E-posta Gönder</a>
+          <a href="mailto:tayf_takimi@itu.edu.tr" class="bg-blue_gray text-prussian_blue px-8 py-3 rounded-lg font-bold transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]" data-key="emailBtn">E-posta Gönder</a>
         </div>
         <div class="flex gap-6 justify-center">
           <a href="https://www.linkedin.com/company/i%CC%87t%C3%BC-tayf/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn - İTÜ TAYF" class="text-blue_gray hover:text-timberwolf transition">
@@ -941,12 +998,19 @@ const langData = {
     navSponsor: "Sponsorluk",
     navContact: "İletişim",
     navJoin: "Takıma Katıl",
+    navDemo: "CANLI SİSTEM",
 
     // Hero
     heroTitle: "İTÜ TAYF: Yörüngedeki İmzamız",
     heroSubtitle: "İstanbul Teknik Üniversitesi Uçak ve Uzay Bilimleri Fakültesi bünyesinde, TEKNOFEST için uydu teknolojileri geliştiriyoruz.",
     heroBtnProject: "Projemizi Keşfedin",
     heroBtnSponsor: "Bize Destek Olun (Sponsorluk)",
+
+    // Stats
+    statTests: "Uçuş/Yer testi",
+    statMembers: "Aktif üye",
+    statPartners: "Sanayi ortağı",
+    statHours: "Atölye saati / dönem",
 
     // Project
     projectTitle: "TEKNOFEST Model Uydu Projemiz",
@@ -972,6 +1036,15 @@ const langData = {
     tab3D: "3B Model",
     hintPan: "İpucu: Parmağınızla çevirin, iki parmakla yakınlaştırın.",
 
+    // Ground Station (NEW)
+    gsLabel: "Gelişmiş Telemetri Analiz Yazılımı v2.0",
+    gsTitle: "Yerli Yer İstasyonu Yazılımı",
+    gsDesc: "Model uydumuzun tüm verilerini anlık olarak işleyen, takımımız tarafından sıfırdan geliştirilen yer kontrol arayüzü.",
+    gsFeat1: "<strong>Anlık Telemetri:</strong> 20+ sensör verisinin milisaniyelik takibi.",
+    gsFeat2: "<strong>3B Görselleştirme:</strong> Uydunun oryantasyonunu (Pitch/Roll/Yaw) canlı simülasyonla izleme.",
+    gsFeat3: "<strong>IoT Entegrasyonu:</strong> Bulut tabanlı veri yedekleme ve harita üzerinde canlı GPS takibi.",
+    gsBtn: "Canlı Demoyu İncele",
+
     // Team
     teamTitle: "Disiplinlerarası Teknik Kadromuz",
     teamCard1Title: "Mekanik Ekibi",
@@ -987,13 +1060,14 @@ const langData = {
 
     // Sponsor
     sponsorTitle: "Vizyonumuza Ortak Olun",
-    sponsorText: "Türkiye'nin Milli Teknoloji Hamlesi'ne katkıda bulunacak genç mühendislere yatırım yapın. İTÜ Tayf, sektör liderleriyle iş birliği yapmaya ve geleceğin teknolojilerini birlikte geliştirmeye hazırdır.",
+    sponsorText: "Markanızı sadece web sitemizde değil, yarışma sırasında binlerce kişinin izlediği Yer İstasyonu Yazılımımızın ana ekranında ve uydumuzun gövdesinde taşıyın. Genç mühendislere yatırım yapın.",
     sponsorBtn: "Tanıtım Dosyasını İndir",
 
     // Contact
     contactTitle: "İletişime Geçin",
     contactText: "Projemiz hakkında daha fazla bilgi almak veya iş birliği fırsatlarını görüşmek için bize ulaşın.",
     contactLead: "tayf_takimi@itu.edu.tr",
+    emailBtn: "E-posta Gönder",
 
     // Join section
     joinTitle: "Takıma Katıl",
@@ -1021,12 +1095,19 @@ const langData = {
     navSponsor: "Sponsorship",
     navContact: "Contact",
     navJoin: "Join the Team",
+    navDemo: "LIVE SYSTEM",
 
     // Hero
     heroTitle: "İTÜ TAYF: Our Signature in Orbit",
     heroSubtitle: "Developing advanced satellite technology for TEKNOFEST within the ITU Faculty of Aeronautics and Astronautics.",
     heroBtnProject: "Discover Our Project",
     heroBtnSponsor: "Support Us (Sponsorship)",
+
+    // Stats
+    statTests: "Flight/Ground tests",
+    statMembers: "Active members",
+    statPartners: "Industry partners",
+    statHours: "Workshop hours / term",
 
     // Project
     projectTitle: "Our TEKNOFEST Model Satellite Project",
@@ -1052,6 +1133,15 @@ const langData = {
     tab3D: "3D Model",
     hintPan: "Tip: Drag to rotate, pinch to zoom.",
 
+    // Ground Station (NEW)
+    gsLabel: "Advanced Telemetry Analysis Software v2.0",
+    gsTitle: "Native Ground Station Software",
+    gsDesc: "A ground control interface developed from scratch by our team that processes all satellite data in real-time.",
+    gsFeat1: "<strong>Real-time Telemetry:</strong> Millisecond tracking of 20+ sensor data points.",
+    gsFeat2: "<strong>3D Visualization:</strong> Live simulation monitoring of satellite orientation (Pitch/Roll/Yaw).",
+    gsFeat3: "<strong>IoT Integration:</strong> Cloud-based data backup and live GPS tracking on maps.",
+    gsBtn: "View Live Demo",
+
     // Team
     teamTitle: "Our Interdisciplinary Technical Team",
     teamCard1Title: "Mechanical Team",
@@ -1067,13 +1157,14 @@ const langData = {
 
     // Sponsor
     sponsorTitle: "Partner With Our Vision",
-    sponsorText: "Invest in the young engineers who will contribute to Turkey's National Technology Initiative. İTÜ Tayf is ready to collaborate with industry leaders to develop the technologies of the future.",
+    sponsorText: "Feature your brand not just on our website, but directly on our Ground Station Dashboard viewed by thousands during competition, and on our satellite flight hardware. Invest in young engineers.",
     sponsorBtn: "Download Sponsorship Deck",
 
     // Contact
     contactTitle: "Get In Touch",
     contactText: "Contact us to learn more about our project or to discuss partnership opportunities.",
     contactLead: "tayf_takimi@itu.edu.tr",
+    emailBtn: "Send Email",
 
     // Join section
     joinTitle: "Join the Team",
@@ -1105,7 +1196,7 @@ const langData = {
     elements.forEach(el => {
       const key = el.getAttribute('data-key');
       if (langData[lang] && langData[lang][key]) {
-        el.innerText = langData[lang][key];
+        el.innerHTML = langData[lang][key]; // innerHTML allows <strong> tags
       }
     });
 
@@ -1302,4 +1393,3 @@ const langData = {
 </script>
 </body>
 </html>
-
