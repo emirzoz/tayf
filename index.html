@@ -313,15 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 
-/* Hide scrollbar but keep scroll functionality */
-.no-scrollbar {
-  -ms-overflow-style: none;  /* IE & Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;             /* Chrome, Safari, Edge (new) */
-}
 
   </style>
 </head>
@@ -541,6 +532,8 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </section>
 
+
+
 <!-- Project Section -->
 <section id="project" class="py-20 bg-prussian_blue">
   <div class="container mx-auto px-6">
@@ -705,168 +698,20 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </section>
 
-<!-- Sponsor CTA Section -->
-<section id="sponsor" class="py-20 bg-prussian_blue">
-  <div class="container mx-auto px-6">
-    <div class="grid md:grid-cols-2 gap-10 items-stretch">
-      <!-- Sol: PDF / genel metin -->
-      <div class="text-center md:text-left flex flex-col justify-center">
-        <h2 class="text-4xl font-heading mb-6" data-key="sponsorTitle"></h2>
-        <p class="text-xl mb-8 max-w-3xl mx-auto md:mx-0 opacity-90" data-key="sponsorText"></p>
-        <a href="ITU_Tayf_Tanitim_Dosyasi.pdf"
-           download
-           class="inline-block bg-blue_gray text-prussian_blue px-10 py-4 rounded-lg font-bold transition shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]"
-           data-key="sponsorBtn"></a>
-      </div>
-
-      <!-- Sağ: İletişim kutusu -->
-      <div class="mt-10 md:mt-0">
-        <div class="bg-yinmn_blue/30 border border-[#6E92B6]/60 rounded-xl p-6 md:p-8 h-full flex flex-col justify-center">
-          <h3 class="text-2xl font-heading mb-4" data-key="sponsorContactTitle"></h3>
-          <p class="mb-6 text-timberwolf/90" data-key="sponsorContactText"></p>
-
-          <div class="space-y-2 text-sm md:text-base">
-            <p>
-              <span class="font-semibold" data-key="sponsorEmailLabel"></span>:
-              <a href="mailto:tayf.takimi@itu.edu.tr"
-                 class="text-blue_gray hover:text-timberwolf underline underline-offset-4">
-                tayf.takimi@itu.edu.tr
-              </a>
-            </p>
-            <p>
-              <span class="font-semibold" data-key="sponsorLinkedInLabel"></span>:
-              <a href="https://www.linkedin.com/company/i%CC%87t%C3%BC-tayf/"
-                 target="_blank" rel="noopener noreferrer"
-                 class="text-blue_gray hover:text-timberwolf underline underline-offset-4">
-                İTÜ TAYF LinkedIn
-              </a>
-            </p>
-            <p>
-              <span class="font-semibold" data-key="sponsorInstagramLabel"></span>:
-              <a href="https://www.instagram.com/itu.tayf/"
-                 target="_blank" rel="noopener noreferrer"
-                 class="text-blue_gray hover:text-timberwolf underline underline-offset-4">
-                @itu.tayf
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-
+  <!-- Sponsor CTA Section -->
+  <section id="sponsor" class="py-20 bg-prussian_blue">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-4xl font-heading mb-6" data-key="sponsorTitle"></h2>
+      <p class="text-xl mb-12 max-w-3xl mx-auto opacity-90" data-key="sponsorText"></p>
+      <a href="ITU_Tayf_Tanitim_Dosyasi.pdf" download class="inline-block bg-blue_gray text-prussian_blue px-10 py-4 rounded-lg font-bold transition shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]" data-key="sponsorBtn"></a>
     </div>
-  </div>
-</section>
-
-
-<section id="launches" class="py-20 bg-gradient-to-b from-yinmn_blue via-yinmn_blue/95 to-prussian_blue border-t border-[#6E92B6]/40">
-  <div class="container mx-auto px-6 space-y-8">
-    <!-- Başlık satırı -->
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-      <div>
-        <p class="text-[11px] uppercase tracking-[0.18em] text-blue_gray mb-1"
-           data-key="launchesKicker">
-          Uzayı anlık takip ediyoruz
-        </p>
-        <h2 class="text-3xl md:text-4xl font-heading" data-key="launchesTitle">
-          Yaklaşan Uzay Fırlatmaları
-        </h2>
-        <p class="text-timberwolf/80 mt-2 text-sm md:text-base" data-key="launchesLead">
-          Dünya genelindeki bazı planlı fırlatmalar (UTC+3, İstanbul saati).
-        </p>
-      </div>
-
-      <!-- canlı veri rozeti -->
-      <span class="inline-flex items-center self-start md:self-end gap-2 px-3 py-1 rounded-full
-                   bg-prussian_blue/70 border border-[#6E92B6]/60 text-[11px] font-semibold
-                   text-timberwolf/80">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span data-key="launchesLiveTag">Gerçek zamanlı veri akışı</span>
-      </span>
-    </div>
-
-    <!-- NASA APOD + fırlatma listesi layout -->
-    <div class="grid lg:grid-cols-5 gap-6">
-      <!-- SOL: NASA APOD kartı -->
-      <div class="lg:col-span-2">
-        <div class="relative rounded-2xl p-[1px] bg-gradient-to-br from-[#6E92B6] via-transparent to-[#6E92B6]/80">
-          <div class="h-full rounded-2xl bg-prussian_blue/80 border border-[#6E92B6]/60 p-4 md:p-5 flex flex-col gap-4">
-            <!-- küçük etiket -->
-            <div class="flex items-center justify-between gap-2">
-              <span class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full
-                           bg-yinmn_blue/70 text-[11px] font-semibold text-timberwolf/90">
-                <span class="w-1.5 h-1.5 rounded-full bg-sky-300"></span>
-                <span data-key="apodTitle">NASA Günün Uzay Fotoğrafı</span>
-              </span>
-              <span class="text-[10px] text-timberwolf/60" data-key="apodSource">
-                Kaynak: NASA Astronomy Picture of the Day (APOD)
-              </span>
-            </div>
-
-            <!-- Görsel -->
-            <div class="rounded-xl bg-prussian_blue/90 overflow-hidden">
-              <div class="aspect-video relative flex items-center justify-center">
-                <img id="apod-image"
-                     src=""
-                     alt=""
-                     class="w-full h-full object-cover hidden">
-                <div id="apod-image-fallback"
-                     class="absolute inset-0 flex items-center justify-center px-3 text-center text-timberwolf/70 text-sm">
-                  <span data-key="apodFallbackText">NASA'dan görsel yüklenemedi.</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Metin -->
-            <div class="space-y-2 text-sm">
-              <p id="apod-date" class="text-timberwolf/70"></p>
-             <p id="apod-desc"
-   class="text-timberwolf/90 leading-relaxed text-sm max-h-32 overflow-y-auto no-scrollbar"></p>
-              <p id="apod-status" class="text-[11px] text-timberwolf/60"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SAĞ: fırlatma listesi -->
-      <div class="lg:col-span-3 flex flex-col gap-4">
-        <div class="flex items-center justify-between gap-2">
-          <h3 class="text-xl font-heading" data-key="launchesListTitle">
-            Yaklaşan fırlatmalar
-          </h3>
-          <!-- durum / hata mesajı -->
-          <p id="launches-status" class="text-timberwolf/70 text-[11px] md:text-xs">
-            <!-- JS dolduracak -->
-          </p>
-        </div>
-
-        <!-- Kartların geleceği grid -->
-        <div id="launches-list"
-             class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        </div>
-
-        <!-- Show more / show less -->
-        <div class="mt-1 text-center">
-          <button id="launches-toggle"
-                  class="hidden px-4 py-2 rounded-lg border border-[#6E92B6]/60
-                         bg-prussian_blue/70 text-timberwolf text-[12px] font-semibold
-                         hover:bg-prussian_blue/90 transition">
-            <!-- JS dolduracak -->
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-  
+  </section>
 <section id="join" class="relative py-20 bg-prussian_blue text-timberwolf border-t border-[#6E92B6]/30 overflow-hidden">
   <div class="container mx-auto px-6 relative">
     <h2 class="text-4xl font-heading mb-4" data-key="joinTitle">Takıma Katıl</h2>
     <p class="text-lg opacity-90 max-w-3xl" data-key="joinLead">
       Her gezegen bir ekip: rolünü seç, yörüngeye katıl.
     </p>
-
   <!-- ICON LEGEND (desktop, TOP) -->
 <div class="mt-6 hidden lg:flex flex-wrap justify-center gap-6 text-sm text-timberwolf/80">
   <div class="flex items-center gap-2">
@@ -1167,40 +1012,7 @@ const langData = {
     joinItem4: "Sektörle erken tanışma ve referans",
     joinApplyBtn: "Başvuru Formu",
     joinEmailBtn: "E-posta ile Başvur",
-    joinNote: "Not: Zaman ayırabileceğin bir rol seç; her rol için temel eğitim veriyoruz.",
-
-    launchesTitle: "Yaklaşan Uzay Fırlatmaları",
-    launchesLead: "Dünya genelindeki bazı planlı fırlatmalar (UTC saatine göre).",
-    launchesLoading: "Fırlatma bilgileri yükleniyor...",
-    launchesEmpty: "Şu anda listelenecek planlı fırlatma bulunamadı.",
-    launchesError: "Fırlatma bilgileri yüklenirken bir hata oluştu. Daha sonra tekrar deneyin.",
-    launchesShowMore: "Daha Fazla Göster",
-    launchesShowLess: "Daha Az Göster",
-    launchesTimeLabel: "Fırlatma zamanı (İstanbul, UTC+3)",
-    launchesOperatorLabel: "Operatör",
-    launchesLocationLabel: "Konum",
-    launchesMissionLabel: "Görev",
-    launchesUnknownName: "Bilinmeyen Fırlatma",
-    launchesUnknownOperator: "Bilinmeyen operatör",
-    launchesUnknownLocation: "Bilinmeyen konum",
-    launchesNoDate: "Tarih açıklanmadı",
-    sponsorContactTitle: "Sponsor İletişimi",
-    sponsorContactText: "Detaylı sponsorluk görüşmesi, özel paketler veya sorularınız için doğrudan bizimle iletişime geçebilirsiniz.",
-    sponsorEmailLabel: "E-posta",
-    sponsorLinkedInLabel: "LinkedIn",
-    sponsorInstagramLabel: "Instagram",
-    apodTitle: "NASA Günün Uzay Fotoğrafı",
-    apodSource: "Kaynak: NASA Astronomy Picture of the Day (APOD)",
-    apodDateLabel: "Tarih",
-    apodLoading: "NASA'dan günün uzay fotoğrafı yükleniyor...",
-    apodError: "NASA'dan fotoğraf alınırken bir hata oluştu.",
-    apodNoImage: "Bugünkü APOD bir görüntü değil (video veya başka bir medya türü).",
-    apodFallbackText: "NASA'dan görsel yüklenemedi.",
-    launchesKicker: "Uzayı anlık takip ediyoruz",
-    launchesLiveTag: "Gerçek zamanlı veri akışı",
-    launchesListTitle: "Yaklaşan fırlatmalar",
-
-
+    joinNote: "Not: Zaman ayırabileceğin bir rol seç; her rol için temel eğitim veriyoruz."
   },
 
   en: {
@@ -1280,173 +1092,53 @@ const langData = {
     joinItem4: "Early industry exposure and references",
     joinApplyBtn: "Application Form",
     joinEmailBtn: "Apply by Email",
-    joinNote: "Tip: Pick a role you can commit time to; we provide onboarding for each track.",
-
-    launchesTitle: "Upcoming Space Launches",
-    launchesLead: "Some of the planned launches worldwide (in UTC time).",
-    launchesLoading: "Loading launch data...",
-    launchesEmpty: "No scheduled launches to display at the moment.",
-    launchesError: "An error occurred while loading launch data. Please try again later.",
-    launchesShowMore: "Show More",
-    launchesShowLess: "Show Less",
-    launchesTimeLabel: "Launch time (Istanbul, UTC+3)",
-    launchesOperatorLabel: "Operator",
-    launchesLocationLabel: "Location",
-    launchesMissionLabel: "Mission",
-    launchesUnknownName: "Unknown Launch",
-    launchesUnknownOperator: "Unknown operator",
-    launchesUnknownLocation: "Unknown location",
-    launchesNoDate: "Date not announced",
-    sponsorContactTitle: "Sponsorship Contact",
-    sponsorContactText: "For sponsorship discussions, custom packages or any questions, you can reach us directly.",
-    sponsorEmailLabel: "Email",
-    sponsorLinkedInLabel: "LinkedIn",
-    sponsorInstagramLabel: "Instagram",
-    apodTitle: "NASA Astronomy Picture of the Day",
-    apodSource: "Source: NASA Astronomy Picture of the Day (APOD)",
-    apodDateLabel: "Date",
-    apodLoading: "Loading NASA's Astronomy Picture of the Day...",
-    apodError: "An error occurred while fetching the NASA picture.",
-    apodNoImage: "Today's APOD is not an image (it may be a video or another media type).",
-    apodFallbackText: "Could not load the image from NASA.",
-    launchesKicker: "Uzayı anlık takip ediyoruz",
-    launchesLiveTag: "Gerçek zamanlı veri akışı",
-    launchesListTitle: "Yaklaşan fırlatmalar",
-
-
+    joinNote: "Tip: Pick a role you can commit time to; we provide onboarding for each track."
   }
 };
-</script> 
-  <script>
-  // NASA APOD (Astronomy Picture of the Day) – bilingual
-  (function () {
-    const NASA_API_KEY = "EJbHG3NHr8CJWHTCAieoCjd2P2aqBXRG8GTRHbsR";
-    const APOD_URL = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}&thumbs=true`;
 
-    const imgEl       = document.getElementById('apod-image');
-    const fallbackEl  = document.getElementById('apod-image-fallback');
-    const dateEl      = document.getElementById('apod-date');
-    const descEl      = document.getElementById('apod-desc');
-    const statusEl    = document.getElementById('apod-status');
 
-    if (!dateEl || !descEl || !statusEl) return; // bölüm yoksa çık
 
-    function t() {
-      const lang = window.currentLang || 'tr';
-      return (window.langData && window.langData[lang]) || {};
-    }
 
-    function setStatus(keyName) {
-      const pack = t();
-      if (!statusEl) return;
-      const text = pack[keyName] || '';
-      statusEl.textContent = text;
-    }
 
-    async function loadApod() {
-      // Yükleniyor mesajı
-      setStatus('apodLoading');
-
-      try {
-        const res = await fetch(APOD_URL);
-        if (!res.ok) throw new Error('API error: ' + res.status);
-        const data = await res.json();
-
-        const pack = t();
-
-        // Tarih
-        if (data.date) {
-          const d = new Date(data.date + "T00:00:00Z");
-          const formatted = d.toLocaleDateString('tr-TR', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          });
-          dateEl.textContent = (pack.apodDateLabel || 'Tarih') + ': ' + formatted;
-        }
-
-        // Açıklama (NASA İngilizce veriyor, direkt basıyoruz)
-        descEl.textContent = data.explanation || '';
-
-        // Görsel
-        if (data.media_type === 'image' && (data.url || data.hdurl)) {
-          const url = data.hdurl || data.url;
-          imgEl.src = url;
-          imgEl.alt = data.title || 'NASA Astronomy Picture of the Day';
-          imgEl.classList.remove('hidden');
-          if (fallbackEl) fallbackEl.classList.add('hidden');
-        } else {
-          // Görsel değilse info yaz
-          descEl.textContent = (pack.apodNoImage || 'Today\'s APOD is not an image.') +
-                               (data.explanation ? ' ' + data.explanation : '');
-        }
-
-        // Her şey yolunda, status boş olsun
-        statusEl.textContent = '';
-      } catch (err) {
-        console.error(err);
-        const pack = t();
-        statusEl.textContent =
-          pack.apodError || 'An error occurred while fetching the NASA picture.';
-      }
-    }
-
-    // İlk yüklemede çağır
-    document.addEventListener('DOMContentLoaded', loadApod);
-  })();
-</script>
-
-<script>
-    
-  // Aktif dil (launches script buradan okuyacak)
-    window.currentLang = 'tr';
-  
     function setLanguage(lang) {
-      // 1) Global state
-      window.currentLang = lang;
-  
-      // 2) data-key ile tüm metinleri güncelle
-      const elements = document.querySelectorAll('[data-key]');
-      elements.forEach(el => {
-        const key = el.getAttribute('data-key');
-        if (langData[lang] && langData[lang][key]) {
-          el.innerText = langData[lang][key];
-        }
-      });
-  
-      // 3) Dil butonlarını (desktop + mobile) stil olarak güncelle
-      const btnTR  = document.getElementById('lang-tr');
-      const btnEN  = document.getElementById('lang-en');
-      const btnTRm = document.getElementById('lang-tr-mobile');
-      const btnENm = document.getElementById('lang-en-mobile');
-  
-      const baseClass   = 'font-semibold px-2 py-1 rounded-md ';
-      const activeClass   = baseClass + 'text-blue_gray';
-      const inactiveClass = baseClass + 'text-timberwolf opacity-70 hover:text-blue_gray';
-  
-      function applyState(activeBtn, inactiveBtn) {
-        if (!activeBtn || !inactiveBtn) return;
-        activeBtn.className   = activeClass;
-        inactiveBtn.className = inactiveClass;
-        activeBtn.innerText   = activeBtn.id.includes('tr') ? 'TR' : 'EN';
-        inactiveBtn.innerText = inactiveBtn.id.includes('tr') ? 'TR' : 'EN';
+    // 1) Update text content
+    const elements = document.querySelectorAll('[data-key]');
+    elements.forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (langData[lang] && langData[lang][key]) {
+        el.innerText = langData[lang][key];
       }
-  
-      if (lang === 'tr') {
-        applyState(btnTR, btnEN);
-        applyState(btnTRm, btnENm);
-      } else {
-        applyState(btnEN, btnTR);
-        applyState(btnENm, btnTRm);
-      }
-  
-      // 4) Fırlatma kartları metinlerini yeni dile göre tazele
-      if (window.syncLaunchesTexts) {
-        window.syncLaunchesTexts();
-      }
+    });
+
+    // 2) Style desktop + mobile language buttons consistently
+    const btnTR  = document.getElementById('lang-tr');
+    const btnEN  = document.getElementById('lang-en');
+    const btnTRm = document.getElementById('lang-tr-mobile');
+    const btnENm = document.getElementById('lang-en-mobile');
+
+    const active   = 'text-blue_gray';
+    const inactive = 'text-timberwolf opacity-70 hover:text-blue_gray';
+
+    function applyState(activeBtn, inactiveBtn) {
+      if (!activeBtn || !inactiveBtn) return;
+      activeBtn.className   = 'font-semibold px-2 py-1 rounded-md ' + active;
+      inactiveBtn.className = 'font-semibold px-2 py-1 rounded-md ' + inactive;
+      activeBtn.innerText = activeBtn.id.includes('tr') ? 'TR' : 'EN';
+      inactiveBtn.innerText = inactiveBtn.id.includes('tr') ? 'TR' : 'EN';
     }
-  
-    // Aktif nav link highlighting + aria-current
+
+    if (lang === 'tr') {
+      applyState(btnTR, btnEN);
+      applyState(btnTRm, btnENm);
+    } else {
+      applyState(btnEN, btnTR);
+      applyState(btnENm, btnTRm);
+    }
+  }
+
+  // Default language on load
+  document.addEventListener('DOMContentLoaded', () => setLanguage('tr'));
+  // Active nav link highlighting + aria-current
     function updateAriaCurrent() {
       const links = document.querySelectorAll('nav a[href^="#"]');
       const hash = window.location.hash || '#hero';
@@ -1460,17 +1152,9 @@ const langData = {
         }
       });
     }
-  
-    // Sayfa yüklenince varsayılan dili TR yap + nav'i güncelle
-    document.addEventListener('DOMContentLoaded', () => {
-      setLanguage('tr');
-      updateAriaCurrent();
-    });
-  
-    // Hash değişince aktif linki güncelle
     window.addEventListener('hashchange', updateAriaCurrent);
-</script>
-
+    document.addEventListener('DOMContentLoaded', updateAriaCurrent);
+  </script>
 
 <script>
   // Mobile menu (slide from left) + backdrop
@@ -1571,246 +1255,52 @@ const langData = {
 
 <!-- Tabs: Sketchfab lazy loader -->
 <script>
-  // Dynamic upcoming launches (Launch Library 2) – bilingual
-  (function () {
-    const API_URL =
-      'https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=10&related=false';
+(function () {
+  const tabG = document.getElementById('tab-gallery');
+  const tab3 = document.getElementById('tab-3d');
+  const panG = document.getElementById('panel-gallery');
+  const pan3 = document.getElementById('panel-3d');
+  if (!tabG || !tab3 || !panG || !pan3) return;
 
-    const INITIAL_COUNT = 3; // 🔹 ilk görünen kart sayısı
-    const MAX_COUNT     = 9;
+  const iframe = pan3.querySelector('iframe.sketchfab-embed');
+  let iframeLoaded = false;
 
-    let launchesData = [];
-    let showingAll   = false;
-
-    const statusEl = document.getElementById('launches-status');
-    const listEl   = document.getElementById('launches-list');
-    const toggleEl = document.getElementById('launches-toggle');
-
-    if (!statusEl || !listEl) return;
-
-    // 🔹 langData + currentLang global değişkenlerini kullan
-    function getLangStrings() {
-      const lang = window.currentLang || 'tr';
-      const pack = (langData && langData[lang]) || {};
-      return pack;
-    }
-
-   function formatDateIstanbul(iso) {
-  try {
-    const d = new Date(iso);
-    if (Number.isNaN(d.getTime())) return iso;
-
-    // site dili neyse ona göre formatla
-    const locale = (window.currentLang === 'en') ? 'en-GB' : 'tr-TR';
-
-    const fmt = new Intl.DateTimeFormat(locale, {
-      dateStyle: 'medium',
-      timeStyle: 'short',
-      timeZone: 'Europe/Istanbul' // 🔹 sabit olarak İstanbul/UTC+3
-    });
-
-    return fmt.format(d);
-  } catch {
-    return iso;
+  function loadIframeOnce() {
+    if (iframeLoaded || !iframe) return;
+    const src = iframe.getAttribute('data-src');
+    if (src) iframe.src = src;
+    iframeLoaded = true;
   }
-}
 
+  function activate(which) {
+    const is3D = which === '3d';
 
-    function createCard(launch) {
-      const t = getLangStrings();
+    tabG.setAttribute('aria-selected', String(!is3D));
+    tab3.setAttribute('aria-selected', String(is3D));
 
-      const name        = launch.name || t.launchesUnknownName || 'Unknown Launch';
-      const provider    = launch.launch_service_provider?.name ||
-                          t.launchesUnknownOperator || 'Unknown operator';
-      const location    =
-        launch.pad?.name ||
-        launch.pad?.location?.name ||
-        t.launchesUnknownLocation || 'Unknown location';
+    tabG.classList.toggle('bg-[#6E92B6]/20', !is3D);
+    tabG.classList.toggle('border-[#6E92B6]/40', !is3D);
+    tab3.classList.toggle('bg-[#6E92B6]/20',  is3D);
+    tab3.classList.toggle('border-[#6E92B6]/40',  is3D);
 
-      const windowStart = launch.window_start || launch.net || launch.last_updated;
-      const timeStr     = windowStart
-        ? formatDateIstanbul(windowStart)
-        : (t.launchesNoDate || 'Date not announced');
+    panG.classList.toggle('hidden', is3D);
+    pan3.classList.toggle('hidden', !is3D);
 
-
-      const mission     = launch.mission?.name || '';
-      const statusText  = launch.status?.name || '';
-      const statusAbbr  = launch.status?.abbrev || '';
-
-      const timeLabel      = t.launchesTimeLabel      || 'Launch time (Istanbul, UTC+3)';
-      const operatorLabel  = t.launchesOperatorLabel  || 'Operator';
-      const locationLabel  = t.launchesLocationLabel  || 'Location';
-      const missionLabel   = t.launchesMissionLabel   || 'Mission';
-
-      // 🔹 Roket / launch görseli (varsa)
-      const imageUrl =
-        launch.image ||
-        launch.rocket?.configuration?.image_url ||
-        '';
-
-      const card = document.createElement('article');
-      card.className =
-        'rounded-xl border border-[#6E92B6]/40 bg-prussian_blue/60 ' +
-        'p-4 flex flex-col gap-2 text-sm text-timberwolf';
-
-      card.innerHTML = `
-        ${imageUrl ? `
-        <div class="mb-3 rounded-lg overflow-hidden bg-prussian_blue/80">
-          <img
-            src="${imageUrl}"
-            loading="lazy"
-            alt="Rocket photo"
-            class="w-full h-40 object-cover"
-          />
-        </div>` : ''}
-
-        <h3 class="text-lg font-heading text-timberwolf">
-          ${name}
-        </h3>
-        <p class="text-timberwolf/70">
-          <span class="font-semibold">${operatorLabel}:</span> ${provider}
-        </p>
-        <p class="text-timberwolf/70">
-          <span class="font-semibold">${locationLabel}:</span> ${location}
-        </p>
-        <p class="text-timberwolf/70">
-          <span class="font-semibold">${timeLabel}:</span> ${timeStr}
-        </p>
-        ${mission ? `
-        <p class="text-timberwolf/70">
-          <span class="font-semibold">${missionLabel}:</span> ${mission}
-        </p>` : ''}
-        ${statusText ? `
-        <span class="inline-flex items-center self-start mt-1 px-2 py-0.5 rounded-full
-                       text-xs font-semibold bg-yinmn_blue/70 border border-[#6E92B6]/60">
-          ${statusAbbr ? statusAbbr + ' — ' : ''}${statusText}
-        </span>` : ''}
-      `;
-
-      return card;
-    }
-
-function renderLaunches() {
-  const t = getLangStrings();
-  listEl.innerHTML = '';
-
-  // en fazla MAX_COUNT kadar göster
-  const maxToShow = Math.min(MAX_COUNT, launchesData.length);
-
-  const countToShow = showingAll
-    ? maxToShow
-    : Math.min(INITIAL_COUNT, maxToShow);
-
-  launchesData.slice(0, countToShow).forEach(launch => {
-    listEl.appendChild(createCard(launch));
-  });
-
-  if (!toggleEl) return;
-
-  if (maxToShow <= INITIAL_COUNT) {
-    toggleEl.classList.add('hidden');
-  } else {
-    toggleEl.classList.remove('hidden');
-    toggleEl.textContent = showingAll
-      ? (t.launchesShowLess || 'Show Less')
-      : (t.launchesShowMore || 'Show More');
+    if (is3D) loadIframeOnce();
   }
-}
 
+  tabG.addEventListener('click', () => activate('gallery'));
+  tab3.addEventListener('click', () => activate('3d'));
 
-    async function loadLaunches() {
-      const t = getLangStrings();
-
-      statusEl.textContent = t.launchesLoading || 'Loading launch data...';
-
-      try {
-        const res = await fetch(API_URL);
-        if (!res.ok) throw new Error('API error: ' + res.status);
-        const data = await res.json();
-
-        launchesData = data.results || [];
-
-        if (!launchesData.length) {
-          statusEl.textContent =
-            t.launchesEmpty || 'No scheduled launches to display at the moment.';
-          return;
-        }
-
-        statusEl.textContent = '';
-        renderLaunches();
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent =
-          t.launchesError ||
-          'An error occurred while loading launch data. Please try again later.';
-      }
+  // keyboard nav
+  [tabG, tab3].forEach(b => b.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      (e.target === tabG ? tab3 : tabG).focus();
     }
-
-    // Show more / less click
-    if (toggleEl) {
-      toggleEl.addEventListener('click', () => {
-        showingAll = !showingAll;
-        renderLaunches();
-      });
-    }
-
-    // 🔹 Dışarıdan (setLanguage içinden) çağrılacak helper:
-    window.syncLaunchesTexts = function () {
-      if (!launchesData.length) return;
-      renderLaunches();  // currentLang'e göre her şeyi yeniden çizer
-    };
-
-    // İlk yüklemede veriyi çek
-    document.addEventListener('DOMContentLoaded', loadLaunches);
-  })();
+  }));
+})();
 </script>
-  <script>
-  // Simple NASA APOD test
-  (function () {
-    const API_URL = 'https://api.nasa.gov/planetary/apod?api_key=EJbHG3NHr8CJWHTCAieoCjd2P2aqBXRG8GTRHbsR';
-
-    const statusEl = document.getElementById('apod-status');
-    const wrapEl   = document.getElementById('apod-wrapper');
-    const titleEl  = document.getElementById('apod-title');
-    const dateEl   = document.getElementById('apod-date');
-    const imgEl    = document.getElementById('apod-image');
-    const explEl   = document.getElementById('apod-explanation');
-
-    if (!statusEl || !wrapEl) return;
-
-    async function loadAPOD() {
-      try {
-        statusEl.textContent = 'Loading NASA image...';
-
-        const res = await fetch(API_URL);
-        if (!res.ok) throw new Error('API error: ' + res.status);
-        const data = await res.json();
-
-        // Only handle image type for this simple test
-        if (data.media_type !== 'image') {
-          statusEl.textContent = 'Today\'s APOD is not an image (it might be a video).';
-          return;
-        }
-
-        titleEl.textContent = data.title || 'Astronomy Picture of the Day';
-        dateEl.textContent  = data.date ? `Date: ${data.date}` : '';
-        imgEl.src           = data.url;
-        imgEl.alt           = data.title || 'NASA APOD';
-        explEl.textContent  = data.explanation || '';
-
-        statusEl.textContent = '';
-        wrapEl.classList.remove('hidden');
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = 'Failed to load NASA image. Check console for details.';
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', loadAPOD);
-  })();
-</script>
-
-
 </body>
 </html>
 
