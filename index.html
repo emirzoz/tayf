@@ -99,12 +99,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- React & Babel (Kept just in case you want to revert later, though not used now) -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
   <script>
     tailwind.config = {
       theme: {
@@ -392,9 +386,6 @@ document.addEventListener('DOMContentLoaded', () => {
     <a href="#sponsor"
        class="block text-timberwolf hover:text-[#6E92B6] transition"
        data-key="navSponsor">Sponsorluk</a>
-    <!-- <a href="#launches"
-       class="block text-timberwolf hover:text-[#6E92B6] transition"
-       data-key="navLaunches">Göklerden Haberler</a> -->
     <a href="#join"
        class="block text-timberwolf hover:text-[#6E92B6] transition"
        data-key="navJoin">Takıma Katıl</a>
@@ -441,9 +432,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="#sponsor" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8
            decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2
            focus:ring-[#6E92B6] rounded-sm" data-key="navSponsor">Sponsorluk</a>
-        <!-- <a href="#launches" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8
-           decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2
-           focus:ring-[#6E92B6] rounded-sm" data-key="navLaunches">Göklerden Haberler</a> -->
         <a href="#join" class="text-timberwolf hover:text-[#6E92B6] transition underline-offset-8
            decoration-transparent hover:decoration-[#6E92B6] focus:outline-none focus:ring-2
            focus:ring-[#6E92B6] rounded-sm" data-key="navJoin">Takıma Katıl</a>
@@ -516,28 +504,28 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="text-4xl md:text-5xl font-heading text-timberwolf tabular-nums">
         <span class="countup" data-target="12" data-suffix="+">0</span>
       </div>
-      <p class="text-timberwolf/80" data-key="statTests">Uçuş/Yer testi</p>
+      <p class="text-timberwolf/80">Uçuş/Yer testi</p>
     </div>
 
     <div class="space-y-1">
       <div class="text-4xl md:text-5xl font-heading text-timberwolf tabular-nums">
         <span class="countup" data-target="15">0</span>
       </div>
-      <p class="text-timberwolf/80" data-key="statMembers">Aktif üye</p>
+      <p class="text-timberwolf/80">Aktif üye</p>
     </div>
 
     <div class="space-y-1">
       <div class="text-4xl md:text-5xl font-heading text-timberwolf tabular-nums">
         <span class="countup" data-target="4">0</span>
       </div>
-      <p class="text-timberwolf/80" data-key="statPartners">Sanayi ortağı</p>
+      <p class="text-timberwolf/80">Sanayi ortağı</p>
     </div>
 
     <div class="space-y-1">
       <div class="text-4xl md:text-5xl font-heading text-timberwolf tabular-nums">
         <span class="countup" data-target="120" data-suffix="+">0</span>
       </div>
-      <p class="text-timberwolf/80" data-key="statHours">Atölye saati / dönem</p>
+      <p class="text-timberwolf/80">Atölye saati / dönem</p>
     </div>
 
   </div>
@@ -593,87 +581,65 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
 
-      <!-- RIGHT: media tabs (Gallery / 3D Model) -->
-      <div>
-        <h3 class="text-2xl font-heading mb-4" data-key="galleryTitle"></h3>
+      <!-- RIGHT: gallery (as before; replace with tabs/3D later if you like) -->
+<!-- RIGHT: media tabs (Gallery / 3D Model) -->
+<div>
+  <h3 class="text-2xl font-heading mb-4" data-key="galleryTitle"></h3>
 
-        <!-- Tabs -->
-        <div class="flex gap-2 mb-4" role="tablist" aria-label="Project media">
-          <button id="tab-gallery" role="tab" aria-selected="true" aria-controls="panel-gallery"
-                  class="px-3 py-1 rounded-md bg-[#6E92B6]/20 text-timberwolf border border-[#6E92B6]/40 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
-                  data-key="tabGallery">Galeri</button>
-          <button id="tab-3d" role="tab" aria-selected="false" aria-controls="panel-3d"
-                  class="px-3 py-1 rounded-md text-timberwolf/80 hover:text-timberwolf border border-transparent hover:border-[#6E92B6]/40 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
-                  data-key="tab3D">3B Model</button>
-        </div>
+  <!-- Tabs -->
+  <div class="flex gap-2 mb-4" role="tablist" aria-label="Project media">
+    <button id="tab-gallery" role="tab" aria-selected="true" aria-controls="panel-gallery"
+            class="px-3 py-1 rounded-md bg-[#6E92B6]/20 text-timberwolf border border-[#6E92B6]/40 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
+            data-key="tabGallery">Galeri</button>
+    <button id="tab-3d" role="tab" aria-selected="false" aria-controls="panel-3d"
+            class="px-3 py-1 rounded-md text-timberwolf/80 hover:text-timberwolf border border-transparent hover:border-[#6E92B6]/40 focus:outline-none focus:ring-2 focus:ring-[#6E92B6]"
+            data-key="tab3D">3B Model</button>
+  </div>
 
-        <!-- Panel: Gallery (default) -->
-        <div id="panel-gallery" role="tabpanel" aria-labelledby="tab-gallery">
-          <div class="grid grid-cols-2 gap-4">
-            <img src="images/1.jpg" alt="Uydu render – ön görünüm" loading="lazy" decoding="async"
-                 width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-            <img src="images/5.jpeg" alt="Uydu render – detay" loading="lazy" decoding="async"
-                 width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-            <img src="images/7.jpg" alt="Uydu render – yanal görünüm" loading="lazy" decoding="async"
-                 width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-            <img src="images/8.jpeg" alt="Uydu render – bileşen yakın plan" loading="lazy" decoding="async"
-                 width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
-          </div>
-          <!-- Ground Station UI (MERGED into Gallery if desired, or keep as bonus below text) -->
-          <!-- I'll remove the separate image block below and keep text content merged -->
-        </div>
-
-        <!-- Panel: 3D Model (lazy, hidden initially) -->
-        <div id="panel-3d" role="tabpanel" aria-labelledby="tab-3d" class="hidden">
-          <div class="rounded-xl overflow-hidden border border-[#6E92B6]/40 bg-white/5 ratio-video">
-            <iframe
-              title="Communication Satellite (Sketchfab)"
-              class="sketchfab-embed absolute inset-0 w-full h-full"
-              data-src="https://sketchfab.com/models/9a7ad3344edb4e598de848a5badb7416/embed?ui_theme=dark"
-              loading="lazy"
-              allow="autoplay; fullscreen; xr-spatial-tracking"
-              allowfullscreen
-              mozallowfullscreen="true"
-              webkitallowfullscreen="true"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-          <p class="mt-3 text-timberwolf/70 text-sm" data-key="hintPan">
-            İpucu: Parmağınızla modeli çevirin, iki parmakla yakınlaştırın.
-          </p>
-        </div>
-      </div>
+  <!-- Panel: Gallery (default) -->
+  <div id="panel-gallery" role="tabpanel" aria-labelledby="tab-gallery">
+    <div class="grid grid-cols-2 gap-4">
+      <img src="images/1.jpg" alt="Uydu render – ön görünüm" loading="lazy" decoding="async"
+           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+      <img src="images/5.jpeg" alt="Uydu render – detay" loading="lazy" decoding="async"
+           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+      <img src="images/7.jpg" alt="Uydu render – yanal görünüm" loading="lazy" decoding="async"
+           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
+      <img src="images/8.jpeg" alt="Uydu render – bileşen yakın plan" loading="lazy" decoding="async"
+           width="800" height="600" class="w-full h-48 object-contain rounded-lg shadow-lg bg-yinmn_blue">
     </div>
+    <img src="images/6.png" alt="Uydu render – genel görünüm" loading="lazy" decoding="async"
+         width="1200" height="800" class="w-full h-64 object-contain rounded-lg shadow-lg bg-yinmn_blue mt-4">
+  </div>
 
-    <!-- Tech Spotlight: Ground Station (MERGED CONTENT, NO IMAGE) -->
-    <div class="mt-16 pt-12 border-t border-[#6E92B6]/30">
-      <div class="grid md:grid-cols-1 gap-12 items-center">
-        <!-- Description Area Only -->
-        <div>
-          <h3 class="text-2xl font-heading mb-4 text-[#6E92B6]" data-key="gsTitle">Yerli Yer İstasyonu Yazılımı</h3>
-          <p class="text-lg opacity-90 mb-6" data-key="gsDesc">
-            Model uydumuzun tüm verilerini anlık olarak işleyen, takımımız tarafından sıfırdan geliştirilen yer kontrol arayüzü.
-          </p>
-          <ul class="space-y-3 opacity-80">
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <span data-key="gsFeat1"><strong>Anlık Telemetri:</strong> 20+ sensör verisinin milisaniyelik takibi.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <span data-key="gsFeat2"><strong>3B Görselleştirme:</strong> Uydunun oryantasyonunu (Pitch/Roll/Yaw) canlı simülasyonla izleme.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-6 h-6 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              <span data-key="gsFeat3"><strong>IoT Entegrasyonu:</strong> Bulut tabanlı veri yedekleme ve harita üzerinde canlı GPS takibi.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <!-- Panel: 3D Model (lazy, hidden initially) -->
+<!-- Panel: 3D Model (lazy, hidden initially) -->
+<div id="panel-3d" role="tabpanel" aria-labelledby="tab-3d" class="hidden">
+  <div class="rounded-xl overflow-hidden border border-[#6E92B6]/40 bg-white/5 ratio-video">
+    <iframe
+      title="Communication Satellite (Sketchfab)"
+      class="sketchfab-embed absolute inset-0 w-full h-full"
+      data-src="https://sketchfab.com/models/9a7ad3344edb4e598de848a5badb7416/embed?ui_theme=dark"
+      loading="lazy"
+      allow="autoplay; fullscreen; xr-spatial-tracking"
+      allowfullscreen
+      mozallowfullscreen="true"
+      webkitallowfullscreen="true"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+  <p class="mt-3 text-timberwolf/70 text-sm" data-key="hintPan">
+    İpucu: Parmağınızla modeli çevirin, iki parmakla yakınlaştırın.
+  </p>
+</div>
+
+</div>
+
+
     </div>
-
   </div>
 </section>
+
 
   <!-- Team Section -->
   <section id="team" class="py-20 bg-yinmn_blue">
@@ -739,10 +705,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <a href="ITU_Tayf_Tanitim_Dosyasi.pdf" download class="inline-block bg-blue_gray text-prussian_blue px-10 py-4 rounded-lg font-bold transition shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]" data-key="sponsorBtn"></a>
     </div>
   </section>
-
-<!-- React Launches Section -->
-<!-- <div id="launches-root"></div> -->
-
 <section id="join" class="relative py-20 bg-prussian_blue text-timberwolf border-t border-[#6E92B6]/30 overflow-hidden">
   <div class="container mx-auto px-6 relative">
     <h2 class="text-4xl font-heading mb-4" data-key="joinTitle">Takıma Katıl</h2>
@@ -944,7 +906,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="text-lg mb-8 opacity-90" data-key="contactText"></p>
         <p class="text-lg mb-8 opacity-90" data-key="contactLead"></p>
         <div class="flex gap-4 justify-center mb-8">
-          <a href="mailto:tayf_takimi@itu.edu.tr" class="bg-blue_gray text-prussian_blue px-8 py-3 rounded-lg font-bold transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]" data-key="emailBtn">E-posta Gönder</a>
+          <a href="mailto:tayf_takimi@itu.edu.tr" class="bg-blue_gray text-prussian_blue px-8 py-3 rounded-lg font-bold transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#6E92B6] hover:ring-2 hover:ring-[#6E92B6]">E-posta Gönder</a>
         </div>
         <div class="flex gap-6 justify-center">
           <a href="https://www.linkedin.com/company/i%CC%87t%C3%BC-tayf/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn - İTÜ TAYF" class="text-blue_gray hover:text-timberwolf transition">
@@ -977,22 +939,14 @@ const langData = {
     navProject: "Proje",
     navTeam: "Ekip",
     navSponsor: "Sponsorluk",
-    navLaunches: "Göklerden Haberler",
     navContact: "İletişim",
     navJoin: "Takıma Katıl",
-    navDemo: "CANLI SİSTEM",
 
     // Hero
     heroTitle: "İTÜ TAYF: Yörüngedeki İmzamız",
     heroSubtitle: "İstanbul Teknik Üniversitesi Uçak ve Uzay Bilimleri Fakültesi bünyesinde, TEKNOFEST için uydu teknolojileri geliştiriyoruz.",
     heroBtnProject: "Projemizi Keşfedin",
     heroBtnSponsor: "Bize Destek Olun (Sponsorluk)",
-
-    // Stats
-    statTests: "Uçuş/Yer testi",
-    statMembers: "Aktif üye",
-    statPartners: "Sanayi ortağı",
-    statHours: "Atölye saati / dönem",
 
     // Project
     projectTitle: "TEKNOFEST Model Uydu Projemiz",
@@ -1018,15 +972,6 @@ const langData = {
     tab3D: "3B Model",
     hintPan: "İpucu: Parmağınızla çevirin, iki parmakla yakınlaştırın.",
 
-    // Ground Station (NEW)
-    gsLabel: "Gelişmiş Telemetri Analiz Yazılımı v2.0",
-    gsTitle: "Yerli Yer İstasyonu Yazılımı",
-    gsDesc: "Model uydumuzun tüm verilerini anlık olarak işleyen, takımımız tarafından sıfırdan geliştirilen yer kontrol arayüzü.",
-    gsFeat1: "<strong>Anlık Telemetri:</strong> 20+ sensör verisinin milisaniyelik takibi.",
-    gsFeat2: "<strong>3B Görselleştirme:</strong> Uydunun oryantasyonunu (Pitch/Roll/Yaw) canlı simülasyonla izleme.",
-    gsFeat3: "<strong>IoT Entegrasyonu:</strong> Bulut tabanlı veri yedekleme ve harita üzerinde canlı GPS takibi.",
-    gsBtn: "Canlı Demoyu İncele",
-
     // Team
     teamTitle: "Disiplinlerarası Teknik Kadromuz",
     teamCard1Title: "Mekanik Ekibi",
@@ -1042,14 +987,13 @@ const langData = {
 
     // Sponsor
     sponsorTitle: "Vizyonumuza Ortak Olun",
-    sponsorText: "Markanızı sadece web sitemizde değil, yarışma sırasında binlerce kişinin izlediği Yer İstasyonu Yazılımımızın ana ekranında ve uydumuzun gövdesinde taşıyın. Genç mühendislere yatırım yapın.",
+    sponsorText: "Türkiye'nin Milli Teknoloji Hamlesi'ne katkıda bulunacak genç mühendislere yatırım yapın. İTÜ Tayf, sektör liderleriyle iş birliği yapmaya ve geleceğin teknolojilerini birlikte geliştirmeye hazırdır.",
     sponsorBtn: "Tanıtım Dosyasını İndir",
 
     // Contact
     contactTitle: "İletişime Geçin",
     contactText: "Projemiz hakkında daha fazla bilgi almak veya iş birliği fırsatlarını görüşmek için bize ulaşın.",
     contactLead: "tayf_takimi@itu.edu.tr",
-    emailBtn: "E-posta Gönder",
 
     // Join section
     joinTitle: "Takıma Katıl",
@@ -1067,34 +1011,7 @@ const langData = {
     joinItem4: "Sektörle erken tanışma ve referans",
     joinApplyBtn: "Başvuru Formu",
     joinEmailBtn: "E-posta ile Başvur",
-    joinNote: "Not: Zaman ayırabileceğin bir rol seç; her rol için temel eğitim veriyoruz.",
-
-    // Launches (NEW)
-    launchesKicker: "CANLI YAYIN & MEDYA",
-    launchesTitle: "Göklerden Haberler",
-    launchesLead: "Uzay sektöründeki en son fırlatmaları ve NASA'nın günün astronomi görselini takip edin.",
-    launchesLiveTag: "CANLI VERİ AKIŞI",
-    launchesListTitle: "Yaklaşan Fırlatmalar",
-    launchesShowMore: "Daha Fazla Göster",
-    launchesShowLess: "Daha Az Göster",
-    launchesUnknownName: "Bilinmeyen Görev",
-    launchesUnknownOperator: "Bilinmeyen Operatör",
-    launchesUnknownLocation: "Bilinmeyen Konum",
-    launchesNoDate: "Tarih Belirlenmedi",
-    launchesOperatorLabel: "Operatör",
-    launchesLocationLabel: "Konum",
-    launchesTimeLabel: "Zaman (TSİ)",
-    launchesMissionLabel: "Görev",
-    launchesLoading: "Veriler yükleniyor...",
-    launchesEmpty: "Planlanmış fırlatma bulunamadı.",
-    launchesError: "Veri alınamadı.",
-    apodTitle: "Günün Astronomi Görseli",
-    apodSource: "Kaynak: NASA APOD",
-    apodDateLabel: "Tarih",
-    apodLoading: "Yükleniyor...",
-    apodError: "Görsel yüklenemedi",
-    apodNoImage: "Bugün için görsel yok",
-    rocketAlt: "Roket görseli"
+    joinNote: "Not: Zaman ayırabileceğin bir rol seç; her rol için temel eğitim veriyoruz."
   },
 
   en: {
@@ -1102,22 +1019,14 @@ const langData = {
     navProject: "Project",
     navTeam: "Team",
     navSponsor: "Sponsorship",
-    navLaunches: "Sky News & Data",
     navContact: "Contact",
     navJoin: "Join the Team",
-    navDemo: "LIVE SYSTEM",
 
     // Hero
     heroTitle: "İTÜ TAYF: Our Signature in Orbit",
     heroSubtitle: "Developing advanced satellite technology for TEKNOFEST within the ITU Faculty of Aeronautics and Astronautics.",
     heroBtnProject: "Discover Our Project",
     heroBtnSponsor: "Support Us (Sponsorship)",
-
-    // Stats
-    statTests: "Flight/Ground tests",
-    statMembers: "Active members",
-    statPartners: "Industry partners",
-    statHours: "Workshop hours / term",
 
     // Project
     projectTitle: "Our TEKNOFEST Model Satellite Project",
@@ -1143,15 +1052,6 @@ const langData = {
     tab3D: "3D Model",
     hintPan: "Tip: Drag to rotate, pinch to zoom.",
 
-    // Ground Station (NEW)
-    gsLabel: "Advanced Telemetry Analysis Software v2.0",
-    gsTitle: "Native Ground Station Software",
-    gsDesc: "A ground control interface developed from scratch by our team that processes all satellite data in real-time.",
-    gsFeat1: "<strong>Real-time Telemetry:</strong> Millisecond tracking of 20+ sensor data points.",
-    gsFeat2: "<strong>3D Visualization:</strong> Live simulation monitoring of satellite orientation (Pitch/Roll/Yaw).",
-    gsFeat3: "<strong>IoT Integration:</strong> Cloud-based data backup and live GPS tracking on maps.",
-    gsBtn: "View Live Demo",
-
     // Team
     teamTitle: "Our Interdisciplinary Technical Team",
     teamCard1Title: "Mechanical Team",
@@ -1167,14 +1067,13 @@ const langData = {
 
     // Sponsor
     sponsorTitle: "Partner With Our Vision",
-    sponsorText: "Feature your brand not just on our website, but directly on our Ground Station Dashboard viewed by thousands during competition, and on our satellite flight hardware. Invest in young engineers.",
+    sponsorText: "Invest in the young engineers who will contribute to Turkey's National Technology Initiative. İTÜ Tayf is ready to collaborate with industry leaders to develop the technologies of the future.",
     sponsorBtn: "Download Sponsorship Deck",
 
     // Contact
     contactTitle: "Get In Touch",
     contactText: "Contact us to learn more about our project or to discuss partnership opportunities.",
     contactLead: "tayf_takimi@itu.edu.tr",
-    emailBtn: "Send Email",
 
     // Join section
     joinTitle: "Join the Team",
@@ -1192,34 +1091,7 @@ const langData = {
     joinItem4: "Early industry exposure and references",
     joinApplyBtn: "Application Form",
     joinEmailBtn: "Apply by Email",
-    joinNote: "Tip: Pick a role you can commit time to; we provide onboarding for each track.",
-
-    // Launches (NEW)
-    launchesKicker: "LIVE FEED & MEDIA",
-    launchesTitle: "Sky News & Data",
-    launchesLead: "Track the latest launches in the aerospace sector and NASA's astronomy picture of the day.",
-    launchesLiveTag: "LIVE DATA STREAM",
-    launchesListTitle: "Upcoming Launches",
-    launchesShowMore: "Show More",
-    launchesShowLess: "Show Less",
-    launchesUnknownName: "Unknown Mission",
-    launchesUnknownOperator: "Unknown Operator",
-    launchesUnknownLocation: "Unknown Location",
-    launchesNoDate: "Date TBD",
-    launchesOperatorLabel: "Operator",
-    launchesLocationLabel: "Location",
-    launchesTimeLabel: "Time (TRT)",
-    launchesMissionLabel: "Mission",
-    launchesLoading: "Loading data...",
-    launchesEmpty: "No launches scheduled.",
-    launchesError: "Could not fetch data.",
-    apodTitle: "Astronomy Picture of the Day",
-    apodSource: "Source: NASA APOD",
-    apodDateLabel: "Date",
-    apodLoading: "Loading...",
-    apodError: "Failed to load image",
-    apodNoImage: "No image for today",
-    rocketAlt: "Rocket image"
+    joinNote: "Tip: Pick a role you can commit time to; we provide onboarding for each track."
   }
 };
 
@@ -1233,7 +1105,7 @@ const langData = {
     elements.forEach(el => {
       const key = el.getAttribute('data-key');
       if (langData[lang] && langData[lang][key]) {
-        el.innerHTML = langData[lang][key]; // innerHTML allows <strong> tags
+        el.innerText = langData[lang][key];
       }
     });
 
@@ -1261,9 +1133,6 @@ const langData = {
       applyState(btnEN, btnTR);
       applyState(btnENm, btnTRm);
     }
-    
-    // Dispatch custom event for React components to listen
-    window.dispatchEvent(new CustomEvent('languageChange', { detail: lang }));
   }
 
   // Default language on load
@@ -1431,248 +1300,5 @@ const langData = {
   }));
 })();
 </script>
-
-<!-- REACT LAUNCHES COMPONENT -->
-<!-- <script type="text/babel">
-  const { useState, useEffect } = React;
-
-  const LAUNCH_API_URL = 'https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=10&related=false';
-  const APOD_API_URL = 'https://api.nasa.gov/planetary/apod?api_key=EJbHG3NHr8CJWHTCAieoCjd2P2aqBXRG8GTRHbsR&thumbs=true';
-  const MAX_COUNT = 9;
-
-  const formatDateIstanbul = (iso, lang) => {
-    try {
-      const d = new Date(iso);
-      if (isNaN(d.getTime())) return iso;
-      const locale = lang === 'en' ? 'en-GB' : 'tr-TR';
-      return new Intl.DateTimeFormat(locale, {
-        dateStyle: 'medium',
-        timeStyle: 'short',
-        timeZone: 'Europe/Istanbul',
-      }).format(d);
-    } catch {
-      return iso;
-    }
-  };
-
-  const LaunchCard = ({ launch, lang, getLangText }) => {
-    const name = launch.name || getLangText('launchesUnknownName');
-    const provider = launch.launch_service_provider?.name || getLangText('launchesUnknownOperator');
-    const location = launch.pad?.name || launch.pad?.location?.name || getLangText('launchesUnknownLocation');
-    const windowStart = launch.window_start || launch.net || launch.last_updated;
-    const timeStr = windowStart ? formatDateIstanbul(windowStart, lang) : getLangText('launchesNoDate');
-    const mission = launch.mission?.name || '';
-    const statusText = launch.status?.name || '';
-    const statusAbbr = launch.status?.abbrev || '';
-    const imageUrl = launch.image || launch.rocket?.configuration?.image_url || '';
-
-    return (
-      <article className="rounded-xl border border-[#6E92B6]/40 bg-prussian_blue/60 p-4 flex flex-col gap-2 text-sm text-timberwolf">
-        {imageUrl && (
-          <div className="mb-3 rounded-lg overflow-hidden bg-prussian_blue/80">
-            <img src={imageUrl} loading="lazy" alt={getLangText('rocketAlt')} className="w-full h-40 object-cover" />
-          </div>
-        )}
-        <h3 className="text-base sm:text-lg font-heading text-timberwolf">{name}</h3>
-        <p className="text-timberwolf/70"><span className="font-semibold">{getLangText('launchesOperatorLabel')}:</span> {provider}</p>
-        <p className="text-timberwolf/70"><span className="font-semibold">{getLangText('launchesLocationLabel')}:</span> {location}</p>
-        <p className="text-timberwolf/70"><span className="font-semibold">{getLangText('launchesTimeLabel')}:</span> {timeStr}</p>
-        {mission && <p className="text-timberwolf/70"><span className="font-semibold">{getLangText('launchesMissionLabel')}:</span> {mission}</p>}
-        {statusText && (
-          <span className="inline-flex items-center self-start mt-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-yinmn_blue/70 border border-[#6E92B6]/60">
-            {statusAbbr ? `${statusAbbr} — ` : ''}{statusText}
-          </span>
-        )}
-      </article>
-    );
-  };
-
-  const ApodCard = ({ lang, getLangText }) => {
-    const [apodData, setApodData] = useState(null);
-    const [status, setStatus] = useState('apodLoading');
-
-    useEffect(() => {
-      const fetchApod = async () => {
-        setStatus('apodLoading');
-        setApodData(null);
-        try {
-          const res = await fetch(APOD_API_URL);
-          if (!res.ok) throw new Error('API error');
-          const data = await res.json();
-          setApodData(data);
-          setStatus(data.media_type === 'image' ? '' : 'apodNoImage');
-        } catch (error) {
-          console.error("APOD fetch error:", error);
-          setStatus('apodError');
-        }
-      };
-      fetchApod();
-    }, []);
-
-    const formattedDate = apodData?.date
-      ? new Date(apodData.date + "T00:00:00Z").toLocaleDateString(lang === 'tr' ? 'tr-TR' : 'en-US', {
-          year: 'numeric', month: 'long', day: 'numeric'
-        })
-      : '';
-
-    return (
-      <div className="relative rounded-2xl p-[1px] bg-gradient-to-br from-[#6E92B6] via-transparent to-[#6E92B6]/80 h-full">
-        <div className="h-full rounded-2xl bg-prussian_blue/80 border border-[#6E92B6]/60 p-4 md:p-5 flex flex-col gap-4">
-          <div className="flex items-center justify-between gap-2 flex-shrink-0">
-            <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-yinmn_blue/70 text-[11px] font-semibold text-timberwolf/90">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-300"></span>
-              <span>{getLangText('apodTitle')}</span>
-            </span>
-            <span className="text-[10px] text-timberwolf/60 hidden sm:block">{getLangText('apodSource')}</span>
-          </div>
-          
-          <div className="rounded-xl bg-prussian_blue/90 overflow-hidden flex-shrink-0">
-            <div className="aspect-video relative flex items-center justify-center">
-              {status === 'apodLoading' && (
-                <div className="w-full h-full bg-yinmn_blue/70 animate-pulse"></div>
-              )}
-              {apodData?.media_type === 'image' && (
-                <img src={apodData.url} alt={apodData.title || ''} className="w-full h-full object-cover" />
-              )}
-              {status && status !== 'apodLoading' && apodData?.media_type !== 'image' && (
-                <div className="absolute inset-0 flex items-center justify-center px-3 text-center text-timberwolf/70 text-sm">
-                  <span>{getLangText(status === 'apodError' ? 'apodError' : 'apodNoImage')}</span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {formattedDate && (
-            <p className="text-sm text-timberwolf/70 flex-shrink-0 -mb-2">
-              {getLangText('apodDateLabel')}: {formattedDate}
-            </p>
-          )}
-          
-          <div className="flex-1 overflow-y-auto no-scrollbar min-h-0">
-            <p className="text-sm text-timberwolf/90 leading-relaxed">
-              {apodData?.explanation || ''}
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const LaunchCardSkeleton = () => (
-    <div className="rounded-xl border border-[#6E92B6]/40 bg-prussian_blue/60 p-4 space-y-3 animate-pulse">
-      <div className="h-40 bg-yinmn_blue/70 rounded-lg"></div>
-      <div className="h-5 bg-yinmn_blue/70 rounded w-3/4"></div>
-      <div className="h-4 bg-yinmn_blue/70 rounded w-1/2"></div>
-      <div className="h-4 bg-yinmn_blue/70 rounded w-5/6"></div>
-      <div className="h-4 bg-yinmn_blue/70 rounded w-1/2"></div>
-    </div>
-  );
-
-  const Launches = () => {
-    const [lang, setLang] = useState('tr'); // Default lang
-    const [launches, setLaunches] = useState([]);
-    const [status, setStatus] = useState('launchesLoading');
-    const [showAll, setShowAll] = useState(false);
-    const [initialCount, setInitialCount] = useState(1);
-
-    // Listen for language changes
-    useEffect(() => {
-      const handleLangChange = (e) => setLang(e.detail);
-      window.addEventListener('languageChange', handleLangChange);
-      return () => window.removeEventListener('languageChange', handleLangChange);
-    }, []);
-
-    // Helper to get text based on current lang
-    const getLangText = (key) => {
-      if (window.langData && window.langData[lang] && window.langData[lang][key]) {
-        return window.langData[lang][key];
-      }
-      return key; // Fallback
-    };
-
-    useEffect(() => {
-      const getCount = () => {
-        if (window.innerWidth >= 1280) return 3;
-        if (window.innerWidth >= 640) return 2;
-        return 1;
-      };
-
-      const handleResize = () => {
-        setInitialCount(getCount());
-      };
-
-      handleResize();
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    useEffect(() => {
-      const fetchLaunches = async () => {
-        setStatus('launchesLoading');
-        try {
-          const res = await fetch(LAUNCH_API_URL);
-          if (!res.ok) throw new Error('API Error');
-          const data = await res.json();
-          setLaunches(data.results || []);
-          setStatus(data.results?.length ? '' : 'launchesEmpty');
-        } catch (err) {
-          console.error("Launch fetch error:", err);
-          setStatus('launchesError');
-        }
-      };
-      fetchLaunches();
-    }, []);
-
-    const visibleLaunches = showAll ? launches.slice(0, MAX_COUNT) : launches.slice(0, initialCount);
-    const canShowMore = launches.length > initialCount;
-
-    return (
-      <section id="launches" className="py-16 md:py-20 bg-gradient-to-b from-yinmn_blue via-yinmn_blue/95 to-prussian_blue border-t border-[#6E92B6]/40">
-        <div className="container mx-auto px-6 space-y-8">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-            <div>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-blue_gray mb-1">{getLangText('launchesKicker')}</p>
-              <h2 className="text-3xl sm:text-4xl font-heading">{getLangText('launchesTitle')}</h2>
-              <p className="text-timberwolf/80 mt-2 text-sm md:text-base">{getLangText('launchesLead')}</p>
-            </div>
-            <span className="inline-flex items-center self-start md:self-end gap-2 px-3 py-1 rounded-full bg-prussian_blue/70 border border-[#6E92B6]/60 text-[11px] font-semibold text-timberwolf/80">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>{getLangText('launchesLiveTag')}</span>
-            </span>
-          </div>
-          <div className="grid md:grid-cols-5 gap-6 md:items-stretch">
-            <div className="md:col-span-2">
-              <ApodCard lang={lang} getLangText={getLangText} />
-            </div>
-            <div className="md:col-span-3 flex flex-col gap-4">
-              <div className="flex items-center justify-between gap-2">
-                <h3 className="text-xl font-heading">{getLangText('launchesListTitle')}</h3>
-                <p className="text-timberwolf/70 text-[11px] md:text-xs">
-                  {status && status !== 'launchesLoading' ? getLangText(status) : ''}
-                </p>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {status === 'launchesLoading'
-                  ? Array.from({ length: initialCount }).map((_, i) => <LaunchCardSkeleton key={i} />)
-                  : visibleLaunches.map(launch => <LaunchCard key={launch.id} launch={launch} lang={lang} getLangText={getLangText} />)
-                }
-              </div>
-              {canShowMore && (
-                <div className="mt-1 text-center">
-                  <button onClick={() => setShowAll(!showAll)} className="px-4 py-2 rounded-lg border border-[#6E92B6]/60 bg-prussian_blue/70 text-timberwolf text-[12px] font-semibold hover:bg-prussian_blue/90 transition">
-                    {getLangText(showAll ? 'launchesShowLess' : 'launchesShowMore')}
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  };
-
-  const root = ReactDOM.createRoot(document.getElementById('launches-root'));
-  root.render(<Launches />);
-</script> -->
 </body>
 </html>
